@@ -1,0 +1,16 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the description and documentation of the Edirom-Online backend API.",
+    "version": "1.0.0",
+    "title": "Edirom Backend API",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/exist/restxq",
+  "schemes": [
+    "http"
+  ]
+}
