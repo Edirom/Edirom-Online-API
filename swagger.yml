@@ -14,7 +14,7 @@ paths:
   /data/xql/getAnnotation.xql:
     get:
       summary: "Get annotation"
-      description: "Returns annotations"
+      description: "Returns HTML for annotation"
       operationId: "getAnnotation"
       produces:
         - "text/html"
