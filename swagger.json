@@ -3,14 +3,51 @@
   "info": {
     "description": "This is the description and documentation of the Edirom-Online backend API.",
     "version": "1.0.0",
-    "title": "Edirom Backend API",
+    "title": "Edirom-Online Backend API",
     "license": {
       "name": "MIT"
     }
   },
   "host": "localhost:8080",
-  "basePath": "/exist/restxq",
+  "basePath": "/exist/apps/Edirom-Online-Backend",
   "schemes": [
     "http"
-  ]
+  ],
+  "paths": {
+    "/getAnnotation.xql": {
+      "get": {
+        "summary": "Get annotation",
+        "description": "Returns annotations",
+        "operationId": "getAnnotation",
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "edition",
+            "in": "query",
+            "description": "Identifier of the edition",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Language",
+            "required": true,
+            "type": "string",
+            "pattern": "^(de|en)$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
 }
