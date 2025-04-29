@@ -1,0 +1,47 @@
+
+swagger: "2.0"
+info:
+  description: "This is the description and documentation of the Edirom-Online backend API."
+  version: "1.0.0"
+  title: "Edirom-Online Backend API"
+  license:
+    name: "MIT"
+host: "localhost:8080"
+basePath: "/exist/apps/Edirom-Online-Backend"
+schemes:
+  - "http"
+paths:
+  /data/xql/getAnnotation.xql:
+    get:
+      summary: "Get annotation"
+      description: "Returns annotations"
+      operationId: "getAnnotation"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
+        - name: "target"
+          in: "query"
+          description: "Target"
+          required: true
+          type: "string" # sample: tip
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string" # sample: de
+          pattern: "^(de|en)$"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
