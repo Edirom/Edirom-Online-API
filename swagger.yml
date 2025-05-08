@@ -1,4 +1,3 @@
-
 swagger: "2.0"
 info:
   description: "This is the description and documentation of the Edirom-Online backend API."
@@ -11,10 +10,16 @@ basePath: "/exist/apps/Edirom-Online-Backend"
 schemes:
   - "http"
 paths:
+
+  ### Annotation ###
+
+  # getAnnotation.xql
   /data/xql/getAnnotation.xql:
     get:
       summary: "Get annotation"
       description: "Returns HTML for annotation"
+      tags:
+        - "Annotations"
       operationId: "getAnnotation"
       produces:
         - "text/html"
@@ -38,8 +43,1248 @@ paths:
           in: "query"
           description: "Language"
           required: true
-          type: "string" # sample: de
-          pattern: "^(de|en)$"
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotations.xql
+  /data/xql/getAnnotations.xql:
+    get:
+      summary: "Get annotations"
+      description: "Returns JSON for annotations"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotations"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationInfos.xql
+  /data/xql/getAnnotationInfos.xql:
+    get:
+      summary: "Get annotation infos"
+      description: "Returns JSON for annotation infos"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationInfos"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationMeta.xql
+  /data/xql/getAnnotationMeta.xql:
+    get:
+      summary: "Get annotation metadata"
+      description: "Returns HTML for annotation metadata"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationMeta"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationText.xql
+  /data/xql/getAnnotationText.xql:
+    get:
+      summary: "Get annotation text"
+      description: "Returns HTML for annotation text"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationText"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationsInText.xql
+  /data/xql/getAnnotationsInText.xql:
+    get:
+      summary: "Get annotations in text"
+      description: "Returns JSON for annotations in text"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationsInText"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationsOnPage.xql
+  /data/xql/getAnnotationsOnPage.xql:
+    get:
+      summary: "Get annotations on page"
+      description: "Returns JSON for annotations on page"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationsOnPage"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "pageId"
+          in: "query"
+          description: "Page ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationOpenAllUris.xql
+  /data/xql/getAnnotationOpenAllUris.xql:
+    get:
+      summary: "Get all annotation URIs"
+      description: "Opens all annotation URIs"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationOpenAllUris"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "annotId"
+          in: "query"
+          description: "Annotation ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getAnnotationPreviews.xql
+  /data/xql/getAnnotationPreviews.xql:
+    get:
+      summary: "Get annotation previews"
+      description: "Returns JSON for annotation previews"
+      tags:
+        - "Annotations"
+      operationId: "getAnnotationPreviews"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+
+  ### Audio ###
+
+  # getAudioPlayer.xql
+  /data/xql/getAudioPlayer.xql:
+    get:
+      summary: "Get audio player"
+      description: "Returns HTML for audio player"
+      tags:
+        - "Audio"
+      operationId: "getAudioPlayer"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+
+  ### Edition ###
+
+  # getEdition.xql
+  /data/xql/getEdition.xql:
+    get:
+      summary: "Get edition"
+      description: "Returns JSON for edition"
+      tags:
+        - "Edition"
+      operationId: "getEdition"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "ID"
+          required: true
+          type: "string" # sample: edirom_edition_example
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getEditions.xql
+  /data/xql/getEditions.xql:
+    get:
+      summary: "Get editions"
+      description: "Returns JSON for editions"
+      tags:
+        - "Edition"
+      operationId: "getEditions"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getEditionURI.xql
+  /data/xql/getEditionURI.xql:
+    get:
+      summary: "Get edition RI"
+      description: "Returns JSON for edition URI"
+      tags:
+        - "Edition"
+      operationId: "getEditionURI"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  ### Measure ###
+
+  # getMeasure.xql
+  /data/xql/getMeasure.xql:
+    get:
+      summary: "Get measure"
+      description: "Returns JSON for measure"
+      tags:
+        - "Measure"
+      operationId: "getMeasure"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "ID"
+          required: true
+          type: "string" # sample: 
+        - name: "measureId"
+          in: "query"
+          description: "Measure ID"
+          required: true
+          type: "string" 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getMeasures.xql
+  /data/xql/getMeasures.xql:
+    get:
+      summary: "Get measures"
+      description: "Returns JSON for measures"
+      tags:
+        - "Measure"
+      operationId: "getMeasures"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "mdiv"
+          in: "query"
+          description: "Measure div"
+          required: true
+          type: "string" 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getMeasurePage.xql
+  /data/xql/getMeasurePage.xql:
+    get:
+      summary: "Get measure page"
+      description: "Returns JSON for measure page"
+      tags:
+        - "Measure"
+      operationId: "getMeasurePage"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "ID"
+          required: true
+          type: "string" # sample: 
+        - name: "measure"
+          in: "query"
+          description: "Measure"
+          required: true
+          type: "string" # sample: 
+        - name: "movementId"
+          in: "query"
+          description: "Movement ID"
+          required: true
+          type: "string" # sample: 
+        - name: "measureCount"
+          in: "query"
+          description: "Measure Count"
+          required: true
+          type: "string" # sample: 
+          default: "1"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getMeasuresOnPage.xql
+  /data/xql/getMeasuresOnPage.xql:
+    get:
+      summary: "Get measures on page"
+      description: "Returns JSON for measures on page"
+      tags:
+        - "Measure"
+      operationId: "getMeasuresOnPage"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "pageId"
+          in: "query"
+          description: "Page ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+
+  ### Movement ###
+
+  # getMovements.xql
+  /data/xql/getMovements.xql:
+    get:
+      summary: "Get movements"
+      description: "Returns JSON for movements"
+      tags:
+        - "Movements"
+      operationId: "getMovements"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample:  
+        - name: "movementId"
+          in: "query"
+          description: "Movement ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getMovementsFirstPage.xql
+  /data/xql/getMovementsFirstPage.xql:
+    get:
+      summary: "Get movements first page"
+      description: "Returns JSON for movements first page"
+      tags:
+        - "Movements"
+      operationId: "getMovementsFirstPage"
+      produces:
+        - "text/plain"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+
+  ### Overlay ###
+
+  # getOverlays.xql
+  /data/xql/getOverlays.xql:
+    get:
+      summary: "Get overlays"
+      description: "Returns JSON for overlays"
+      tags:
+        - "Overlay"
+      operationId: "getOverlays"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getOverlayOnPage.xql
+  /data/xql/getOverlayOnPage.xql:
+    get:
+      summary: "Get overlay on page"
+      description: "Returns JSON for overlay on page"
+      tags:
+        - "Overlay"
+      operationId: "OverlayOnPage"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample:  
+        - name: "pageId"
+          in: "query"
+          description: "Page ID"
+          required: true
+          type: "string" # sample: 
+        - name: "overlayId"
+          in: "query"
+          description: "Overlay ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+
+  ### Work ###
+
+  # getWork.xql
+  /data/xql/getWork.xql:
+    get:
+      summary: "Get work"
+      description: "Returns work"
+      tags:
+        - "Work"
+      operationId: "getWork"
+      produces:
+        - "text/plain"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "workId"
+          in: "query"
+          description: "Work ID"
+          required: true
+          type: "string" # sample:
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getWorks.xql
+  /data/xql/getWorks.xql:
+    get:
+      summary: "Get works"
+      description: "Returns JSON for works"
+      tags:
+        - "Work"
+      operationId: "getWorks"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "editionId"
+          in: "query"
+          description: "Edition ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"  
+
+
+  ### Other ###
+
+  # getChapters.xql
+  /data/xql/getChapters.xql:
+    get:
+      summary: "Get chapters"
+      description: "Returns JSON for chapters"
+      tags:
+        - "Other"
+      operationId: "getChapters"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "mode"
+          in: "query"
+          description: "Mode"
+          required: true
+          type: "string" # sample: pageMode
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getConcordances.xql
+  /data/xql/getConcordances.xql:
+    get:
+      summary: "Get concordances"
+      description: "Returns JSON for concordances"
+      tags:
+        - "Other"
+      operationId: "getConcordances"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample:  
+        - name: "id"
+          in: "query"
+          description: "ID"
+          required: true
+          type: "string" # sample:  
+        - name: "workId"
+          in: "query"
+          description: "Work ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getHeader.xql
+  /data/xql/getHeader.xql:
+    get:
+      summary: "Get header"
+      description: "Returns JSON for header"
+      tags:
+        - "Other"
+      operationId: "getHeader"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "type"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: work
+          enum:
+            - "work"
+            - "source"
+            - "recording"
+            - "text"
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getHelp.xql
+  /data/xql/getHelp.xql:
+    get:
+      summary: "Get help"
+      description: "Returns JSON for help"
+      tags:
+        - "Other"
+      operationId: "getHelp"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "idPrefix"
+          in: "query"
+          description: "ID prefix"
+          required: true
+          type: "string" # sample: 
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getiFrameURL.xql
+  /data/xql/getiFrameURL.xql:
+    get:
+      summary: "Get iframe URL"
+      description: "Returns iframe URL"
+      tags:
+        - "Other"
+      operationId: "getiFrameURL"
+      produces:
+        - "text/plain"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getInternalIdType.xql
+  /data/xql/getInternalIdType.xql:
+    get:
+      summary: "Get internalIdType"
+      description: "Returns internalIdType"
+      tags:
+        - "Other"
+      operationId: "getInternalIdType"
+      produces:
+        - "text/plain"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getLanguageFile.xql
+  /data/xql/getLanguageFile.xql:
+    get:
+      summary: "Get language file"
+      description: "Returns XML for language file"
+      tags:
+        - "Other"
+      operationId: "getLanguageFile"
+      produces:
+        - "application/xml"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "mode"
+          in: "query"
+          description: "Mode"
+          required: true
+          type: "string" 
+          default: "json"
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getLinkTarget.xql
+  /data/xql/getLinkTarget.xql:
+    get:
+      summary: "Get link target"
+      description: "Returns JSON for link target"
+      tags:
+        - "Other"
+      operationId: "getLinkTarget"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" 
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getMusicInMdiv.xql
+  /data/xql/getMusicInMdiv.xql:
+    get:
+      summary: "Get music in mdiv"
+      description: "Returns XML for music in mdiv"
+      tags:
+        - "Other"
+      operationId: "getMusicInMdiv"
+      produces:
+        - "application/xml"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample:  
+        - name: "movementId"
+          in: "query"
+          description: "Movement ID"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getNavigatorConfig.xql
+  /data/xql/getNavigatorConfig.xql:
+    get:
+      summary: "Get navigator config"
+      description: "Returns HTML for navigator config"
+      tags:
+        - "Other"
+      operationId: "getNavigatorConfig"
+      produces:
+        - "text/html"
+      parameters:
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getPages.xql
+  /data/xql/getPages.xql:
+    get:
+      summary: "Get pages"
+      description: "Returns JSON for pages"
+      tags:
+        - "Other"
+      operationId: "getPages"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getParts.xql
+  /data/xql/getParts.xql:
+    get:
+      summary: "Get parts"
+      description: "Returns JSON for parts"
+      tags:
+        - "Other"
+      operationId: "getParts"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getPreferences.xql
+  /data/xql/getPreferences.xql:
+    get:
+      summary: "Get preferences"
+      description: "Returns XML for preferences"
+      tags:
+        - "Other"
+      operationId: "getPreferences"
+      produces:
+        - "application/xml"
+      parameters:        
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "mode"
+          in: "query"
+          description: "Mode"
+          required: true
+          type: "string" 
+          default: "json"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getReducedDocument.xql
+  /data/xql/getReducedDocument.xql:
+    get:
+      summary: "Get reduced document"
+      description: "Returns HTML for reduced document"
+      tags:
+        - "Other"
+      operationId: "getReducedDocument"
+      produces:
+        - "text/html"
+      parameters:        
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" 
+        - name: "selectionId"
+          in: "query"
+          description: "Selection ID"
+          required: true
+          type: "string" # sample:
+        - name: "subtreeRoot"
+          in: "query"
+          description: "Subtree root"
+          required: true
+          type: "string" # sample:
+        - name: "idPrefix"
+          in: "query"
+          description: "ID prefix"
+          required: true
+          type: "string" # sample:
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getSummary.xql
+  /data/xql/getSummary.xql:
+    get:
+      summary: "Get summary"
+      description: "Returns HTML for summary"
+      tags:
+        - "Other"
+      operationId: "getSummary"
+      produces:
+        - "text/html"
+      parameters:        
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" 
+        - name: "type"
+          in: "query"
+          description: "Type"
+          required: true
+          type: "string" # sample:
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getText.xql
+  /data/xql/getText.xql:
+    get:
+      summary: "Get text"
+      description: "Returns HTML for text"
+      tags:
+        - "Other"
+      operationId: "getText"
+      produces:
+        - "text/html"
+      parameters:        
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "idPrefix"
+          in: "query"
+          description: "ID prefix"
+          required: true
+          type: "string" # sample:
+        - name: "term"
+          in: "query"
+          description: "Term"
+          required: true
+          type: "string" # sample:
+        - name: "path"
+          in: "query"
+          description: "Path"
+          required: true
+          type: "string" # sample:
+        - name: "page"
+          in: "query"
+          description: "Page"
+          required: true
+          type: "string" # sample:
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getXml.xql
+  /data/xql/getXml.xql:
+    get:
+      summary: "Get xml"
+      description: "Returns XML"
+      tags:
+        - "Other"
+      operationId: "getXml"
+      produces:
+        - "text/xml"
+      parameters:  
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "internalId"
+          in: "query"
+          description: "Internal ID"
+          required: true
+          type: "string" # sample:
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # getZone.xql
+  /data/xql/getZone.xql:
+    get:
+      summary: "Get zone"
+      description: "Returns JSON for zone"
+      tags:
+        - "Other"
+      operationId: "getZone"
+      produces:
+        - "application/json"
+      parameters:  
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample: 
+        - name: "zoneId"
+          in: "query"
+          description: "Zone ID"
+          required: true
+          type: "string" # sample:
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # search.xql
+  /data/xql/search.xql:
+    get:
+      summary: "Get search"
+      description: "Returns HTML for search"
+      tags:
+        - "Other"
+      operationId: "search"
+      produces:
+        - "text/html"
+      parameters: 
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "term"
+          in: "query"
+          description: "Term"
+          required: true
+          type: "string" 
+        - name: "lang"
+          in: "query"
+          description: "Language"
+          required: true
+          type: "string"
+          default: "en"
+          enum:
+            - "de"
+            - "en"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+
+  # edirom_printPreview.xql
+  /data/xql/edirom_printPreview.xql:
+    get:
+      summary: "Get print preview"
+      description: "Returns HTML for print preview"
+      tags:
+        - "Other"
+      operationId: "edirom_printPreview"
+      produces:
+        - "text/html"
+      parameters: 
+        - name: "edition"
+          in: "query"
+          description: "Identifier of the edition"
+          required: true
+          type: "string" # sample: 
+        - name: "uri"
+          in: "query"
+          description: "URI"
+          required: true
+          type: "string" # sample:
+        - name: "type"
+          in: "query"
+          description: "Type"
+          required: true
+          type: "string" # sample: work, source, text
       responses:
         "200":
           description: "Successful operation"
