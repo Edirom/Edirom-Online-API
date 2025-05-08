@@ -1,4 +1,4 @@
-# Edirom-Online-API
+# Edirom-Online Backend API
 
 This is the Open API definition for the [Edirom-Online backend](https://github.com/Edirom/Edirom-Online-Backend).
 
