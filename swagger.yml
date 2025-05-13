@@ -13,7 +13,7 @@ paths:
 
   ### Annotation ###
 
-  # getAnnotation.xql
+  ### getAnnotation.xql
   /data/xql/getAnnotation.xql:
     get:
       summary: "Get annotation"
@@ -31,8 +31,7 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            type: "string"
+
 
   # getAnnotations.xql
   /data/xql/getAnnotations.xql:
@@ -91,8 +90,6 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            $ref: "#/definitions/AnnotationMeta"
 
   # getAnnotationText.xql
   /data/xql/getAnnotationText.xql:
@@ -195,7 +192,7 @@ paths:
 
   ### Audio ###
 
-  # getAudioPlayer.xql
+  ### getAudioPlayer.xql
   /data/xql/getAudioPlayer.xql:
     get:
       summary: "Get audio player"
@@ -210,8 +207,6 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
 
   ### Edition ###
@@ -248,9 +243,11 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: array
+            items:
+              $ref: "#/definitions/Edition"
 
-  # getEditionURI.xql
+  ### getEditionURI.xql
   /data/xql/getEditionURI.xql:
     get:
       summary: "Get edition RI"
@@ -259,14 +256,12 @@ paths:
         - "Edition"
       operationId: "getEditionURI"
       produces:
-        - "application/json"
+        - "text/plain"
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
         200:
           description: "Successful operation"
-          schema:
-            type: string
 
   ### Measure ###
 
@@ -493,7 +488,7 @@ paths:
           schema:
             type: "string"
 
-  # getConcordances.xql
+  ### getConcordances.xql
   /data/xql/getConcordances.xql:
     get:
       summary: "Get concordances"
@@ -511,9 +506,11 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: array
+            items:
+              $ref: "#/definitions/Concordance"
 
-  # getHeader.xql
+  ### getHeader.xql
   /data/xql/getHeader.xql:
     get:
       summary: "Get header"
@@ -522,7 +519,7 @@ paths:
         - "Other"
       operationId: "getHeader"
       produces:
-        - "application/json"
+        - "text/html"
       parameters:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/typeParam'
@@ -530,8 +527,6 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
   ### getHelp.xql
   /data/xql/getHelp.xql:
@@ -626,7 +621,7 @@ paths:
           schema:
             $ref: "#/definitions/LinkTarget"
 
-  # getMusicInMdiv.xql
+  ### getMusicInMdiv.xql
   /data/xql/getMusicInMdiv.xql:
     get:
       summary: "Get music in mdiv"
@@ -642,10 +637,8 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
-  # getNavigatorConfig.xql
+  ### getNavigatorConfig.xql
   /data/xql/getNavigatorConfig.xql:
     get:
       summary: "Get navigator config"
@@ -1058,13 +1051,19 @@ definitions:
     properties:
       id:
         type: "string"
-        example: "edition-50127042"
+        example: "edirom_edition_example"
       doc:
         type: "string"
-        example: "xmldb:exist:///db/apps/contents/edition/freidi-edition.xml"
+        example: "xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml"
       name:
         type: "string"
-        example: "Freischütz Digital"
+        example: "Edirom Edition Example"
+      additional_css_path:
+        type: "string"
+        example: ""
+      languages:
+        type: "string"
+        example: "de"
         
   Preferences:
     type: object
@@ -1176,61 +1175,6 @@ definitions:
       categories:
         type: "string"
         example: "wega.annotation.category.bogensetzung"
-
-  AnnotationMeta:
-    type: object
-    properties:
-      div:
-        type: object
-        properties:
-          class:
-            type: "string"
-            example: "annotView"
-          content:
-            type: object
-            properties:
-              div:
-                type: "object"
-                properties:
-                  class:
-                    type: "string"
-                    example: "metaBox"
-                  content:
-                    type: array
-                    items:
-                      $ref: "#/definitions/PropertyDiv"
-
-  PropertyDiv:
-    type: object
-    properties:
-      div:
-        type: "object"
-        properties:
-          class:
-            type: "string"
-            example: "property"
-            enum:
-              - "property priority"
-              - "property categories"
-              - "property sourceSiglums"
-              - "property annotID"
-          content:
-            $ref: "#/definitions/KeyValue"
-
-  KeyValue:
-    type: array
-    items:
-      type: object
-      properties:
-        div:
-          type: "object"
-          properties:
-            class:
-              type: "string"
-              example: "class"
-            content:
-              type: string
-              example: "string"
 
 
   AnnotationInfos:
@@ -1383,3 +1327,45 @@ definitions:
       height:
         type: "string"
         example: "3107"
+
+  Concordance:
+    type: object
+    properties:
+      name:
+        type: "string"
+        example: "Taktkonkordanz nach neuer Struktur"
+      groups:
+        type: object
+        properties:
+          label:
+            type: "string"
+            example: "Satz"
+          groups:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: "string"
+                  example: "Overtura."
+                connections:
+                  type: object
+                  properties:
+                    label:
+                      type: "string"
+                      example: "Takt"
+                    connections:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: "string"
+                            example: "1"
+                          plist:
+                            type: "string"
+                            example: "xmldb:exist:///db/apps/contents/musicSources/freidi-musicSource_A.xml#A_mov0_measure1"
+          connections: 
+            type: array
+            items:
+              type: object
