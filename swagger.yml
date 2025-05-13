@@ -29,7 +29,7 @@ paths:
         - $ref: '#/parameters/targetParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -48,14 +48,14 @@ paths:
         - $ref: '#/parameters/editionParam'
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "object"
             items:
               $ref: "#/definitions/Annotations"
 
-  # getAnnotationInfos.xql
+  ### getAnnotationInfos.xql
   /data/xql/getAnnotationInfos.xql:
     get:
       summary: "Get annotation infos"
@@ -69,12 +69,12 @@ paths:
         - $ref: '#/parameters/editionParam'
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            $ref: "#/definitions/AnnotationInfos"
 
-  # getAnnotationMeta.xql
+  ### getAnnotationMeta.xql
   /data/xql/getAnnotationMeta.xql:
     get:
       summary: "Get annotation metadata"
@@ -89,10 +89,10 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            $ref: "#/definitions/AnnotationMeta"
 
   # getAnnotationText.xql
   /data/xql/getAnnotationText.xql:
@@ -109,10 +109,8 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
   # getAnnotationsInText.xql
   /data/xql/getAnnotationsInText.xql:
@@ -128,7 +126,7 @@ paths:
         - $ref: '#/parameters/editionParam'
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -148,10 +146,12 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/pageIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: array
+            items:
+              $ref: "#/definitions/AnnotationItem"
 
   # getAnnotationOpenAllUris.xql
   /data/xql/getAnnotationOpenAllUris.xql:
@@ -167,7 +167,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/annotIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -187,10 +187,10 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            $ref: "#/definitions/AnnotationPreviews"
 
 
   ### Audio ###
@@ -208,7 +208,7 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -229,10 +229,10 @@ paths:
       parameters:
         - $ref: '#/parameters/idParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            $ref: "#/definitions/Edition"
 
   # getEditions.xql
   /data/xql/getEditions.xql:
@@ -245,7 +245,7 @@ paths:
       produces:
         - "application/json"
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -263,10 +263,10 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: string
 
   ### Measure ###
 
@@ -284,7 +284,7 @@ paths:
         - $ref: '#/parameters/idParam'
         - $ref: '#/parameters/measureIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -303,7 +303,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/mdivParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -324,7 +324,7 @@ paths:
         - $ref: '#/parameters/movementIdParam'
         - $ref: '#/parameters/measureCountParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -343,7 +343,7 @@ paths:
         - $ref: '#/parameters/uriParam'        
         - $ref: '#/parameters/pageIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -351,7 +351,7 @@ paths:
 
   ### Movement ###
 
-  # getMovements.xql
+  ### getMovements.xql
   /data/xql/getMovements.xql:
     get:
       summary: "Get movements"
@@ -365,10 +365,12 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/movementIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: array
+            items:
+              $ref: "#/definitions/Movement"
 
   # getMovementsFirstPage.xql
   /data/xql/getMovementsFirstPage.xql:
@@ -383,7 +385,7 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -404,7 +406,7 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -424,7 +426,7 @@ paths:
         - $ref: '#/parameters/pageIdParam'
         - $ref: '#/parameters/overlayIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -432,11 +434,11 @@ paths:
 
   ### Work ###
 
-  # getWork.xql
-  /data/xql/getWork.xql:
+  # getWorkID.xql
+  /data/xql/getWorkID.xql:
     get:
-      summary: "Get work"
-      description: "Returns work"
+      summary: "Get work ID"
+      description: "Returns work ID"
       tags:
         - "Work"
       operationId: "getWork"
@@ -446,10 +448,10 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/workIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: string
 
   # getWorks.xql
   /data/xql/getWorks.xql:
@@ -464,7 +466,7 @@ paths:
       parameters:
         - $ref: '#/parameters/editionIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"  
@@ -486,7 +488,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/modeParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -506,7 +508,7 @@ paths:
         - $ref: '#/parameters/idParam'
         - $ref: '#/parameters/workIdParam' 
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -526,16 +528,16 @@ paths:
         - $ref: '#/parameters/typeParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
 
-  # getHelp.xql
+  ### getHelp.xql
   /data/xql/getHelp.xql:
     get:
       summary: "Get help"
-      description: "Returns JSON for help"
+      description: "Returns HTML for help"
       tags:
         - "Other"
       operationId: "getHelp"
@@ -545,12 +547,10 @@ paths:
         - $ref: '#/parameters/idPrefixParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
-  # getiFrameURL.xql
+  ### getiFrameURL.xql
   /data/xql/getiFrameURL.xql:
     get:
       summary: "Get iframe URL"
@@ -563,7 +563,7 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -581,7 +581,7 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -601,12 +601,12 @@ paths:
         - $ref: '#/parameters/modeParam' # sample: json
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
 
-  # getLinkTarget.xql
+  ### getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
     post:
       summary: "Get link target"
@@ -621,10 +621,10 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            $ref: "#/definitions/LinkTarget"
 
   # getMusicInMdiv.xql
   /data/xql/getMusicInMdiv.xql:
@@ -640,7 +640,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/movementIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -658,10 +658,8 @@ paths:
       parameters:
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
   # getPages.xql
   /data/xql/getPages.xql:
@@ -676,10 +674,12 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            type: array
+            items:
+              $ref: "#/definitions/Page"
 
   # getParts.xql
   /data/xql/getParts.xql:
@@ -694,7 +694,7 @@ paths:
       parameters:
         - $ref: '#/parameters/uriParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -708,15 +708,15 @@ paths:
         - "Other"
       operationId: "getPreferences"
       produces:
-        - "application/xml"
+        - "text/plain"
       parameters:        
         - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/modeParam' # sample: json
+        - $ref: '#/parameters/modeParam' # sample: json, xml
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
-            type: "string"
+            $ref: '#/definitions/Preferences'
 
   # getReducedDocument.xql
   /data/xql/getReducedDocument.xql:
@@ -735,7 +735,7 @@ paths:
         - $ref: '#/parameters/subtreeRootParam'
         - $ref: '#/parameters/idPrefixParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -755,7 +755,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/typeParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -778,10 +778,8 @@ paths:
         - $ref: '#/parameters/pathParam'
         - $ref: '#/parameters/pageParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
-          schema:
-            type: "string"
 
   # getXml.xql
   /data/xql/getXml.xql:
@@ -797,7 +795,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/internalIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -816,7 +814,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/zoneIdParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -836,7 +834,7 @@ paths:
         - $ref: '#/parameters/termParam'
         - $ref: '#/parameters/langParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -856,7 +854,7 @@ paths:
         - $ref: '#/parameters/uriParam'
         - $ref: '#/parameters/typeParam'
       responses:
-        "200":
+        200:
           description: "Successful operation"
           schema:
             type: "string"
@@ -1055,3 +1053,333 @@ definitions:
         type: "string"
         example: "A, K/sv, ED₁"
 
+  Edition:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "edition-50127042"
+      doc:
+        type: "string"
+        example: "xmldb:exist:///db/apps/contents/edition/freidi-edition.xml"
+      name:
+        type: "string"
+        example: "Freischütz Digital"
+        
+  Preferences:
+    type: object
+    properties:
+      application_language:
+        type: "string"
+        example: "de"
+      annotation_layout:
+        type: "string"
+        example: "EdiromOnline.view.window.annotationLayouts.AnnotationLayout1"
+      image_prefix:
+        type: "string"
+        example: "https://digilib.freischuetz-digital.de/Scaler/"
+      
+  View:
+    type: object
+    properties:
+      type:
+        type: "string"
+        enum:
+          - "headerView"
+          - "textView"
+          - "xmlView"
+      defaultView:
+        type: "boolean"
+        example: true
+      label:
+        type: "string"
+        example: "XML Text"
+      uri:
+        type: "string"
+        example: "xmldb:exist:///db/apps/contents/edition/freidi-work-overview.xml"
+
+  LinkTarget:
+    type: object
+    properties:
+      type:
+        type: "string"
+        example: "work"
+      title:
+        type: "string"
+        example: "Der Freischütz, romantische Oper in drei Aufzügen"
+      doc:
+        type: "string"
+        example: "xmldb:exist:///db/apps/contents/edition/freidi-work.xml"
+      views:
+        type: "array"
+        items:
+          $ref: "#/definitions/View"
+      internalId:
+        type: "string"
+        example: ""
+      term:
+        type: "string"
+        example: ""
+      path:
+        type: "string"
+        example: ""
+      internalIdType:
+        type: "string"
+        example: "unknown"
+
+  plistItem:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "annotation__bar-2005"
+      type:
+        type: "string"
+        example: "measure"
+      ulx:
+        type: "integer"
+        example: 100
+      uly:
+        type: "integer"
+        example: 200
+      lrx:
+        type: "integer"
+        example: 300
+      lry:
+        type: "integer"
+        example: 400
+
+  AnnotationItem:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "annotation-2"
+      plist:
+        type: "array"
+        items:
+          $ref: "#/definitions/plistItem"
+      svgList:
+        type: "array"
+        items:
+          type: "string"
+          example: "svg-1.svg"
+      fn:
+        type: "string"
+        example: "loadLink(\"xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2\")"
+      uri:
+        type: "string"
+        example: "xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2"
+      priority:
+        type: "string"
+        example: "ediromAnnotPrio1"
+      categories:
+        type: "string"
+        example: "wega.annotation.category.bogensetzung"
+
+  AnnotationMeta:
+    type: object
+    properties:
+      div:
+        type: object
+        properties:
+          class:
+            type: "string"
+            example: "annotView"
+          content:
+            type: object
+            properties:
+              div:
+                type: "object"
+                properties:
+                  class:
+                    type: "string"
+                    example: "metaBox"
+                  content:
+                    type: array
+                    items:
+                      $ref: "#/definitions/PropertyDiv"
+
+  PropertyDiv:
+    type: object
+    properties:
+      div:
+        type: "object"
+        properties:
+          class:
+            type: "string"
+            example: "property"
+            enum:
+              - "property priority"
+              - "property categories"
+              - "property sourceSiglums"
+              - "property annotID"
+          content:
+            $ref: "#/definitions/KeyValue"
+
+  KeyValue:
+    type: array
+    items:
+      type: object
+      properties:
+        div:
+          type: "object"
+          properties:
+            class:
+              type: "string"
+              example: "class"
+            content:
+              type: string
+              example: "string"
+
+
+  AnnotationInfos:
+    type: object
+    properties:
+      categories:
+        type: "array"
+        items:
+          $ref: "#/definitions/Category"
+      priorities:
+        type: array
+        items:
+          $ref: "#/definitions/Priority"
+      count:
+        type: "integer"
+        example: 226
+
+  AnnotationPreviews:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+      participants:
+        type: "array"
+        items:
+          $ref: "#/definitions/Participant"
+
+  Participant:
+    type: object
+    properties:
+      type:
+        type: "string"
+        example: "measure"
+      label:
+        type: "string"
+        example: "Takte 5 bis 7"
+      mdiv:
+        type: "string"
+        example: ""
+      part:
+        type: "string"
+        example: ""
+      page:
+        type: "string"
+        example: "2"
+      source:
+        type: "string"
+        example: "Autograph A"
+      siglum:
+        type: "string"
+        example: "A"
+      digilibBaseParams:
+        type: "string"
+        example: "https://content.staatsbibliothek-berlin.de/dc/69007087X-0002"
+      digilibSizeParams:
+        type: "string"
+        example: "&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit"
+      hiddenData:
+        type: "object"
+        $ref: "#/definitions/HiddenData"
+      content:
+        type: "string"
+        example: ""
+      linkUri:
+        type: "string"
+        example: "xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0"
+
+  HiddenData:
+    type: "object"
+    properties:
+      width:
+        type: "integer"
+        example: 634
+      height:
+        type: "integer"
+        example: 940
+      x:
+        type: "integer"
+        example: 1610
+      y:
+        type: "integer"
+        example: 240
+      origH:
+        type: "integer"
+        example: 3107
+      origW:
+        type: "integer"
+        example: 3950
+  
+  Category:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "wega.annotation.category.bogensetzung"
+      name:
+        type: "string"
+        example: "Bogensetzung"
+
+  Priority:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "ediromAnnotPrio1"
+      name:
+        type: "string"
+        example: "1"
+
+  Movement:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "movement-1"
+      name:
+        type: "string"
+        example: "Allegro"
+      parts:
+        type: "array"
+        items:
+          $ref: "#/definitions/Part"
+
+  Part:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: ""
+      name:
+        type: "string"
+        example: "Violine"
+
+  Page:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "facsimile-2001001"
+      path:
+        type: "string"
+        example: "https://content.staatsbibliothek-berlin.de/dc/69007087X-0001"
+      name:
+        type: "string"
+        example: "1"
+      width:
+        type: "string"
+        example: "3950"
+      height:
+        type: "string"
+        example: "3107"
