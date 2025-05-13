@@ -24,30 +24,10 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
-        - name: "target"
-          in: "query"
-          description: "Target"
-          required: true
-          type: "string" # sample: tip
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/targetParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -65,21 +45,15 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
           schema:
-            type: "string"
+            type: "object"
+            items:
+              $ref: "#/definitions/Annotations"
 
   # getAnnotationInfos.xql
   /data/xql/getAnnotationInfos.xql:
@@ -92,16 +66,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -119,25 +85,9 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -155,25 +105,9 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -191,16 +125,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -218,21 +144,9 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "pageId"
-          in: "query"
-          description: "Page ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/pageIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -250,16 +164,8 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "annotId"
-          in: "query"
-          description: "Annotation ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/annotIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -277,25 +183,9 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -316,11 +206,7 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -341,11 +227,7 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "id"
-          in: "query"
-          description: "ID"
-          required: true
-          type: "string" # sample: edirom_edition_example
+        - $ref: '#/parameters/idParam'
       responses:
         "200":
           description: "Successful operation"
@@ -379,11 +261,7 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -403,16 +281,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "id"
-          in: "query"
-          description: "ID"
-          required: true
-          type: "string" # sample: 
-        - name: "measureId"
-          in: "query"
-          description: "Measure ID"
-          required: true
-          type: "string" 
+        - $ref: '#/parameters/idParam'
+        - $ref: '#/parameters/measureIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -430,16 +300,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "mdiv"
-          in: "query"
-          description: "Measure div"
-          required: true
-          type: "string" 
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/mdivParam'
       responses:
         "200":
           description: "Successful operation"
@@ -457,27 +319,10 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "id"
-          in: "query"
-          description: "ID"
-          required: true
-          type: "string" # sample: 
-        - name: "measure"
-          in: "query"
-          description: "Measure"
-          required: true
-          type: "string" # sample: 
-        - name: "movementId"
-          in: "query"
-          description: "Movement ID"
-          required: true
-          type: "string" # sample: 
-        - name: "measureCount"
-          in: "query"
-          description: "Measure Count"
-          required: true
-          type: "string" # sample: 
-          default: "1"
+        - $ref: '#/parameters/idParam'
+        - $ref: '#/parameters/measureParam'
+        - $ref: '#/parameters/movementIdParam'
+        - $ref: '#/parameters/measureCountParam'
       responses:
         "200":
           description: "Successful operation"
@@ -495,16 +340,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "pageId"
-          in: "query"
-          description: "Page ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'        
+        - $ref: '#/parameters/pageIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -525,16 +362,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample:  
-        - name: "movementId"
-          in: "query"
-          description: "Movement ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/movementIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -552,11 +381,7 @@ paths:
       produces:
         - "text/plain"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -577,11 +402,7 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -599,21 +420,9 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample:  
-        - name: "pageId"
-          in: "query"
-          description: "Page ID"
-          required: true
-          type: "string" # sample: 
-        - name: "overlayId"
-          in: "query"
-          description: "Overlay ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/pageIdParam'
+        - $ref: '#/parameters/overlayIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -634,16 +443,8 @@ paths:
       produces:
         - "text/plain"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "workId"
-          in: "query"
-          description: "Work ID"
-          required: true
-          type: "string" # sample:
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/workIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -661,11 +462,7 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "editionId"
-          in: "query"
-          description: "Edition ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/editionIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -686,16 +483,8 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "mode"
-          in: "query"
-          description: "Mode"
-          required: true
-          type: "string" # sample: pageMode
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/modeParam'
       responses:
         "200":
           description: "Successful operation"
@@ -713,21 +502,9 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample:  
-        - name: "id"
-          in: "query"
-          description: "ID"
-          required: true
-          type: "string" # sample:  
-        - name: "workId"
-          in: "query"
-          description: "Work ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/idParam'
+        - $ref: '#/parameters/workIdParam' 
       responses:
         "200":
           description: "Successful operation"
@@ -745,30 +522,9 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "type"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: work
-          enum:
-            - "work"
-            - "source"
-            - "recording"
-            - "text"
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/typeParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -786,20 +542,8 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "idPrefix"
-          in: "query"
-          description: "ID prefix"
-          required: true
-          type: "string" # sample: 
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/idPrefixParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -817,11 +561,7 @@ paths:
       produces:
         - "text/plain"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -839,11 +579,7 @@ paths:
       produces:
         - "text/plain"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -861,26 +597,9 @@ paths:
       produces:
         - "application/xml"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "mode"
-          in: "query"
-          description: "Mode"
-          required: true
-          type: "string" 
-          default: "json"
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/modeParam' # sample: json
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -889,7 +608,7 @@ paths:
 
   # getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
-    get:
+    post:
       summary: "Get link target"
       description: "Returns JSON for link target"
       tags:
@@ -898,25 +617,9 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" 
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -934,16 +637,8 @@ paths:
       produces:
         - "application/xml"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample:  
-        - name: "movementId"
-          in: "query"
-          description: "Movement ID"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/movementIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -961,15 +656,7 @@ paths:
       produces:
         - "text/html"
       parameters:
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -987,11 +674,7 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1009,11 +692,7 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
+        - $ref: '#/parameters/uriParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1031,17 +710,8 @@ paths:
       produces:
         - "application/xml"
       parameters:        
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "mode"
-          in: "query"
-          description: "Mode"
-          required: true
-          type: "string" 
-          default: "json"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/modeParam' # sample: json
       responses:
         "200":
           description: "Successful operation"
@@ -1059,31 +729,11 @@ paths:
       produces:
         - "text/html"
       parameters:        
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" 
-        - name: "selectionId"
-          in: "query"
-          description: "Selection ID"
-          required: true
-          type: "string" # sample:
-        - name: "subtreeRoot"
-          in: "query"
-          description: "Subtree root"
-          required: true
-          type: "string" # sample:
-        - name: "idPrefix"
-          in: "query"
-          description: "ID prefix"
-          required: true
-          type: "string" # sample:
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/selectionIdParam'
+        - $ref: '#/parameters/subtreeRootParam'
+        - $ref: '#/parameters/idPrefixParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1101,21 +751,9 @@ paths:
       produces:
         - "text/html"
       parameters:        
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" 
-        - name: "type"
-          in: "query"
-          description: "Type"
-          required: true
-          type: "string" # sample:
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/typeParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1133,36 +771,12 @@ paths:
       produces:
         - "text/html"
       parameters:        
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "idPrefix"
-          in: "query"
-          description: "ID prefix"
-          required: true
-          type: "string" # sample:
-        - name: "term"
-          in: "query"
-          description: "Term"
-          required: true
-          type: "string" # sample:
-        - name: "path"
-          in: "query"
-          description: "Path"
-          required: true
-          type: "string" # sample:
-        - name: "page"
-          in: "query"
-          description: "Page"
-          required: true
-          type: "string" # sample:
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/idPrefixParam'
+        - $ref: '#/parameters/termParam'
+        - $ref: '#/parameters/pathParam'
+        - $ref: '#/parameters/pageParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1180,16 +794,8 @@ paths:
       produces:
         - "text/xml"
       parameters:  
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "internalId"
-          in: "query"
-          description: "Internal ID"
-          required: true
-          type: "string" # sample:
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/internalIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1207,16 +813,8 @@ paths:
       produces:
         - "application/json"
       parameters:  
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: 
-        - name: "zoneId"
-          in: "query"
-          description: "Zone ID"
-          required: true
-          type: "string" # sample:
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/zoneIdParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1234,25 +832,9 @@ paths:
       produces:
         - "text/html"
       parameters: 
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "term"
-          in: "query"
-          description: "Term"
-          required: true
-          type: "string" 
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string"
-          default: "en"
-          enum:
-            - "de"
-            - "en"
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/termParam'
+        - $ref: '#/parameters/langParam'
       responses:
         "200":
           description: "Successful operation"
@@ -1270,23 +852,206 @@ paths:
       produces:
         - "text/html"
       parameters: 
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: 
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample:
-        - name: "type"
-          in: "query"
-          description: "Type"
-          required: true
-          type: "string" # sample: work, source, text
+        - $ref: '#/parameters/editionParam'
+        - $ref: '#/parameters/uriParam'
+        - $ref: '#/parameters/typeParam'
       responses:
         "200":
           description: "Successful operation"
           schema:
             type: "string"
+
+
+### Parameters ###
+parameters:
+
+  # Common parameters
+
+  editionParam:
+    name: edition
+    in: query
+    description: "Identifier of the edition"
+    type: string 
+  uriParam:
+    name: uri
+    in: query
+    description: "URI"
+    type: string 
+  langParam:
+    name: lang
+    in: query
+    description: "Language"
+    type: string
+    default: "en"
+    enum:
+      - "de"
+      - "en"
+
+
+  # ID parameters  
+
+  idParam:
+    name: id
+    in: query
+    description: "ID"
+    type: string
+  editionIdParam:
+    name: editionId
+    in: query
+    description: "Edition ID"
+    type: string
+  pageIdParam:
+    name: pageId
+    in: query
+    description: "Page ID"
+    type: string
+  annotIdParam:
+    name: annotId
+    in: query
+    description: "Annotation ID"
+    type: string
+  measureIdParam:
+    name: measureId
+    in: query
+    description: "Measure ID"
+    type: string
+  movementIdParam:
+    name: movementId
+    in: query
+    description: "Movement ID"
+    type: string
+  overlayIdParam:
+    name: overlayId
+    in: query
+    description: "Overlay ID"
+    type: string
+  workIdParam:
+    name: workId
+    in: query
+    description: "Work ID"
+    type: string
+  selectionIdParam:
+    name: selectionId
+    in: query
+    description: "Selection ID"
+    type: string
+  zoneIdParam:
+    name: zoneId
+    in: query
+    description: "Zone ID"
+    type: string
+  internalIdParam:
+    name: internalId
+    in: query
+    description: "Internal ID"
+    type: string
+  idPrefixParam:
+    name: idPrefix
+    in: query
+    description: "ID prefix"
+    type: string
+
+
+  # Other parameters
+
+  targetParam:
+    name: target
+    in: query
+    description: "Target"
+    type: string
+  mdivParam:
+    name: mdiv
+    in: query
+    description: "Measure div"
+    type: string
+  measureParam:
+    name: measure
+    in: query
+    description: "Measure"
+    type: string
+  measureCountParam:
+    name: measureCount
+    in: query
+    description: "Measure Count"
+    type: string
+    default: "1"
+  modeParam:
+    name: mode
+    in: query
+    description: "Mode"
+    type: string
+  typeParam:
+    name: type
+    in: query
+    description: "Type"
+    type: string
+    enum:
+      - "work"
+      - "source"
+      - "recording"
+      - "text"
+  termParam:
+    name: term
+    in: query
+    description: "Term"
+    type: string
+  pathParam:
+    name: path
+    in: query
+    description: "Path"
+    type: string
+  pageParam:
+    name: page
+    in: query
+    description: "Page"
+    type: string
+  subtreeRootParam:
+    name: subtreeRoot
+    in: query
+    description: "Subtree root"
+    type: string
+
+
+
+### Definitions ###
+
+definitions:
+
+  Annotations:
+    type: object
+    properties:
+      success:
+        type: boolean
+        example: true
+      total:
+        type: "integer"
+        example: 301
+      annotations:
+        type: "array"
+        items:
+          $ref: "#/definitions/Annotation"
+
+  Annotation:
+    type: object
+    properties:
+      id:
+        type: "string"
+        example: "annotation-2"
+      title:
+        type: "string"
+        example: "Annotation Title"
+      categories:
+        type: "string"
+        example: "Bogensetzung"
+      priority:
+        type: "string"
+        format: "integer"
+        example: "1"
+      pos:
+        type: "string"
+        format: "integer"
+        example: "2"
+      sigla:
+        type: "string"
+        example: "A, K/sv, ED₁"
+
