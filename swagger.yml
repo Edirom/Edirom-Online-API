@@ -1,1371 +1,1682 @@
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  description: "This is the description and documentation of the Edirom-Online backend API."
-  version: "1.0.0"
-  title: "Edirom-Online Backend API"
+  title: Edirom-Online Backend API
+  description: This is the description and documentation of the Edirom-Online backend
+    API.
   license:
-    name: "MIT"
-host: "localhost:8080"
-basePath: "/exist/apps/Edirom-Online-Backend"
-schemes:
-  - "http"
+    name: MIT
+  version: 1.0.0
+servers:
+- url: http://localhost:8080/exist/apps/Edirom-Online-Backend
+  description: Local backend
+- url: https://klarinettenquintett.weber-gesamtausgabe.de/
+  description: Klarinettenquintett
 paths:
-
-  ### Annotation ###
-
-  ### getAnnotation.xql
   /data/xql/getAnnotation.xql:
     get:
-      summary: "Get annotation"
-      description: "Returns HTML for annotation"
       tags:
-        - "Annotations"
-      operationId: "getAnnotation"
-      produces:
-        - "text/html"
+      - Annotations
+      summary: Get annotation
+      description: Returns HTML for annotation
+      operationId: getAnnotation
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/targetParam'
-        - $ref: '#/parameters/langParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: target
+        in: query
+        description: Target
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-
-
-  # getAnnotations.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getAnnotations.xql:
     get:
-      summary: "Get annotations"
-      description: "Returns JSON for annotations"
       tags:
-        - "Annotations"
-      operationId: "getAnnotations"
-      produces:
-        - "application/json"
+      - Annotations
+      summary: Get annotations
+      description: Returns JSON for annotations
+      operationId: getAnnotations
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "object"
-            items:
-              $ref: "#/definitions/Annotations"
-
-  ### getAnnotationInfos.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Annotations'
   /data/xql/getAnnotationInfos.xql:
     get:
-      summary: "Get annotation infos"
-      description: "Returns JSON for annotation infos"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationInfos"
-      produces:
-        - "application/json"
+      - Annotations
+      summary: Get annotation infos
+      description: Returns JSON for annotation infos
+      operationId: getAnnotationInfos
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/AnnotationInfos"
-
-  ### getAnnotationMeta.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationInfos'
   /data/xql/getAnnotationMeta.xql:
     get:
-      summary: "Get annotation metadata"
-      description: "Returns HTML for annotation metadata"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationMeta"
-      produces:
-        - "text/html"
+      - Annotations
+      summary: Get annotation metadata
+      description: Returns HTML for annotation metadata
+      operationId: getAnnotationMeta
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/langParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-
-  # getAnnotationText.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getAnnotationText.xql:
     get:
-      summary: "Get annotation text"
-      description: "Returns HTML for annotation text"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationText"
-      produces:
-        - "text/html"
+      - Annotations
+      summary: Get annotation text
+      description: Returns HTML for annotation text
+      operationId: getAnnotationText
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/langParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-
-  # getAnnotationsInText.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getAnnotationsInText.xql:
     get:
-      summary: "Get annotations in text"
-      description: "Returns JSON for annotations in text"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationsInText"
-      produces:
-        - "application/json"
+      - Annotations
+      summary: Get annotations in text
+      description: Returns JSON for annotations in text
+      operationId: getAnnotationsInText
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getAnnotationsOnPage.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getAnnotationsOnPage.xql:
     get:
-      summary: "Get annotations on page"
-      description: "Returns JSON for annotations on page"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationsOnPage"
-      produces:
-        - "application/json"
+      - Annotations
+      summary: Get annotations on page
+      description: Returns JSON for annotations on page
+      operationId: getAnnotationsOnPage
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/pageIdParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: pageId
+        in: query
+        description: Page ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/AnnotationItem"
-
-  # getAnnotationOpenAllUris.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnotationItem'
   /data/xql/getAnnotationOpenAllUris.xql:
     get:
-      summary: "Get all annotation URIs"
-      description: "Opens all annotation URIs"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationOpenAllUris"
-      produces:
-        - "text/html"
+      - Annotations
+      summary: Get all annotation URIs
+      description: Opens all annotation URIs
+      operationId: getAnnotationOpenAllUris
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/annotIdParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: annotId
+        in: query
+        description: Annotation ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getAnnotationPreviews.xql
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
   /data/xql/getAnnotationPreviews.xql:
     get:
-      summary: "Get annotation previews"
-      description: "Returns JSON for annotation previews"
       tags:
-        - "Annotations"
-      operationId: "getAnnotationPreviews"
-      produces:
-        - "application/json"
+      - Annotations
+      summary: Get annotation previews
+      description: Returns JSON for annotation previews
+      operationId: getAnnotationPreviews
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/langParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/AnnotationPreviews"
-
-
-  ### Audio ###
-
-  ### getAudioPlayer.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationPreviews'
   /data/xql/getAudioPlayer.xql:
     get:
-      summary: "Get audio player"
-      description: "Returns HTML for audio player"
       tags:
-        - "Audio"
-      operationId: "getAudioPlayer"
-      produces:
-        - "text/html"
+      - Audio
+      summary: Get audio player
+      description: Returns HTML for audio player
+      operationId: getAudioPlayer
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-
-
-  ### Edition ###
-
-  # getEdition.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getEdition.xql:
     get:
-      summary: "Get edition"
-      description: "Returns JSON for edition"
       tags:
-        - "Edition"
-      operationId: "getEdition"
-      produces:
-        - "application/json"
+      - Edition
+      summary: Get edition
+      description: Returns JSON for edition
+      operationId: getEdition
       parameters:
-        - $ref: '#/parameters/idParam'
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/Edition"
-
-  # getEditions.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Edition'
   /data/xql/getEditions.xql:
     get:
-      summary: "Get editions"
-      description: "Returns JSON for editions"
       tags:
-        - "Edition"
-      operationId: "getEditions"
-      produces:
-        - "application/json"
+      - Edition
+      summary: Get editions
+      description: Returns JSON for editions
+      operationId: getEditions
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Edition"
-
-  ### getEditionURI.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Edition'
   /data/xql/getEditionURI.xql:
     get:
-      summary: "Get edition RI"
-      description: "Returns JSON for edition URI"
       tags:
-        - "Edition"
-      operationId: "getEditionURI"
-      produces:
-        - "text/plain"
+      - Edition
+      summary: Get edition RI
+      description: Returns JSON for edition URI
+      operationId: getEditionURI
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-
-  ### Measure ###
-
-  # getMeasure.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getMeasure.xql:
     get:
-      summary: "Get measure"
-      description: "Returns JSON for measure"
       tags:
-        - "Measure"
-      operationId: "getMeasure"
-      produces:
-        - "application/json"
+      - Measure
+      summary: Get measure
+      description: Returns JSON for measure
+      operationId: getMeasure
       parameters:
-        - $ref: '#/parameters/idParam'
-        - $ref: '#/parameters/measureIdParam'
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+      - name: measureId
+        in: query
+        description: Measure ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getMeasures.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getMeasures.xql:
     get:
-      summary: "Get measures"
-      description: "Returns JSON for measures"
       tags:
-        - "Measure"
-      operationId: "getMeasures"
-      produces:
-        - "application/json"
+      - Measure
+      summary: Get measures
+      description: Returns JSON for measures
+      operationId: getMeasures
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/mdivParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: mdiv
+        in: query
+        description: Measure div
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getMeasurePage.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getMeasurePage.xql:
     get:
-      summary: "Get measure page"
-      description: "Returns JSON for measure page"
       tags:
-        - "Measure"
-      operationId: "getMeasurePage"
-      produces:
-        - "application/json"
+      - Measure
+      summary: Get measure page
+      description: Returns JSON for measure page
+      operationId: getMeasurePage
       parameters:
-        - $ref: '#/parameters/idParam'
-        - $ref: '#/parameters/measureParam'
-        - $ref: '#/parameters/movementIdParam'
-        - $ref: '#/parameters/measureCountParam'
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+      - name: measure
+        in: query
+        description: Measure
+        schema:
+          type: string
+      - name: movementId
+        in: query
+        description: Movement ID
+        schema:
+          type: string
+      - name: measureCount
+        in: query
+        description: Measure Count
+        schema:
+          type: string
+          default: "1"
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getMeasuresOnPage.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getMeasuresOnPage.xql:
     get:
-      summary: "Get measures on page"
-      description: "Returns JSON for measures on page"
       tags:
-        - "Measure"
-      operationId: "getMeasuresOnPage"
-      produces:
-        - "application/json"
+      - Measure
+      summary: Get measures on page
+      description: Returns JSON for measures on page
+      operationId: getMeasuresOnPage
       parameters:
-        - $ref: '#/parameters/uriParam'        
-        - $ref: '#/parameters/pageIdParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: pageId
+        in: query
+        description: Page ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-
-  ### Movement ###
-
-  ### getMovements.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getMovements.xql:
     get:
-      summary: "Get movements"
-      description: "Returns JSON for movements"
       tags:
-        - "Movements"
-      operationId: "getMovements"
-      produces:
-        - "application/json"
+      - Movements
+      summary: Get movements
+      description: Returns JSON for movements
+      operationId: getMovements
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/movementIdParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: movementId
+        in: query
+        description: Movement ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Movement"
-
-  # getMovementsFirstPage.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movement'
   /data/xql/getMovementsFirstPage.xql:
     get:
-      summary: "Get movements first page"
-      description: "Returns JSON for movements first page"
       tags:
-        - "Movements"
-      operationId: "getMovementsFirstPage"
-      produces:
-        - "text/plain"
+      - Movements
+      summary: Get movements first page
+      description: Returns JSON for movements first page
+      operationId: getMovementsFirstPage
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-
-  ### Overlay ###
-
-  # getOverlays.xql
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /data/xql/getOverlays.xql:
     get:
-      summary: "Get overlays"
-      description: "Returns JSON for overlays"
       tags:
-        - "Overlay"
-      operationId: "getOverlays"
-      produces:
-        - "application/json"
+      - Overlay
+      summary: Get overlays
+      description: Returns JSON for overlays
+      operationId: getOverlays
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getOverlayOnPage.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getOverlayOnPage.xql:
     get:
-      summary: "Get overlay on page"
-      description: "Returns JSON for overlay on page"
       tags:
-        - "Overlay"
-      operationId: "OverlayOnPage"
-      produces:
-        - "application/json"
+      - Overlay
+      summary: Get overlay on page
+      description: Returns JSON for overlay on page
+      operationId: OverlayOnPage
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/pageIdParam'
-        - $ref: '#/parameters/overlayIdParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: pageId
+        in: query
+        description: Page ID
+        schema:
+          type: string
+      - name: overlayId
+        in: query
+        description: Overlay ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-
-  ### Work ###
-
-  # getWorkID.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getWorkID.xql:
     get:
-      summary: "Get work ID"
-      description: "Returns work ID"
       tags:
-        - "Work"
-      operationId: "getWork"
-      produces:
-        - "text/plain"
+      - Work
+      summary: Get work ID
+      description: Returns work ID
+      operationId: getWork
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/workIdParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: workId
+        in: query
+        description: Work ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: string
-
-  # getWorks.xql
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /data/xql/getWorks.xql:
     get:
-      summary: "Get works"
-      description: "Returns JSON for works"
       tags:
-        - "Work"
-      operationId: "getWorks"
-      produces:
-        - "application/json"
+      - Work
+      summary: Get works
+      description: Returns JSON for works
+      operationId: getWorks
       parameters:
-        - $ref: '#/parameters/editionIdParam'
+      - name: editionId
+        in: query
+        description: Edition ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"  
-
-
-  ### Other ###
-
-  # getChapters.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getChapters.xql:
     get:
-      summary: "Get chapters"
-      description: "Returns JSON for chapters"
       tags:
-        - "Other"
-      operationId: "getChapters"
-      produces:
-        - "application/json"
+      - Other
+      summary: Get chapters
+      description: Returns JSON for chapters
+      operationId: getChapters
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/modeParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  ### getConcordances.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getConcordances.xql:
     get:
-      summary: "Get concordances"
-      description: "Returns JSON for concordances"
       tags:
-        - "Other"
-      operationId: "getConcordances"
-      produces:
-        - "application/json"
+      - Other
+      summary: Get concordances
+      description: Returns JSON for concordances
+      operationId: getConcordances
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/idParam'
-        - $ref: '#/parameters/workIdParam' 
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+      - name: workId
+        in: query
+        description: Work ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Concordance"
-
-  ### getHeader.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Concordance'
   /data/xql/getHeader.xql:
     get:
-      summary: "Get header"
-      description: "Returns JSON for header"
       tags:
-        - "Other"
-      operationId: "getHeader"
-      produces:
-        - "text/html"
+      - Other
+      summary: Get header
+      description: Returns JSON for header
+      operationId: getHeader
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/typeParam'
-        - $ref: '#/parameters/langParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Type
+        schema:
+          type: string
+          enum:
+          - work
+          - source
+          - recording
+          - text
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-
-  ### getHelp.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getHelp.xql:
     get:
-      summary: "Get help"
-      description: "Returns HTML for help"
       tags:
-        - "Other"
-      operationId: "getHelp"
-      produces:
-        - "text/html"
+      - Other
+      summary: Get help
+      description: Returns HTML for help
+      operationId: getHelp
       parameters:
-        - $ref: '#/parameters/idPrefixParam'
-        - $ref: '#/parameters/langParam'
+      - name: idPrefix
+        in: query
+        description: ID prefix
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-
-  ### getiFrameURL.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getiFrameURL.xql:
     get:
-      summary: "Get iframe URL"
-      description: "Returns iframe URL"
       tags:
-        - "Other"
-      operationId: "getiFrameURL"
-      produces:
-        - "text/plain"
+      - Other
+      summary: Get iframe URL
+      description: Returns iframe URL
+      operationId: getiFrameURL
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getInternalIdType.xql
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /data/xql/getInternalIdType.xql:
     get:
-      summary: "Get internalIdType"
-      description: "Returns internalIdType"
       tags:
-        - "Other"
-      operationId: "getInternalIdType"
-      produces:
-        - "text/plain"
+      - Other
+      summary: Get internalIdType
+      description: Returns internalIdType
+      operationId: getInternalIdType
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getLanguageFile.xql
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /data/xql/getLanguageFile.xql:
     get:
-      summary: "Get language file"
-      description: "Returns XML for language file"
       tags:
-        - "Other"
-      operationId: "getLanguageFile"
-      produces:
-        - "application/xml"
+      - Other
+      summary: Get language file
+      description: Returns XML for language file
+      operationId: getLanguageFile
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/modeParam' # sample: json
-        - $ref: '#/parameters/langParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  ### getLinkTarget.xql
+        "200":
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                type: string
   /data/xql/getLinkTarget.xql:
     post:
-      summary: "Get link target"
-      description: "Returns JSON for link target"
       tags:
-        - "Other"
-      operationId: "getLinkTarget"
-      produces:
-        - "application/json"
+      - Other
+      summary: Get link target
+      description: Returns JSON for link target
+      operationId: getLinkTarget
       parameters:
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/langParam'
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/LinkTarget"
-
-  ### getMusicInMdiv.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTarget'
   /data/xql/getMusicInMdiv.xql:
     get:
-      summary: "Get music in mdiv"
-      description: "Returns XML for music in mdiv"
       tags:
-        - "Other"
-      operationId: "getMusicInMdiv"
-      produces:
-        - "application/xml"
+      - Other
+      summary: Get music in mdiv
+      description: Returns XML for music in mdiv
+      operationId: getMusicInMdiv
       parameters:
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/movementIdParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: movementId
+        in: query
+        description: Movement ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-
-  ### getNavigatorConfig.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getNavigatorConfig.xql:
     get:
-      summary: "Get navigator config"
-      description: "Returns HTML for navigator config"
       tags:
-        - "Other"
-      operationId: "getNavigatorConfig"
-      produces:
-        - "text/html"
+      - Other
+      summary: Get navigator config
+      description: Returns HTML for navigator config
+      operationId: getNavigatorConfig
       parameters:
-        - $ref: '#/parameters/langParam'
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-
-  # getPages.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getPages.xql:
     get:
-      summary: "Get pages"
-      description: "Returns JSON for pages"
       tags:
-        - "Other"
-      operationId: "getPages"
-      produces:
-        - "application/json"
+      - Other
+      summary: Get pages
+      description: Returns JSON for pages
+      operationId: getPages
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Page"
-
-  # getParts.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Page'
   /data/xql/getParts.xql:
     get:
-      summary: "Get parts"
-      description: "Returns JSON for parts"
       tags:
-        - "Other"
-      operationId: "getParts"
-      produces:
-        - "application/json"
+      - Other
+      summary: Get parts
+      description: Returns JSON for parts
+      operationId: getParts
       parameters:
-        - $ref: '#/parameters/uriParam'
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getPreferences.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/getPreferences.xql:
     get:
-      summary: "Get preferences"
-      description: "Returns XML for preferences"
       tags:
-        - "Other"
-      operationId: "getPreferences"
-      produces:
-        - "text/plain"
-      parameters:        
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/modeParam' # sample: json, xml
+      - Other
+      summary: Get preferences
+      description: Returns XML for preferences
+      operationId: getPreferences
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: '#/definitions/Preferences'
-
-  # getReducedDocument.xql
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Preferences'
   /data/xql/getReducedDocument.xql:
     get:
-      summary: "Get reduced document"
-      description: "Returns HTML for reduced document"
       tags:
-        - "Other"
-      operationId: "getReducedDocument"
-      produces:
-        - "text/html"
-      parameters:        
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/selectionIdParam'
-        - $ref: '#/parameters/subtreeRootParam'
-        - $ref: '#/parameters/idPrefixParam'
+      - Other
+      summary: Get reduced document
+      description: Returns HTML for reduced document
+      operationId: getReducedDocument
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: selectionId
+        in: query
+        description: Selection ID
+        schema:
+          type: string
+      - name: subtreeRoot
+        in: query
+        description: Subtree root
+        schema:
+          type: string
+      - name: idPrefix
+        in: query
+        description: ID prefix
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getSummary.xql
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
   /data/xql/getSummary.xql:
     get:
-      summary: "Get summary"
-      description: "Returns HTML for summary"
       tags:
-        - "Other"
-      operationId: "getSummary"
-      produces:
-        - "text/html"
-      parameters:        
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/typeParam'
+      - Other
+      summary: Get summary
+      description: Returns HTML for summary
+      operationId: getSummary
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Type
+        schema:
+          type: string
+          enum:
+          - work
+          - source
+          - recording
+          - text
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getText.xql
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
   /data/xql/getText.xql:
     get:
-      summary: "Get text"
-      description: "Returns HTML for text"
       tags:
-        - "Other"
-      operationId: "getText"
-      produces:
-        - "text/html"
-      parameters:        
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/idPrefixParam'
-        - $ref: '#/parameters/termParam'
-        - $ref: '#/parameters/pathParam'
-        - $ref: '#/parameters/pageParam'
+      - Other
+      summary: Get text
+      description: Returns HTML for text
+      operationId: getText
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: idPrefix
+        in: query
+        description: ID prefix
+        schema:
+          type: string
+      - name: term
+        in: query
+        description: Term
+        schema:
+          type: string
+      - name: path
+        in: query
+        description: Path
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-
-  # getXml.xql
+        "200":
+          description: Successful operation
+          content: {}
   /data/xql/getXml.xql:
     get:
-      summary: "Get xml"
-      description: "Returns XML"
       tags:
-        - "Other"
-      operationId: "getXml"
-      produces:
-        - "text/xml"
-      parameters:  
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/internalIdParam'
+      - Other
+      summary: Get xml
+      description: Returns XML
+      operationId: getXml
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: internalId
+        in: query
+        description: Internal ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # getZone.xql
+        "200":
+          description: Successful operation
+          content:
+            text/xml:
+              schema:
+                type: string
   /data/xql/getZone.xql:
     get:
-      summary: "Get zone"
-      description: "Returns JSON for zone"
       tags:
-        - "Other"
-      operationId: "getZone"
-      produces:
-        - "application/json"
-      parameters:  
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/zoneIdParam'
+      - Other
+      summary: Get zone
+      description: Returns JSON for zone
+      operationId: getZone
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: zoneId
+        in: query
+        description: Zone ID
+        schema:
+          type: string
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # search.xql
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
   /data/xql/search.xql:
     get:
-      summary: "Get search"
-      description: "Returns HTML for search"
       tags:
-        - "Other"
-      operationId: "search"
-      produces:
-        - "text/html"
-      parameters: 
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/termParam'
-        - $ref: '#/parameters/langParam'
+      - Other
+      summary: Get search
+      description: Returns HTML for search
+      operationId: search
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: term
+        in: query
+        description: Term
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-  # edirom_printPreview.xql
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
   /data/xql/edirom_printPreview.xql:
     get:
-      summary: "Get print preview"
-      description: "Returns HTML for print preview"
       tags:
-        - "Other"
-      operationId: "edirom_printPreview"
-      produces:
-        - "text/html"
-      parameters: 
-        - $ref: '#/parameters/editionParam'
-        - $ref: '#/parameters/uriParam'
-        - $ref: '#/parameters/typeParam'
+      - Other
+      summary: Get print preview
+      description: Returns HTML for print preview
+      operationId: edirom_printPreview
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Type
+        schema:
+          type: string
+          enum:
+          - work
+          - source
+          - recording
+          - text
       responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "string"
-
-
-### Parameters ###
-parameters:
-
-  # Common parameters
-
-  editionParam:
-    name: edition
-    in: query
-    description: "Identifier of the edition"
-    type: string 
-  uriParam:
-    name: uri
-    in: query
-    description: "URI"
-    type: string 
-  langParam:
-    name: lang
-    in: query
-    description: "Language"
-    type: string
-    default: "en"
-    enum:
-      - "de"
-      - "en"
-
-
-  # ID parameters  
-
-  idParam:
-    name: id
-    in: query
-    description: "ID"
-    type: string
-  editionIdParam:
-    name: editionId
-    in: query
-    description: "Edition ID"
-    type: string
-  pageIdParam:
-    name: pageId
-    in: query
-    description: "Page ID"
-    type: string
-  annotIdParam:
-    name: annotId
-    in: query
-    description: "Annotation ID"
-    type: string
-  measureIdParam:
-    name: measureId
-    in: query
-    description: "Measure ID"
-    type: string
-  movementIdParam:
-    name: movementId
-    in: query
-    description: "Movement ID"
-    type: string
-  overlayIdParam:
-    name: overlayId
-    in: query
-    description: "Overlay ID"
-    type: string
-  workIdParam:
-    name: workId
-    in: query
-    description: "Work ID"
-    type: string
-  selectionIdParam:
-    name: selectionId
-    in: query
-    description: "Selection ID"
-    type: string
-  zoneIdParam:
-    name: zoneId
-    in: query
-    description: "Zone ID"
-    type: string
-  internalIdParam:
-    name: internalId
-    in: query
-    description: "Internal ID"
-    type: string
-  idPrefixParam:
-    name: idPrefix
-    in: query
-    description: "ID prefix"
-    type: string
-
-
-  # Other parameters
-
-  targetParam:
-    name: target
-    in: query
-    description: "Target"
-    type: string
-  mdivParam:
-    name: mdiv
-    in: query
-    description: "Measure div"
-    type: string
-  measureParam:
-    name: measure
-    in: query
-    description: "Measure"
-    type: string
-  measureCountParam:
-    name: measureCount
-    in: query
-    description: "Measure Count"
-    type: string
-    default: "1"
-  modeParam:
-    name: mode
-    in: query
-    description: "Mode"
-    type: string
-  typeParam:
-    name: type
-    in: query
-    description: "Type"
-    type: string
-    enum:
-      - "work"
-      - "source"
-      - "recording"
-      - "text"
-  termParam:
-    name: term
-    in: query
-    description: "Term"
-    type: string
-  pathParam:
-    name: path
-    in: query
-    description: "Path"
-    type: string
-  pageParam:
-    name: page
-    in: query
-    description: "Page"
-    type: string
-  subtreeRootParam:
-    name: subtreeRoot
-    in: query
-    description: "Subtree root"
-    type: string
-
-
-
-### Definitions ###
-
-definitions:
-
-  Annotations:
-    type: object
-    properties:
-      success:
-        type: boolean
-        example: true
-      total:
-        type: "integer"
-        example: 301
-      annotations:
-        type: "array"
-        items:
-          $ref: "#/definitions/Annotation"
-
-  Annotation:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "annotation-2"
-      title:
-        type: "string"
-        example: "Annotation Title"
-      categories:
-        type: "string"
-        example: "Bogensetzung"
-      priority:
-        type: "string"
-        format: "integer"
-        example: "1"
-      pos:
-        type: "string"
-        format: "integer"
-        example: "2"
-      sigla:
-        type: "string"
-        example: "A, K/sv, ED₁"
-
-  Edition:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "edirom_edition_example"
-      doc:
-        type: "string"
-        example: "xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml"
-      name:
-        type: "string"
-        example: "Edirom Edition Example"
-      additional_css_path:
-        type: "string"
-        example: ""
-      languages:
-        type: "string"
-        example: "de"
-        
-  Preferences:
-    type: object
-    properties:
-      application_language:
-        type: "string"
-        example: "de"
-      annotation_layout:
-        type: "string"
-        example: "EdiromOnline.view.window.annotationLayouts.AnnotationLayout1"
-      image_prefix:
-        type: "string"
-        example: "https://digilib.freischuetz-digital.de/Scaler/"
-      
-  View:
-    type: object
-    properties:
-      type:
-        type: "string"
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas:
+    Annotations:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        total:
+          type: integer
+          example: 301
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: string
+          example: annotation-2
+        title:
+          type: string
+          example: Annotation Title
+        categories:
+          type: string
+          example: Bogensetzung
+        priority:
+          type: string
+          format: integer
+          example: "1"
+        pos:
+          type: string
+          format: integer
+          example: "2"
+        sigla:
+          type: string
+          example: "A, K/sv, ED₁"
+    Edition:
+      type: object
+      properties:
+        id:
+          type: string
+          example: edirom_edition_example
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+        name:
+          type: string
+          example: Edirom Edition Example
+        additional_css_path:
+          type: string
+          example: ""
+        languages:
+          type: string
+          example: de
+    Preferences:
+      type: object
+      properties:
+        application_language:
+          type: string
+          example: de
+        annotation_layout:
+          type: string
+          example: EdiromOnline.view.window.annotationLayouts.AnnotationLayout1
+        image_prefix:
+          type: string
+          example: https://digilib.freischuetz-digital.de/Scaler/
+    View:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - headerView
+          - textView
+          - xmlView
+        defaultView:
+          type: boolean
+          example: true
+        label:
+          type: string
+          example: XML Text
+        uri:
+          type: string
+          example: xmldb:exist:///db/apps/contents/edition/freidi-work-overview.xml
+    LinkTarget:
+      type: object
+      properties:
+        type:
+          type: string
+          example: work
+        title:
+          type: string
+          example: "Der Freischütz, romantische Oper in drei Aufzügen"
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/contents/edition/freidi-work.xml
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/View'
+        internalId:
+          type: string
+          example: ""
+        term:
+          type: string
+          example: ""
+        path:
+          type: string
+          example: ""
+        internalIdType:
+          type: string
+          example: unknown
+    plistItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: annotation__bar-2005
+        type:
+          type: string
+          example: measure
+        ulx:
+          type: integer
+          example: 100
+        uly:
+          type: integer
+          example: 200
+        lrx:
+          type: integer
+          example: 300
+        lry:
+          type: integer
+          example: 400
+    AnnotationItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: annotation-2
+        plist:
+          type: array
+          items:
+            $ref: '#/components/schemas/plistItem'
+        svgList:
+          type: array
+          items:
+            type: string
+            example: svg-1.svg
+        fn:
+          type: string
+          example: loadLink("xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2")
+        uri:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
+        priority:
+          type: string
+          example: ediromAnnotPrio1
+        categories:
+          type: string
+          example: wega.annotation.category.bogensetzung
+    AnnotationInfos:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        priorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Priority'
+        count:
+          type: integer
+          example: 226
+    AnnotationPreviews:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+    Participant:
+      type: object
+      properties:
+        type:
+          type: string
+          example: measure
+        label:
+          type: string
+          example: Takte 5 bis 7
+        mdiv:
+          type: string
+          example: ""
+        part:
+          type: string
+          example: ""
+        page:
+          type: string
+          example: "2"
+        source:
+          type: string
+          example: Autograph A
+        siglum:
+          type: string
+          example: A
+        digilibBaseParams:
+          type: string
+          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0002
+        digilibSizeParams:
+          type: string
+          example: '&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit'
+        hiddenData:
+          $ref: '#/components/schemas/HiddenData'
+        content:
+          type: string
+          example: ""
+        linkUri:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0
+    HiddenData:
+      type: object
+      properties:
+        width:
+          type: integer
+          example: 634
+        height:
+          type: integer
+          example: 940
+        x:
+          type: integer
+          example: 1610
+        "y":
+          type: integer
+          example: 240
+        origH:
+          type: integer
+          example: 3107
+        origW:
+          type: integer
+          example: 3950
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          example: wega.annotation.category.bogensetzung
+        name:
+          type: string
+          example: Bogensetzung
+    Priority:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ediromAnnotPrio1
+        name:
+          type: string
+          example: "1"
+    Movement:
+      type: object
+      properties:
+        id:
+          type: string
+          example: movement-1
+        name:
+          type: string
+          example: Allegro
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+    Part:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ""
+        name:
+          type: string
+          example: Violine
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+          example: facsimile-2001001
+        path:
+          type: string
+          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0001
+        name:
+          type: string
+          example: "1"
+        width:
+          type: string
+          example: "3950"
+        height:
+          type: string
+          example: "3107"
+    Concordance:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Taktkonkordanz nach neuer Struktur
+        groups:
+          type: object
+          properties:
+            label:
+              type: string
+              example: Satz
+            groups:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Overtura.
+                  connections:
+                    type: object
+                    properties:
+                      label:
+                        type: string
+                        example: Takt
+                      connections:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: "1"
+                            plist:
+                              type: string
+                              example: xmldb:exist:///db/apps/contents/musicSources/freidi-musicSource_A.xml#A_mov0_measure1
+            connections:
+              type: array
+              items:
+                type: object
+                properties: {}
+  parameters:
+    editionParam:
+      name: edition
+      in: query
+      description: Identifier of the edition
+      schema:
+        type: string
+    uriParam:
+      name: uri
+      in: query
+      description: URI
+      schema:
+        type: string
+    langParam:
+      name: lang
+      in: query
+      description: Language
+      schema:
+        type: string
+        default: en
         enum:
-          - "headerView"
-          - "textView"
-          - "xmlView"
-      defaultView:
-        type: "boolean"
-        example: true
-      label:
-        type: "string"
-        example: "XML Text"
-      uri:
-        type: "string"
-        example: "xmldb:exist:///db/apps/contents/edition/freidi-work-overview.xml"
-
-  LinkTarget:
-    type: object
-    properties:
-      type:
-        type: "string"
-        example: "work"
-      title:
-        type: "string"
-        example: "Der Freischütz, romantische Oper in drei Aufzügen"
-      doc:
-        type: "string"
-        example: "xmldb:exist:///db/apps/contents/edition/freidi-work.xml"
-      views:
-        type: "array"
-        items:
-          $ref: "#/definitions/View"
-      internalId:
-        type: "string"
-        example: ""
-      term:
-        type: "string"
-        example: ""
-      path:
-        type: "string"
-        example: ""
-      internalIdType:
-        type: "string"
-        example: "unknown"
-
-  plistItem:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "annotation__bar-2005"
-      type:
-        type: "string"
-        example: "measure"
-      ulx:
-        type: "integer"
-        example: 100
-      uly:
-        type: "integer"
-        example: 200
-      lrx:
-        type: "integer"
-        example: 300
-      lry:
-        type: "integer"
-        example: 400
-
-  AnnotationItem:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "annotation-2"
-      plist:
-        type: "array"
-        items:
-          $ref: "#/definitions/plistItem"
-      svgList:
-        type: "array"
-        items:
-          type: "string"
-          example: "svg-1.svg"
-      fn:
-        type: "string"
-        example: "loadLink(\"xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2\")"
-      uri:
-        type: "string"
-        example: "xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2"
-      priority:
-        type: "string"
-        example: "ediromAnnotPrio1"
-      categories:
-        type: "string"
-        example: "wega.annotation.category.bogensetzung"
-
-
-  AnnotationInfos:
-    type: object
-    properties:
-      categories:
-        type: "array"
-        items:
-          $ref: "#/definitions/Category"
-      priorities:
-        type: array
-        items:
-          $ref: "#/definitions/Priority"
-      count:
-        type: "integer"
-        example: 226
-
-  AnnotationPreviews:
-    type: object
-    properties:
-      success:
-        type: boolean
-        example: true
-      participants:
-        type: "array"
-        items:
-          $ref: "#/definitions/Participant"
-
-  Participant:
-    type: object
-    properties:
-      type:
-        type: "string"
-        example: "measure"
-      label:
-        type: "string"
-        example: "Takte 5 bis 7"
-      mdiv:
-        type: "string"
-        example: ""
-      part:
-        type: "string"
-        example: ""
-      page:
-        type: "string"
-        example: "2"
-      source:
-        type: "string"
-        example: "Autograph A"
-      siglum:
-        type: "string"
-        example: "A"
-      digilibBaseParams:
-        type: "string"
-        example: "https://content.staatsbibliothek-berlin.de/dc/69007087X-0002"
-      digilibSizeParams:
-        type: "string"
-        example: "&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit"
-      hiddenData:
-        type: "object"
-        $ref: "#/definitions/HiddenData"
-      content:
-        type: "string"
-        example: ""
-      linkUri:
-        type: "string"
-        example: "xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0"
-
-  HiddenData:
-    type: "object"
-    properties:
-      width:
-        type: "integer"
-        example: 634
-      height:
-        type: "integer"
-        example: 940
-      x:
-        type: "integer"
-        example: 1610
-      y:
-        type: "integer"
-        example: 240
-      origH:
-        type: "integer"
-        example: 3107
-      origW:
-        type: "integer"
-        example: 3950
-  
-  Category:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "wega.annotation.category.bogensetzung"
-      name:
-        type: "string"
-        example: "Bogensetzung"
-
-  Priority:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "ediromAnnotPrio1"
-      name:
-        type: "string"
-        example: "1"
-
-  Movement:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "movement-1"
-      name:
-        type: "string"
-        example: "Allegro"
-      parts:
-        type: "array"
-        items:
-          $ref: "#/definitions/Part"
-
-  Part:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: ""
-      name:
-        type: "string"
-        example: "Violine"
-
-  Page:
-    type: object
-    properties:
-      id:
-        type: "string"
-        example: "facsimile-2001001"
-      path:
-        type: "string"
-        example: "https://content.staatsbibliothek-berlin.de/dc/69007087X-0001"
-      name:
-        type: "string"
-        example: "1"
-      width:
-        type: "string"
-        example: "3950"
-      height:
-        type: "string"
-        example: "3107"
-
-  Concordance:
-    type: object
-    properties:
-      name:
-        type: "string"
-        example: "Taktkonkordanz nach neuer Struktur"
-      groups:
-        type: object
-        properties:
-          label:
-            type: "string"
-            example: "Satz"
-          groups:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: "string"
-                  example: "Overtura."
-                connections:
-                  type: object
-                  properties:
-                    label:
-                      type: "string"
-                      example: "Takt"
-                    connections:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: "string"
-                            example: "1"
-                          plist:
-                            type: "string"
-                            example: "xmldb:exist:///db/apps/contents/musicSources/freidi-musicSource_A.xml#A_mov0_measure1"
-          connections: 
-            type: array
-            items:
-              type: object
+        - de
+        - en
+    idParam:
+      name: id
+      in: query
+      description: ID
+      schema:
+        type: string
+    editionIdParam:
+      name: editionId
+      in: query
+      description: Edition ID
+      schema:
+        type: string
+    pageIdParam:
+      name: pageId
+      in: query
+      description: Page ID
+      schema:
+        type: string
+    annotIdParam:
+      name: annotId
+      in: query
+      description: Annotation ID
+      schema:
+        type: string
+    measureIdParam:
+      name: measureId
+      in: query
+      description: Measure ID
+      schema:
+        type: string
+    movementIdParam:
+      name: movementId
+      in: query
+      description: Movement ID
+      schema:
+        type: string
+    overlayIdParam:
+      name: overlayId
+      in: query
+      description: Overlay ID
+      schema:
+        type: string
+    workIdParam:
+      name: workId
+      in: query
+      description: Work ID
+      schema:
+        type: string
+    selectionIdParam:
+      name: selectionId
+      in: query
+      description: Selection ID
+      schema:
+        type: string
+    zoneIdParam:
+      name: zoneId
+      in: query
+      description: Zone ID
+      schema:
+        type: string
+    internalIdParam:
+      name: internalId
+      in: query
+      description: Internal ID
+      schema:
+        type: string
+    idPrefixParam:
+      name: idPrefix
+      in: query
+      description: ID prefix
+      schema:
+        type: string
+    targetParam:
+      name: target
+      in: query
+      description: Target
+      schema:
+        type: string
+    mdivParam:
+      name: mdiv
+      in: query
+      description: Measure div
+      schema:
+        type: string
+    measureParam:
+      name: measure
+      in: query
+      description: Measure
+      schema:
+        type: string
+    measureCountParam:
+      name: measureCount
+      in: query
+      description: Measure Count
+      schema:
+        type: string
+        default: "1"
+    modeParam:
+      name: mode
+      in: query
+      description: Mode
+      schema:
+        type: string
+    typeParam:
+      name: type
+      in: query
+      description: Type
+      schema:
+        type: string
+        enum:
+        - work
+        - source
+        - recording
+        - text
+    termParam:
+      name: term
+      in: query
+      description: Term
+      schema:
+        type: string
+    pathParam:
+      name: path
+      in: query
+      description: Path
+      schema:
+        type: string
+    pageParam:
+      name: page
+      in: query
+      description: Page
+      schema:
+        type: string
+    subtreeRootParam:
+      name: subtreeRoot
+      in: query
+      description: Subtree root
+      schema:
+        type: string
