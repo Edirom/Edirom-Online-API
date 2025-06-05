@@ -417,6 +417,7 @@ paths:
           description: Successful operation
           content: {}
 
+  # getEdition.xql
   /data/xql/getEdition.xql:
     get:
       tags:
@@ -433,7 +434,10 @@ paths:
         examples: 
           EditionExample:
             summary: "EditionExample"
-            value: 
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       responses:
         "200":
           description: Successful operation
@@ -442,7 +446,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Edition'
 
-  # getEditions
+  # getEditions.xql
   /data/xql/getEditions.xql:
     get:
       tags:
@@ -499,6 +503,7 @@ paths:
                   summary: "EditionExample"
                   value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
   
+  # getMeasure.xql
   /data/xql/getMeasure.xql:
     get:
       tags:
@@ -513,18 +518,18 @@ paths:
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
       - name: measureId
         in: query
         description: Measure ID
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: bar-20016?tstamp2=2m+0
       responses:
         "200":
           description: Successful operation
@@ -533,6 +538,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getMeasures.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMeasures.xql?_dc=1749042817147&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-3.xml&mdiv=x84707a44-0e6a-4c77-9eab-d196150079a9&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getMeasures.xql:
     get:
       tags:
@@ -567,6 +574,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getMeasurePage.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMeasurePage.xql?_dc=1749042692718&id=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-4-MEI.xml&measure=3&movementId=tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getMeasurePage.xql:
     get:
       tags:
@@ -620,6 +629,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getMeasuresOnPage.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMeasuresOnPage.xql?_dc=1749043173948&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-1.xml&pageId=facsimile-2001002&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getMeasuresOnPage.xql:
     get:
       tags:
@@ -654,6 +665,9 @@ paths:
               schema:
                 type: string
 
+  # TODO: getMovements.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMovements.xql?_dc=1748966174711&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-4-MEI.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMovements.xql?_dc=1748966967558&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fsources%2Fedirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
   /data/xql/getMovements.xql:
     get:
       tags:
@@ -690,6 +704,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Movement'
 
+  # TODO: getMovementsFirstPage.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMovementsFirstPage.xql?_dc=1749043229222&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-1.xml&movementId=part-3&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getMovementsFirstPage.xql:
     get:
       tags:
@@ -715,6 +731,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getOverlays.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getOverlays.xql?_dc=1748966967559&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fsources%2Fedirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
   /data/xql/getOverlays.xql:
     get:
       tags:
@@ -740,6 +758,7 @@ paths:
               schema:
                 type: string
 
+  # TODO: getOverlayOnPage.xql
   /data/xql/getOverlayOnPage.xql:
     get:
       tags:
@@ -784,6 +803,8 @@ paths:
                 type: string
 
   # getWorkID
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getWorkID.xql?_dc=1748965293662&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&workId=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=en
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getWorkID.xql?_dc=1748966450776&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&workId=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=en
   /data/xql/getWorkID.xql:
     get:
       tags:
@@ -822,6 +843,8 @@ paths:
                   summary: "EditionExample"
                   value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
 
+  # TODO: getWorks.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getWorks.xql?editionId=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de&page=1&start=0&limit=25
   /data/xql/getWorks.xql:
     get:
       tags:
@@ -847,6 +870,9 @@ paths:
               schema:
                 type: string
 
+  # TODO: getChapters.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getChapters.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getChapters.xql?_dc=1748966865595&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fstartwindow.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
   /data/xql/getChapters.xql:
     get:
       tags:
@@ -881,6 +907,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getConcordances.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getConcordances.xql?_dc=1749042647129&id=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&workId=edition-27830471_work-1&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
   /data/xql/getConcordances.xql:
     get:
       tags:
@@ -926,6 +954,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Concordance'
 
+  # TODO: getHeader.xql
+  # Freischütz: https://edition.freischuetz-digital.de/data/xql/getHeader.xql?_dc=1749114435866&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fcontents%2Fedition%2Ffreidi-musikgenese.xml&type=text
   /data/xql/getHeader.xql:
     get:
       tags:
@@ -975,6 +1005,8 @@ paths:
           description: Successful operation
           content: {}
 
+  # TODO: getHelp.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getHelp.xql?_dc=1749021575047&lang=de&idPrefix=helpWindow-1073&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
   /data/xql/getHelp.xql:
     get:
       tags:
@@ -1010,6 +1042,8 @@ paths:
           description: Successful operation
           content: {}
 
+  # TODO: getiFrameURL.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getiFrameURL.xql?_dc=1749043105107&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Ftexts%2Ftext-7.xml%3Fterm%3Dnull%26path%3Dnull%23searchTarget&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getiFrameURL.xql:
     get:
       tags:
@@ -1035,6 +1069,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getInternalIdType.xql
+  # 
   /data/xql/getInternalIdType.xql:
     get:
       tags:
@@ -1060,6 +1096,9 @@ paths:
               schema:
                 type: string
 
+  # TODO: getLanguageFile.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getLanguageFile.xql?_dc=1748965293677&lang=de&mode=json&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml 
+  #  http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getLanguageFile.xql?_dc=1748966450794&lang=de&mode=json&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml
   /data/xql/getLanguageFile.xql:
     get:
       tags:
@@ -1107,6 +1146,8 @@ paths:
               schema:
                 type: string
 
+  # TODO: getLinkTarget.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
     post:
       tags:
@@ -1154,6 +1195,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/LinkTarget'
 
+  # TODO: getMusicInMdiv.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend//data/xql/getMusicInMdiv.xql?uri=xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml&edition=xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml&movementId= 
+  #  http://localhost:8080/exist/apps/Edirom-Online-Backend//data/xql/getMusicInMdiv.xql?uri=xmldb:exist:///db/apps/edirom/edition-example/content/editions/edirom_edition_7bade454-c1b2-499f-8100-7b3e369e2d65.xml&edition=xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml&movementId=
   /data/xql/getMusicInMdiv.xql:
     get:
       tags:
@@ -1185,6 +1229,9 @@ paths:
           description: Successful operation
           content: {}
 
+  # TODO: getNavigatorConfig.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getNavigatorConfig.xql?_dc=1748965293849&editionId=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&workId=edition-27830471_work-1&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml 
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getNavigatorConfig.xql?_dc=1748966450979&editionId=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&workId=edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml
   /data/xql/getNavigatorConfig.xql:
     get:
       tags:
@@ -1210,6 +1257,9 @@ paths:
         "200":
           description: Successful operation
           content: {}
+
+  # TODO: getPages.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getPages.xql?_dc=1748966994984&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fsources%2Fedirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
   /data/xql/getPages.xql:
     get:
       tags:
@@ -1236,6 +1286,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Page'
+
+  # TODO: getParts.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getParts.xql?_dc=1749114100330&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-5.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getParts.xql:
     get:
       tags:
@@ -1260,6 +1313,10 @@ paths:
             application/json:
               schema:
                 type: string
+
+  # TODO: getPreferences.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getPreferences.xql?_dc=1748965293669&mode=json&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=en 
+  #  http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getPreferences.xql?_dc=1748966450783&mode=json&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=en
   /data/xql/getPreferences.xql:
     get:
       tags:
@@ -1293,6 +1350,9 @@ paths:
             text/plain:
               schema:
                 $ref: '#/components/schemas/Preferences'
+
+  # TODO: getReducedDocument.xql
+  # 
   /data/xql/getReducedDocument.xql:
     get:
       tags:
@@ -1353,6 +1413,9 @@ paths:
             text/html:
               schema:
                 type: string
+
+  # TODO: getSummary.xql
+  # 
   /data/xql/getSummary.xql:
     get:
       tags:
@@ -1400,6 +1463,10 @@ paths:
             text/html:
               schema:
                 type: string
+
+  # TODO: getText.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getText.xql?_dc=1748965294230&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Ftexts%2Ftext-1.xml&idPrefix=textView-1063_&term=&path=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de 
+  #  http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getText.xql?_dc=1748966864743&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fstartwindow.xml&idPrefix=textView-1063_&term=&path=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
   /data/xql/getText.xql:
     get:
       tags:
@@ -1466,6 +1533,9 @@ paths:
         "200":
           description: Successful operation
           content: {}
+  
+  # TODO: getXml.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getXml.xql?_dc=1749042925031&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-4-MEI.xml&internalId=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
   /data/xql/getXml.xql:
     get:
       tags:
@@ -1499,6 +1569,8 @@ paths:
             text/xml:
               schema:
                 type: string
+  
+  # TODO: getZone.xql
   /data/xql/getZone.xql:
     get:
       tags:
@@ -1532,6 +1604,9 @@ paths:
             application/json:
               schema:
                 type: string
+  
+  # TODO: search.xql
+  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/search.xql?_dc=1749113832668&term=neu&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
   /data/xql/search.xql:
     get:
       tags:
@@ -1578,53 +1653,8 @@ paths:
             text/html:
               schema:
                 type: string
-  /data/xql/edirom_printPreview.xql:
-    get:
-      tags:
-      - Other
-      summary: Get print preview
-      description: Returns HTML for print preview
-      operationId: edirom_printPreview
-      parameters:
-      - name: edition
-        in: query
-        description: Identifier of the edition
-        schema:
-          type: string      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
-      - name: uri
-        in: query
-        description: URI
-        schema:
-          type: string      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
-      - name: type
-        in: query
-        description: Type
-        schema:
-          type: string
-          enum:
-          - work
-          - source
-          - recording
-          - text      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            text/html:
-              schema:
-                type: string
+  
+  
 components:
   schemas:
     Annotations:
