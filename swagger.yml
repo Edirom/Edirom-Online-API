@@ -54,7 +54,6 @@ paths:
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en        
@@ -171,7 +170,6 @@ paths:
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en        
@@ -269,6 +267,7 @@ paths:
               schema:
                 type: string
 
+  # getAnnotationsOnPage.xql
   /data/xql/getAnnotationsOnPage.xql:
     get:
       tags:
@@ -282,28 +281,28 @@ paths:
         description: Identifier of the edition
         schema:
           type: string        
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
       - name: pageId
         in: query
         description: Page ID
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: facsimile-2001002
       responses:
         "200":
           description: Successful operation
@@ -314,6 +313,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/AnnotationItem'
 
+  # getAnnotationOpenAllUris.xql
   /data/xql/getAnnotationOpenAllUris.xql:
     get:
       tags:
@@ -328,26 +328,27 @@ paths:
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
       - name: annotId
         in: query
         description: Annotation ID
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: annotation-9
       responses:
         "200":
           description: Successful operation
           content:
-            text/html:
+            text/plain:
               schema:
                 type: string
 
+  # getAnnotationPreviews.xql
   /data/xql/getAnnotationPreviews.xql:
     get:
       tags:
@@ -362,31 +363,30 @@ paths:
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-8
       - name: lang
         in: query
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: en
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
       responses:
         "200":
           description: Successful operation
