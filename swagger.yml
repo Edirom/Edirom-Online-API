@@ -12,6 +12,8 @@ servers:
 - url: https://klarinettenquintett.weber-gesamtausgabe.de/
   description: Klarinettenquintett
 paths:
+
+  # getAnnotation.xql
   /data/xql/getAnnotation.xql:
     get:
       tags:
@@ -24,17 +26,29 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
       - name: target
         in: query
         description: Target
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: tip
       - name: lang
         in: query
         description: Language
@@ -43,11 +57,17 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
       responses:
         "200":
           description: Successful operation
           content: {}
+
+  # getAnnotations.xql
   /data/xql/getAnnotations.xql:
     get:
       tags:
@@ -60,12 +80,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
       responses:
         "200":
           description: Successful operation
@@ -75,6 +103,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Annotations'
+
+  # getAnnotationInfos.xql
   /data/xql/getAnnotationInfos.xql:
     get:
       tags:
@@ -87,12 +117,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
       responses:
         "200":
           description: Successful operation
@@ -100,6 +138,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnnotationInfos'
+
+  # getAnnotationMeta.xql
   /data/xql/getAnnotationMeta.xql:
     get:
       tags:
@@ -112,12 +152,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
       - name: lang
         in: query
         description: Language
@@ -126,11 +174,20 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en        
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content:
+            text/html:
+              schema:
+                type: string
+
+  # getAnnotationText.xql
   /data/xql/getAnnotationText.xql:
     get:
       tags:
@@ -143,12 +200,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-8
       - name: lang
         in: query
         description: Language
@@ -157,11 +222,19 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en        
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            text/html:
+              schema:
+                type: string
+
   /data/xql/getAnnotationsInText.xql:
     get:
       tags:
@@ -174,12 +247,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -187,6 +268,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getAnnotationsOnPage.xql:
     get:
       tags:
@@ -199,17 +281,29 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: pageId
         in: query
         description: Page ID
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -219,6 +313,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AnnotationItem'
+
   /data/xql/getAnnotationOpenAllUris.xql:
     get:
       tags:
@@ -231,12 +326,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: annotId
         in: query
         description: Annotation ID
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -244,6 +347,7 @@ paths:
             text/html:
               schema:
                 type: string
+
   /data/xql/getAnnotationPreviews.xql:
     get:
       tags:
@@ -256,12 +360,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: lang
         in: query
         description: Language
@@ -270,7 +382,11 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: en
       responses:
         "200":
           description: Successful operation
@@ -278,6 +394,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnnotationPreviews'
+
   /data/xql/getAudioPlayer.xql:
     get:
       tags:
@@ -290,11 +407,16 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
           content: {}
+
   /data/xql/getEdition.xql:
     get:
       tags:
@@ -307,7 +429,11 @@ paths:
         in: query
         description: ID
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -315,6 +441,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Edition'
+
+  # getEditions
   /data/xql/getEditions.xql:
     get:
       tags:
@@ -331,11 +459,22 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Edition'
+              examples:
+                EditionExample:
+                  summary: "EditionExample"
+                  value: 
+                    - additional_css_path: ""
+                      id: "edirom_edition_example"
+                      languages: "de"
+                      name: "Edirom Edition Example"
+                      doc: "xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml"
+
+  # getEditionURI
   /data/xql/getEditionURI.xql:
     get:
       tags:
       - Edition
-      summary: Get edition RI
+      summary: Get edition URI
       description: Returns JSON for edition URI
       operationId: getEditionURI
       parameters:
@@ -344,10 +483,22 @@ paths:
         description: URI
         schema:
           type: string
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_edition_examplexmldb:exist:///db/contents/edition-50127042.xml
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                EditionExample:
+                  summary: "EditionExample"
+                  value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+  
   /data/xql/getMeasure.xql:
     get:
       tags:
@@ -360,12 +511,20 @@ paths:
         in: query
         description: ID
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: measureId
         in: query
         description: Measure ID
         schema:
-          type: string
+          type: string        
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -373,6 +532,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getMeasures.xql:
     get:
       tags:
@@ -385,12 +545,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: mdiv
         in: query
         description: Measure div
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -398,6 +566,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getMeasurePage.xql:
     get:
       tags:
@@ -410,23 +579,39 @@ paths:
         in: query
         description: ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: measure
         in: query
         description: Measure
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: movementId
         in: query
         description: Movement ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: measureCount
         in: query
         description: Measure Count
         schema:
           type: string
-          default: "1"
+          default: "1"      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -434,6 +619,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getMeasuresOnPage.xql:
     get:
       tags:
@@ -446,12 +632,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: pageId
         in: query
         description: Page ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -459,6 +653,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getMovements.xql:
     get:
       tags:
@@ -471,12 +666,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: movementId
         in: query
         description: Movement ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -486,6 +689,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Movement'
+
   /data/xql/getMovementsFirstPage.xql:
     get:
       tags:
@@ -498,7 +702,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -506,6 +714,7 @@ paths:
             text/plain:
               schema:
                 type: string
+
   /data/xql/getOverlays.xql:
     get:
       tags:
@@ -518,7 +727,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -526,6 +739,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getOverlayOnPage.xql:
     get:
       tags:
@@ -538,17 +752,29 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: pageId
         in: query
         description: Page ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: overlayId
         in: query
         description: Overlay ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -556,6 +782,8 @@ paths:
             application/json:
               schema:
                 type: string
+
+  # getWorkID
   /data/xql/getWorkID.xql:
     get:
       tags:
@@ -568,12 +796,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xmlxmldb:exist:///db/apps/contents/edition/freidi-edition.xml
       - name: workId
         in: query
         description: Work ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_work_743373fb-4dcf-4329-90c0-fd1eacc9ea69
       responses:
         "200":
           description: Successful operation
@@ -581,6 +817,11 @@ paths:
             text/plain:
               schema:
                 type: string
+              examples:
+                EditionExample:
+                  summary: "EditionExample"
+                  value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
+
   /data/xql/getWorks.xql:
     get:
       tags:
@@ -593,7 +834,11 @@ paths:
         in: query
         description: Edition ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -601,6 +846,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getChapters.xql:
     get:
       tags:
@@ -613,12 +859,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: mode
         in: query
         description: Mode
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -626,6 +880,7 @@ paths:
             application/json:
               schema:
                 type: string
+
   /data/xql/getConcordances.xql:
     get:
       tags:
@@ -638,17 +893,29 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: id
         in: query
         description: ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: workId
         in: query
         description: Work ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -658,6 +925,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Concordance'
+
   /data/xql/getHeader.xql:
     get:
       tags:
@@ -670,7 +938,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: type
         in: query
         description: Type
@@ -680,7 +952,11 @@ paths:
           - work
           - source
           - recording
-          - text
+          - text      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: lang
         in: query
         description: Language
@@ -689,11 +965,16 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en      
+        examples: 
+          EditionExample:
+            summary: en
+            value: 
       responses:
         "200":
           description: Successful operation
           content: {}
+
   /data/xql/getHelp.xql:
     get:
       tags:
@@ -706,7 +987,11 @@ paths:
         in: query
         description: ID prefix
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: lang
         in: query
         description: Language
@@ -715,11 +1000,16 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: en
       responses:
         "200":
           description: Successful operation
           content: {}
+
   /data/xql/getiFrameURL.xql:
     get:
       tags:
@@ -732,7 +1022,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -740,6 +1034,7 @@ paths:
             text/plain:
               schema:
                 type: string
+
   /data/xql/getInternalIdType.xql:
     get:
       tags:
@@ -752,7 +1047,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -760,6 +1059,7 @@ paths:
             text/plain:
               schema:
                 type: string
+
   /data/xql/getLanguageFile.xql:
     get:
       tags:
@@ -772,12 +1072,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: mode
         in: query
         description: Mode
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: lang
         in: query
         description: Language
@@ -786,7 +1094,11 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: en
       responses:
         "200":
           description: Successful operation
@@ -794,6 +1106,7 @@ paths:
             application/xml:
               schema:
                 type: string
+
   /data/xql/getLinkTarget.xql:
     post:
       tags:
@@ -806,12 +1119,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: lang
         in: query
         description: Language
@@ -820,7 +1141,11 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: en
       responses:
         "200":
           description: Successful operation
@@ -828,6 +1153,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LinkTarget'
+
   /data/xql/getMusicInMdiv.xql:
     get:
       tags:
@@ -840,16 +1166,25 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: movementId
         in: query
         description: Movement ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
           content: {}
+
   /data/xql/getNavigatorConfig.xql:
     get:
       tags:
@@ -866,7 +1201,11 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: en
       responses:
         "200":
           description: Successful operation
@@ -883,7 +1222,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -905,7 +1248,11 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -925,12 +1272,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: mode
         in: query
         description: Mode
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -950,27 +1305,47 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: selectionId
         in: query
         description: Selection ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: subtreeRoot
         in: query
         description: Subtree root
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: idPrefix
         in: query
         description: ID prefix
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -990,12 +1365,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: type
         in: query
         description: Type
@@ -1005,7 +1388,11 @@ paths:
           - work
           - source
           - recording
-          - text
+          - text      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -1025,32 +1412,56 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: idPrefix
         in: query
         description: ID prefix
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: term
         in: query
         description: Term
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: path
         in: query
         description: Path
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: page
         in: query
         description: Page
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -1067,12 +1478,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: internalId
         in: query
         description: Internal ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -1092,12 +1511,20 @@ paths:
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: zoneId
         in: query
         description: Zone ID
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
@@ -1117,12 +1544,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: term
         in: query
         description: Term
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: lang
         in: query
         description: Language
@@ -1131,7 +1566,11 @@ paths:
           default: en
           enum:
           - de
-          - en
+          - en      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: en
       responses:
         "200":
           description: Successful operation
@@ -1151,12 +1590,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: uri
         in: query
         description: URI
         schema:
-          type: string
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       - name: type
         in: query
         description: Type
@@ -1166,7 +1613,11 @@ paths:
           - work
           - source
           - recording
-          - text
+          - text      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: 
       responses:
         "200":
           description: Successful operation
