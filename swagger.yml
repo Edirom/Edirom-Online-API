@@ -233,6 +233,7 @@ paths:
               schema:
                 type: string
 
+  
   /data/xql/getAnnotationsInText.xql:
     get:
       tags:
@@ -247,8 +248,8 @@ paths:
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: uri
         in: query
@@ -256,8 +257,8 @@ paths:
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -409,8 +410,8 @@ paths:
         schema:
           type: string        
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -526,7 +527,7 @@ paths:
         description: Measure ID
         schema:
           type: string        
-        examples: 
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: bar-20016?tstamp2=2m+0
@@ -538,8 +539,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getMeasures.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMeasures.xql?_dc=1749042817147&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-3.xml&mdiv=x84707a44-0e6a-4c77-9eab-d196150079a9&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
+  # getMeasures.xql
   /data/xql/getMeasures.xql:
     get:
       tags:
@@ -554,18 +554,18 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
       - name: mdiv
         in: query
         description: Measure div
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: x84707a44-0e6a-4c77-9eab-d196150079a9
       responses:
         "200":
           description: Successful operation
@@ -574,8 +574,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getMeasurePage.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMeasurePage.xql?_dc=1749042692718&id=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-4-MEI.xml&measure=3&movementId=tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
+  # getMeasurePage.xql
   /data/xql/getMeasurePage.xql:
     get:
       tags:
@@ -589,38 +588,39 @@ paths:
         description: ID
         schema:
           type: string      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
       - name: measure
         in: query
         description: Measure
         schema:
-          type: string      
+          type: number
+          format: integer  
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: 3
       - name: movementId
         in: query
         description: Movement ID
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf
       - name: measureCount
         in: query
+        required: false
         description: Measure Count
         schema:
-          type: string
-          default: "1"      
+          type: number      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: 2
       responses:
         "200":
           description: Successful operation
@@ -629,8 +629,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getMeasuresOnPage.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMeasuresOnPage.xql?_dc=1749043173948&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-1.xml&pageId=facsimile-2001002&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
+  # getMeasuresOnPage.xql
   /data/xql/getMeasuresOnPage.xql:
     get:
       tags:
@@ -645,18 +644,18 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
       - name: pageId
         in: query
         description: Page ID
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: facsimile-2001002
       responses:
         "200":
           description: Successful operation
@@ -665,9 +664,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getMovements.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMovements.xql?_dc=1748966174711&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-4-MEI.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMovements.xql?_dc=1748966967558&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fsources%2Fedirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
+  # getMovements.xql
   /data/xql/getMovements.xql:
     get:
       tags:
@@ -682,18 +679,12 @@ paths:
         schema:
           type: string      
         examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
           EditionExample:
             summary: "EditionExample"
-            value: 
-      - name: movementId
-        in: query
-        description: Movement ID
-        schema:
-          type: string      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml
       responses:
         "200":
           description: Successful operation
@@ -720,9 +711,18 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
+      - name: movementId
+        in: query
+        description: Movement ID
+        schema:
+          type: string      
+        examples: 
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: part-3
       responses:
         "200":
           description: Successful operation
@@ -747,8 +747,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -773,8 +773,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: pageId
         in: query
@@ -782,8 +782,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: overlayId
         in: query
@@ -791,8 +791,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -859,8 +859,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -887,8 +887,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: mode
         in: query
@@ -896,8 +896,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -923,8 +923,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: id
         in: query
@@ -932,8 +932,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: workId
         in: query
@@ -941,8 +941,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -970,8 +970,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: type
         in: query
@@ -984,8 +984,8 @@ paths:
           - recording
           - text      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: lang
         in: query
@@ -1021,8 +1021,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: lang
         in: query
@@ -1034,8 +1034,8 @@ paths:
           - de
           - en      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
@@ -1058,8 +1058,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1085,8 +1085,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1113,8 +1113,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: mode
         in: query
@@ -1122,8 +1122,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: lang
         in: query
@@ -1135,8 +1135,8 @@ paths:
           - de
           - en      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
@@ -1162,8 +1162,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: uri
         in: query
@@ -1171,8 +1171,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: lang
         in: query
@@ -1184,8 +1184,8 @@ paths:
           - de
           - en      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
@@ -1212,8 +1212,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: movementId
         in: query
@@ -1221,8 +1221,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1250,8 +1250,8 @@ paths:
           - de
           - en      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
@@ -1274,8 +1274,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1303,8 +1303,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1331,8 +1331,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: mode
         in: query
@@ -1340,8 +1340,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1367,8 +1367,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: uri
         in: query
@@ -1376,8 +1376,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: selectionId
         in: query
@@ -1385,8 +1385,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: subtreeRoot
         in: query
@@ -1394,8 +1394,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: idPrefix
         in: query
@@ -1403,8 +1403,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1430,8 +1430,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: uri
         in: query
@@ -1439,8 +1439,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: type
         in: query
@@ -1453,8 +1453,8 @@ paths:
           - recording
           - text      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1481,8 +1481,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: uri
         in: query
@@ -1490,8 +1490,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: idPrefix
         in: query
@@ -1499,8 +1499,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: term
         in: query
@@ -1508,8 +1508,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: path
         in: query
@@ -1517,8 +1517,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: page
         in: query
@@ -1526,8 +1526,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1550,8 +1550,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: internalId
         in: query
@@ -1559,8 +1559,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1585,8 +1585,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: zoneId
         in: query
@@ -1594,8 +1594,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
@@ -1621,8 +1621,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: term
         in: query
@@ -1630,8 +1630,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: 
       - name: lang
         in: query
@@ -1643,8 +1643,8 @@ paths:
           - de
           - en      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
