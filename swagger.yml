@@ -1072,8 +1072,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getInternalIdType.xql
-  # 
+  # getInternalIdType.xql
   /data/xql/getInternalIdType.xql:
     get:
       tags:
@@ -1090,7 +1089,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
       responses:
         "200":
           description: Successful operation
