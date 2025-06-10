@@ -1632,8 +1632,8 @@ paths:
         schema:
           type: string
         examples:
-          ExampleTerm:
-            summary: "Example search term"
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
             value: neu
       - name: lang
         in: query
