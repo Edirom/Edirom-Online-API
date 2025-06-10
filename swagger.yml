@@ -1665,8 +1665,7 @@ paths:
               schema:
                 type: string
   
-  # TODO: 
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/search.xql?_dc=1749113832668&term=neu&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
+  # search.xql
   /data/xql/search.xql:
     get:
       tags:
@@ -1682,8 +1681,8 @@ paths:
           schema:
             type: string
           examples:
-            Klarinettenquintett:
-              summary: "Klarinettenquintett"
+            EditionExample:
+              summary: "EditionExample"
               value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
         - name: term
           in: query
@@ -1692,8 +1691,8 @@ paths:
           schema:
             type: string
           examples:
-            Klarinettenquintett:
-              summary: "Klarinettenquintett"
+            EditionExample:
+              summary: "EditionExample"
               value: neu
         - name: lang
           in: query
@@ -1706,8 +1705,8 @@ paths:
               - de
               - en
           examples:
-            Klarinettenquintett:
-              summary: "Klarinettenquintett"
+            EditionExample:
+              summary: "EditionExample"
               value: de
       responses:
         "200":
