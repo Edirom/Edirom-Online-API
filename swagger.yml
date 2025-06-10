@@ -1639,7 +1639,7 @@ paths:
       description: Returns JSON for zone
       operationId: getZone
       parameters:
-      - name: uri
+      - name: uri  
         in: query
         description: URI
         schema:
@@ -1665,47 +1665,50 @@ paths:
               schema:
                 type: string
   
-  # TODO: search.xql
+  # TODO: 
   # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/search.xql?_dc=1749113832668&term=neu&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
   /data/xql/search.xql:
     get:
       tags:
-      - Other
-      summary: Get search
-      description: Returns HTML for search
+        - Search
+      summary: Search in edition
+      description: Returns HTML with search results for a given term in the specified edition and language.
       operationId: search
       parameters:
-      - name: edition
-        in: query
-        description: Identifier of the edition
-        schema:
-          type: string      
-        examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
-      - name: term
-        in: query
-        description: Term
-        schema:
-          type: string      
-        examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
-      - name: lang
-        in: query
-        description: Language
-        schema:
-          type: string
-          default: en
-          enum:
-          - de
-          - en      
-        examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: en
+        - name: edition
+          in: query
+          description: Identifier of the edition (XMLDB URI)
+          required: true
+          schema:
+            type: string
+          examples:
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
+              value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+        - name: term
+          in: query
+          description: Search term
+          required: true
+          schema:
+            type: string
+          examples:
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
+              value: neu
+        - name: lang
+          in: query
+          description: Language for result messages
+          required: false
+          schema:
+            type: string
+            default: en
+            enum:
+              - de
+              - en
+          examples:
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
+              value: de
       responses:
         "200":
           description: Successful operation
@@ -1713,8 +1716,7 @@ paths:
             text/html:
               schema:
                 type: string
-  
-  
+              
 components:
   schemas:
     Annotations:
