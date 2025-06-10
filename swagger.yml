@@ -1158,8 +1158,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getLinkTarget.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getLinkTarget.xql
+  # getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
     post:
       tags:
@@ -1176,7 +1175,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: uri
         in: query
         description: URI
@@ -1185,20 +1184,19 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
       - name: lang
         in: query
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en      
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: en
+            value: de
       responses:
         "200":
           description: Successful operation
