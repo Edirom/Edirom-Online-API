@@ -11,6 +11,8 @@ servers:
   description: Local backend
 - url: https://klarinettenquintett.weber-gesamtausgabe.de/
   description: Klarinettenquintett
+- url: https://edition.freischuetz-digital.de
+  description: Freischütz Digital
 paths:
 
   # getAnnotation.xql
@@ -232,7 +234,6 @@ paths:
             text/html:
               schema:
                 type: string
-
   
   /data/xql/getAnnotationsInText.xql:
     get:
@@ -410,13 +411,19 @@ paths:
         schema:
           type: string        
         examples: 
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/audioSources/freidi-recording_Janowski1994.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: 
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            text/html:
+              schema:
+                type: string
 
   # getEdition.xql
   /data/xql/getEdition.xql:
@@ -872,10 +879,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getChapters.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getChapters.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getChapters.xql?_dc=1748966865595&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fstartwindow.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
-  # [returns empty result - maybe there is a better example]
+  # getChapters.xql
   /data/xql/getChapters.xql:
     get:
       tags:
@@ -890,6 +894,9 @@ paths:
         schema:
           type: string      
         examples: 
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_ED-tx.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/startwindow.xml
@@ -899,6 +906,9 @@ paths:
         schema:
           type: string      
         examples: 
+          Freischütz:
+            summary: "Freischütz"
+            value: pageMode
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: 
@@ -963,9 +973,9 @@ paths:
         schema:
           type: string      
         examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/edition/freidi-musikgenese.xml
       - name: type
         in: query
         description: Type
@@ -977,9 +987,9 @@ paths:
           - recording
           - text      
         examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
+          Freischütz:
+            summary: "Freischütz"
+            value: text
       - name: lang
         in: query
         description: Language
@@ -989,14 +999,17 @@ paths:
           enum:
           - de
           - en      
-        examples: 
-          EditionExample:
-            summary: en
-            value: 
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: en
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            text/html:
+              schema:
+                type: string
 
   # getHelp.xql
   /data/xql/getHelp.xql:
