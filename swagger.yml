@@ -695,8 +695,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Movement'
 
-  # TODO: getMovementsFirstPage.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getMovementsFirstPage.xql?_dc=1749043229222&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fsources%2Fsource-1.xml&movementId=part-3&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
+  # getMovementsFirstPage.xql
   /data/xql/getMovementsFirstPage.xql:
     get:
       tags:
@@ -731,8 +730,8 @@ paths:
               schema:
                 type: string
 
-  # TODO: getOverlays.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getOverlays.xql?_dc=1748966967559&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fsources%2Fedirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
+  # getOverlays.xql
+  # [empty result - there may be better example]
   /data/xql/getOverlays.xql:
     get:
       tags:
@@ -749,7 +748,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml
       responses:
         "200":
           description: Successful operation
@@ -803,8 +802,6 @@ paths:
                 type: string
 
   # getWorkID
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getWorkID.xql?_dc=1748965293662&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&workId=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=en
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getWorkID.xql?_dc=1748966450776&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&workId=&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=en
   /data/xql/getWorkID.xql:
     get:
       tags:
@@ -821,7 +818,10 @@ paths:
         examples: 
           EditionExample:
             summary: "EditionExample"
-            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xmlxmldb:exist:///db/apps/contents/edition/freidi-edition.xml
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: workId
         in: query
         description: Work ID
@@ -831,6 +831,9 @@ paths:
           EditionExample:
             summary: "EditionExample"
             value: edirom_work_743373fb-4dcf-4329-90c0-fd1eacc9ea69
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
       responses:
         "200":
           description: Successful operation
@@ -843,8 +846,7 @@ paths:
                   summary: "EditionExample"
                   value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
 
-  # TODO: getWorks.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getWorks.xql?editionId=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de&page=1&start=0&limit=25
+  # getWorks.xql
   /data/xql/getWorks.xql:
     get:
       tags:
@@ -861,7 +863,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       responses:
         "200":
           description: Successful operation
@@ -873,6 +875,7 @@ paths:
   # TODO: getChapters.xql
   # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getChapters.xql
   # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getChapters.xql?_dc=1748966865595&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fstartwindow.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
+  # [returns empty result - maybe there is a better example]
   /data/xql/getChapters.xql:
     get:
       tags:
@@ -889,7 +892,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/startwindow.xml
       - name: mode
         in: query
         description: Mode
@@ -907,8 +910,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getConcordances.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getConcordances.xql?_dc=1749042647129&id=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&workId=edition-27830471_work-1&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
+  # getConcordances.xql
   /data/xql/getConcordances.xql:
     get:
       tags:
@@ -917,15 +919,6 @@ paths:
       description: Returns JSON for concordances
       operationId: getConcordances
       parameters:
-      - name: uri
-        in: query
-        description: URI
-        schema:
-          type: string      
-        examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
       - name: id
         in: query
         description: ID
@@ -934,7 +927,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: workId
         in: query
         description: Work ID
@@ -943,7 +936,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: edition-27830471_work-1
       responses:
         "200":
           description: Successful operation
@@ -1005,8 +998,7 @@ paths:
           description: Successful operation
           content: {}
 
-  # TODO: getHelp.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getHelp.xql?_dc=1749021575047&lang=de&idPrefix=helpWindow-1073&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
+  # getHelp.xql
   /data/xql/getHelp.xql:
     get:
       tags:
@@ -1023,13 +1015,12 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: helpWindow-1073
       - name: lang
         in: query
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en      
@@ -1042,8 +1033,7 @@ paths:
           description: Successful operation
           content: {}
 
-  # TODO: getiFrameURL.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getiFrameURL.xql?_dc=1749043105107&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Ftexts%2Ftext-7.xml%3Fterm%3Dnull%26path%3Dnull%23searchTarget&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&lang=de
+  # getiFrameURL.xql
   /data/xql/getiFrameURL.xql:
     get:
       tags:
@@ -1060,7 +1050,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-7.xml
       responses:
         "200":
           description: Successful operation
@@ -1096,9 +1086,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getLanguageFile.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getLanguageFile.xql?_dc=1748965293677&lang=de&mode=json&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml 
-  #  http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getLanguageFile.xql?_dc=1748966450794&lang=de&mode=json&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml
+  # getLanguageFile.xql
   /data/xql/getLanguageFile.xql:
     get:
       tags:
@@ -1113,28 +1101,36 @@ paths:
         schema:
           type: string      
         examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
       - name: mode
         in: query
         description: Mode
         schema:
           type: string      
         examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: json
       - name: lang
         in: query
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en      
         examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: de
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: en
