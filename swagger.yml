@@ -1191,9 +1191,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LinkTarget'
 
-  # TODO: getMusicInMdiv.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend//data/xql/getMusicInMdiv.xql?uri=xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml&edition=xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml&movementId= 
-  #  http://localhost:8080/exist/apps/Edirom-Online-Backend//data/xql/getMusicInMdiv.xql?uri=xmldb:exist:///db/apps/edirom/edition-example/content/editions/edirom_edition_7bade454-c1b2-499f-8100-7b3e369e2d65.xml&edition=xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml&movementId=
+  # getMusicInMdiv.xql
   /data/xql/getMusicInMdiv.xql:
     get:
       tags:
@@ -1208,15 +1206,22 @@ paths:
         schema:
           type: string      
         examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/editions/edirom_edition_7bade454-c1b2-499f-8100-7b3e369e2d65.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
       - name: movementId
         in: query
+        required: false
         description: Movement ID
         schema:
           type: string      
         examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: 
@@ -1225,9 +1230,7 @@ paths:
           description: Successful operation
           content: {}
 
-  # TODO: getNavigatorConfig.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getNavigatorConfig.xql?_dc=1748965293849&editionId=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml&workId=edition-27830471_work-1&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml 
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getNavigatorConfig.xql?_dc=1748966450979&editionId=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&workId=edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml
+  # getNavigatorConfig.xql
   /data/xql/getNavigatorConfig.xql:
     get:
       tags:
@@ -1236,26 +1239,54 @@ paths:
       description: Returns HTML for navigator config
       operationId: getNavigatorConfig
       parameters:
+      - name: editionId
+        in: query
+        description: Edition ID
+        schema:
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: workId
+        in: query
+        description: Work ID
+        schema:
+          type: string      
+        examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: edition-27830471_work-1
       - name: lang
         in: query
         description: Language
         schema:
           type: string
-          default: en
           enum:
           - de
           - en      
         examples: 
+          EditionExample:
+            summary: "EditionExample"
+            value: de
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            text/html:
+              schema:
+                type: string
 
-  # TODO: getPages.xql
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/getPages.xql?_dc=1748966994984&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2Fsources%2Fedirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fedition-example%2Fcontent%2FediromEditions%2Fedirom_edition_example.xml&lang=de
+  # getPages.xql
   /data/xql/getPages.xql:
     get:
       tags:
@@ -1272,7 +1303,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
       responses:
         "200":
           description: Successful operation
