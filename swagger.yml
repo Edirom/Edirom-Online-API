@@ -764,7 +764,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getOverlayOnPage.xql
+  # getOverlayOnPage.xql
   /data/xql/getOverlayOnPage.xql:
     get:
       tags:
@@ -781,7 +781,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
       - name: pageId
         in: query
         description: Page ID
@@ -790,7 +790,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: facsimile-2002001
       - name: overlayId
         in: query
         description: Overlay ID
@@ -799,7 +799,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: layer-1
       responses:
         "200":
           description: Successful operation
