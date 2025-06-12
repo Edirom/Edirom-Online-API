@@ -1671,26 +1671,26 @@ paths:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
-    responses:
-      "200":
-        description: Successful operation
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                ulx:
-                  type: integer
-                uly:
-                  type: integer
-                lrx:
-                  type: integer
-                lry:
-                  type: integer
-                type:
-                  type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  ulx:
+                    type: integer
+                  uly:
+                    type: integer
+                  lrx:
+                    type: integer
+                  lry:
+                    type: integer
+                  type:
+                    type: string
   
   # search.xql
   /data/xql/search.xql:
