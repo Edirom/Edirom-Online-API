@@ -1640,7 +1640,7 @@ paths:
   /data/xql/getZone.xql:
     get:
       tags:
-        - Zone
+        - Other
       summary: Get a zone by ID
       description: Returns a single zone element (typically from a facsimile or measure region) as JSON.
       operationId: getZone
