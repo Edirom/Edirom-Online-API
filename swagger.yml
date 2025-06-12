@@ -1407,7 +1407,6 @@ paths:
             
 
   # TODO: getReducedDocument.xql
-  # 
   /data/xql/getReducedDocument.xql:
     get:
       tags:
@@ -1470,7 +1469,6 @@ paths:
                 type: string
 
   # TODO: getSummary.xql
-  # 
   /data/xql/getSummary.xql:
     get:
       tags:
@@ -1637,41 +1635,63 @@ paths:
             text/xml:
               schema:
                 type: string
-  
-  # TODO: getZone.xql
+
+  #getZone.xql
   /data/xql/getZone.xql:
     get:
       tags:
       - Other
-      summary: Get zone
-      description: Returns JSON for zone
-      operationId: getZone
+      summary: Get a zone by ID
+      description: Returns a single zone element (typically from a facsimile or measure region) as JSON.
+      operationId: getZone 
       parameters:
-      - name: uri  
+      - name: uri
         in: query
-        description: URI
+        description: Full xmldb URI of the source MEI file containing the zone
+        required: true
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
-      - name: zoneId
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-8.xml
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
+      - name: zoneId  
         in: query
-        description: Zone ID
+        description: The xml:id of the zone element to retrieve
+        required: true
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
+
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  id:
+                    type: string
+                  ulx:
+                    type: integer
+                  uly:
+                    type: integer
+                  lrx:
+                    type: integer
+                  lry:
+                    type: integer
+                  type:
+                    type: string
   
   # search.xql
   /data/xql/search.xql:
@@ -1689,8 +1709,8 @@ paths:
           schema:
             type: string
           examples:
-            EditionExample:
-              summary: "EditionExample"
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
               value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
         - name: term
           in: query
@@ -1699,8 +1719,8 @@ paths:
           schema:
             type: string
           examples:
-            EditionExample:
-              summary: "EditionExample"
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
               value: neu
         - name: lang
           in: query
@@ -1713,8 +1733,8 @@ paths:
               - de
               - en
           examples:
-            EditionExample:
-              summary: "EditionExample"
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
               value: de
       responses:
         "200":
