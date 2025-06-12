@@ -13,6 +13,8 @@ servers:
   description: Klarinettenquintett
 - url: https://edition.freischuetz-digital.de
   description: Freischütz Digital
+- url: https://open-faust.zenmem.de
+  description: Open Faust
 paths:
 
   # getAnnotation.xql
@@ -235,6 +237,12 @@ paths:
               schema:
                 type: string
   
+  # getAnnotationsInText.xql
+  # https://open-faust.zenmem.de
+  # /data/xql/getAnnotationsInText.xql?_dc=1749634993542&
+  # xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fopen-faust%2Fcontent%2Fedition%2Fedition_text.xml
+  # xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fopen-faust%2Fcontent%2F
+  # lang=en
   /data/xql/getAnnotationsInText.xql:
     get:
       tags:
@@ -249,18 +257,18 @@ paths:
         schema:
           type: string        
         examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
+          OpenFaust:
+            summary: "Open Faust"
+            value: xmldb:exist:///db/apps/edirom/open-faust/content/edition-open-faust.xml
       - name: uri
         in: query
         description: URI
         schema:
           type: string        
         examples: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
+          OpenFaust:
+            summary: "Open Faust"
+            value: xmldb:exist:///db/apps/edirom/open-faust/content/edition/edition_text.xml
       responses:
         "200":
           description: Successful operation
@@ -764,7 +772,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getOverlayOnPage.xql
+  # getOverlayOnPage.xql
   /data/xql/getOverlayOnPage.xql:
     get:
       tags:
@@ -781,7 +789,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
       - name: pageId
         in: query
         description: Page ID
@@ -790,7 +798,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: facsimile-2002001
       - name: overlayId
         in: query
         description: Overlay ID
@@ -799,7 +807,7 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value: layer-1
       responses:
         "200":
           description: Successful operation
@@ -1399,7 +1407,6 @@ paths:
             
 
   # TODO: getReducedDocument.xql
-  # 
   /data/xql/getReducedDocument.xql:
     get:
       tags:
@@ -1462,7 +1469,6 @@ paths:
                 type: string
 
   # TODO: getSummary.xql
-  # 
   /data/xql/getSummary.xql:
     get:
       tags:
@@ -1686,7 +1692,7 @@ paths:
                   type:
                     type: string
   
-  # http://localhost:8080/exist/apps/Edirom-Online-Backend/data/xql/search.xql?_dc=1749113832668&term=neu&lang=de&edition=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fweber-klarinettenquintett-eol-emeritus%2Fedition.xml
+  # search.xql
   /data/xql/search.xql:
     get:
       tags:
