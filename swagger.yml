@@ -1643,7 +1643,7 @@ paths:
       - Other
       summary: Get a zone by ID
       description: Returns a single zone element (typically from a facsimile or measure region) as JSON.
-      operationId: getZone
+      operationId: getZone 
       parameters:
       - name: uri
         in: query
@@ -1658,19 +1658,20 @@ paths:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
-      - name: zoneId
+      - name: zoneId  
         in: query
         description: The xml:id of the zone element to retrieve
         required: true
         schema:
           type: string
         examples:
-          EditionExample:
-            summary: "EditionExample"
-            value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
+
       responses:
         "200":
           description: Successful operation
