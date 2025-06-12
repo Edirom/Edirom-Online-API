@@ -675,7 +675,7 @@ paths:
         "200":
           description: Successful operation
           content:
-            application/json:
+            application/xml:
               schema:
                 type: string
 
@@ -812,7 +812,7 @@ paths:
         "200":
           description: Successful operation
           content:
-            application/json:
+            application/svg+xml:
               schema:
                 type: string
 
@@ -885,7 +885,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Works'
 
   # getChapters.xql
   /data/xql/getChapters.xql:
@@ -926,7 +926,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Chapters'
 
   # getConcordances.xql
   /data/xql/getConcordances.xql:
@@ -1161,9 +1161,7 @@ paths:
             application/xml:
               schema:
                 type: string
-            application/json:
-              schema:
-                type: string
+
 
   # getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
@@ -1858,6 +1856,18 @@ components:
         internalIdType:
           type: string
           example: unknown
+    Works:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ""
+        doc:
+          type: string
+          example: ""
+        title:
+          type: string
+          example: ""
     plistItem:
       type: object
       properties:
@@ -2047,6 +2057,22 @@ components:
         height:
           type: string
           example: "3107"
+    Chapters:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "d1e372"
+        name:
+          type: string
+          example: "No. 0"
+        pageId:
+          type: string
+          example: "surface_0000005"
+      Chapters:
+        type: array
+        items:
+          $ref: '#/components/schemas/Chapters'
     Concordance:
       type: object
       properties:
@@ -2209,6 +2235,7 @@ components:
       schema:
         type: string
         default: "1"
+        
     modeParam:
       name: mode
       in: query
