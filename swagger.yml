@@ -2072,10 +2072,6 @@ components:
         pageId:
           type: string
           example: "surface_0000005"
-      Chapters:
-        type: array
-        items:
-          $ref: '#/components/schemas/Chapters'
     Concordance:
       type: object
       properties:
