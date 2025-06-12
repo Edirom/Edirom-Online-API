@@ -1645,52 +1645,52 @@ paths:
       description: Returns a single zone element (typically from a facsimile or measure region) as JSON.
       operationId: getZone
       parameters:
-        - name: uri
-          in: query
-          description: Full xmldb URI of the source MEI file containing the zone
-          required: true
-          schema:
-            type: string
-          examples:
-            Klarinettenquintett:
-              summary: "Klarinettenquintett"
-              value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-8.xml
-            EditionExample:
-              summary: "EditionExample"
-              value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
-        - name: zoneId
-          in: query
-          description: The xml:id of the zone element to retrieve
-          required: true
-          schema:
-            type: string
-          examples:
-            EditionExample:
-              summary: "EditionExample"
-              value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
-            Klarinettenquintett:
-              summary: "Klarinettenquintett"
-              value: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  ulx:
-                    type: integer
-                  uly:
-                    type: integer
-                  lrx:
-                    type: integer
-                  lry:
-                    type: integer
-                  type:
-                    type: string
+      - name: uri
+        in: query
+        description: Full xmldb URI of the source MEI file containing the zone
+        required: true
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-8.xml
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
+      - name: zoneId
+        in: query
+        description: The xml:id of the zone element to retrieve
+        required: true
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
+    responses:
+      "200":
+        description: Successful operation
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                ulx:
+                  type: integer
+                uly:
+                  type: integer
+                lrx:
+                  type: integer
+                lry:
+                  type: integer
+                type:
+                  type: string
   
   # search.xql
   /data/xql/search.xql:
