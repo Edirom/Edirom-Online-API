@@ -904,7 +904,7 @@ paths:
         examples: 
           Freischütz:
             summary: "Freischütz"
-            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_ED-tx.xml
+            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_L-tx2.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/startwindow.xml
