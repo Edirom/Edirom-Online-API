@@ -816,7 +816,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Measure'
 
   # getMeasures.xql
   /data/xql/getMeasures.xql:
@@ -851,7 +851,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Measures'
 
   # getMeasurePage.xql
   /data/xql/getMeasurePage.xql:
@@ -906,7 +906,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/MeasurePage'
 
   # getMeasuresOnPage.xql
   /data/xql/getMeasuresOnPage.xql:
@@ -941,7 +941,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/MeasurePage'
 
   # getMovements.xql
   /data/xql/getMovements.xql:
@@ -1935,7 +1935,6 @@ paths:
           EditionExample:
             summary: "EditionExample"
             value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
-
       responses:
         "200":
           description: Successful operation
@@ -1943,19 +1942,15 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  id:
-                    type: string
-                  ulx:
-                    type: integer
-                  uly:
-                    type: integer
-                  lrx:
-                    type: integer
-                  lry:
-                    type: integer
-                  type:
-                    type: string
+                allOf:
+                  - properties:
+                      zoneIid:
+                        type: string
+                        example: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
+                      pageId:
+                        type: string
+                        example: surface_40a1f7ea-e7fb-4642-9195-0a4fce19210a
+                  - $ref: '#/components/schemas/Positions'
   
   # search.xql
   /data/xql/search.xql:
@@ -2010,19 +2005,6 @@ paths:
               
 components:
   schemas:
-    Annotations:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        total:
-          type: integer
-          example: 301
-        annotations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Annotation'
     Annotation:
       type: object
       properties:
@@ -2046,103 +2028,20 @@ components:
         sigla:
           type: string
           example: "A, K/sv, ED₁"
-    Edition:
+    AnnotationInfos:
       type: object
       properties:
-        id:
-          type: string
-          example: edirom_edition_example
-        doc:
-          type: string
-          example: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
-        name:
-          type: string
-          example: Edirom Edition Example
-        additional_css_path:
-          type: string
-          example: ""
-        languages:
-          type: string
-          example: de
-    Preferences:
-      type: object
-      properties:
-        application_language:
-          type: string
-          example: de
-        annotation_layout:
-          type: string
-          example: EdiromOnline.view.window.annotationLayouts.AnnotationLayout1
-        image_prefix:
-          type: string
-          example: https://digilib.freischuetz-digital.de/Scaler/
-    View:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - headerView
-          - textView
-          - xmlView
-        defaultView:
-          type: boolean
-          example: true
-        label:
-          type: string
-          example: XML Text
-        uri:
-          type: string
-          example: xmldb:exist:///db/apps/contents/edition/freidi-work-overview.xml
-    LinkTarget:
-      type: object
-      properties:
-        type:
-          type: string
-          example: work
-        title:
-          type: string
-          example: "Der Freischütz, romantische Oper in drei Aufzügen"
-        doc:
-          type: string
-          example: xmldb:exist:///db/apps/contents/edition/freidi-work.xml
-        views:
+        categories:
           type: array
           items:
-            $ref: '#/components/schemas/View'
-        internalId:
-          type: string
-          example: ""
-        term:
-          type: string
-          example: ""
-        path:
-          type: string
-          example: ""
-        internalIdType:
-          type: string
-          example: unknown
-    plistItem:
-      type: object
-      properties:
-        id:
-          type: string
-          example: annotation__bar-2005
-        type:
-          type: string
-          example: measure
-        ulx:
+            $ref: '#/components/schemas/Category'
+        priorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Priority'
+        count:
           type: integer
-          example: 100
-        uly:
-          type: integer
-          example: 200
-        lrx:
-          type: integer
-          example: 300
-        lry:
-          type: integer
-          example: 400
+          example: 226
     AnnotationItem:
       type: object
       properties:
@@ -2170,20 +2069,6 @@ components:
         categories:
           type: string
           example: wega.annotation.category.bogensetzung
-    AnnotationInfos:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-        priorities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Priority'
-        count:
-          type: integer
-          example: 226
     AnnotationPreviews:
       type: object
       properties:
@@ -2194,65 +2079,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Participant'
-    Participant:
+    Annotations:
       type: object
       properties:
-        type:
-          type: string
-          example: measure
-        label:
-          type: string
-          example: Takte 5 bis 7
-        mdiv:
-          type: string
-          example: ""
-        part:
-          type: string
-          example: ""
-        page:
-          type: string
-          example: "2"
-        source:
-          type: string
-          example: Autograph A
-        siglum:
-          type: string
-          example: A
-        digilibBaseParams:
-          type: string
-          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0002
-        digilibSizeParams:
-          type: string
-          example: '&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit'
-        hiddenData:
-          $ref: '#/components/schemas/HiddenData'
-        content:
-          type: string
-          example: ""
-        linkUri:
-          type: string
-          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0
-    HiddenData:
-      type: object
-      properties:
-        width:
+        success:
+          type: boolean
+          example: true
+        total:
           type: integer
-          example: 634
-        height:
-          type: integer
-          example: 940
-        x:
-          type: integer
-          example: 1610
-        "y":
-          type: integer
-          example: 240
-        origH:
-          type: integer
-          example: 3107
-        origW:
-          type: integer
-          example: 3950
+          example: 301
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
     Category:
       type: object
       properties:
@@ -2262,55 +2101,6 @@ components:
         name:
           type: string
           example: Bogensetzung
-    Priority:
-      type: object
-      properties:
-        id:
-          type: string
-          example: ediromAnnotPrio1
-        name:
-          type: string
-          example: "1"
-    Movement:
-      type: object
-      properties:
-        id:
-          type: string
-          example: movement-1
-        name:
-          type: string
-          example: Allegro
-        parts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Part'
-    Part:
-      type: object
-      properties:
-        id:
-          type: string
-          example: ""
-        name:
-          type: string
-          example: Violine
-    Page:
-      type: object
-      properties:
-        id:
-          type: string
-          example: facsimile-2001001
-        path:
-          type: string
-          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0001
-        name:
-          type: string
-          example: "1"
-        width:
-          type: string
-          example: "3950"
-        height:
-          type: string
-          example: "3107"
     Concordance:
       type: object
       properties:
@@ -2353,6 +2143,280 @@ components:
               items:
                 type: object
                 properties: {}
+    Edition:
+      type: object
+      properties:
+        id:
+          type: string
+          example: edirom_edition_example
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+        name:
+          type: string
+          example: Edirom Edition Example
+        additional_css_path:
+          type: string
+          example: ""
+        languages:
+          type: string
+          example: de
+    HiddenData:
+      type: object
+      properties:
+        width:
+          type: integer
+          example: 634
+        height:
+          type: integer
+          example: 940
+        x:
+          type: integer
+          example: 1610
+        "y":
+          type: integer
+          example: 240
+        origH:
+          type: integer
+          example: 3107
+        origW:
+          type: integer
+          example: 3950
+    LinkTarget:
+      type: object
+      properties:
+        type:
+          type: string
+          example: work
+        title:
+          type: string
+          example: "Der Freischütz, romantische Oper in drei Aufzügen"
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/contents/edition/freidi-work.xml
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/View'
+        internalId:
+          type: string
+          example: ""
+        term:
+          type: string
+          example: ""
+        path:
+          type: string
+          example: ""
+        internalIdType:
+          type: string
+          example: unknown
+    Measure:
+      type: object
+      properties:
+        measureId:
+          type: string
+          example: bar-20016
+        movementId:
+          type: string
+          example: part-1
+        measureCount:
+          type: string
+          example: 3
+    MeasurePage:
+      type: array
+      items:
+        $ref: '#/components/schemas/MeasurePageItem'
+    MeasurePageItem:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            zoneId:
+              type: string
+              example: zone_bar-2004
+            id:
+              type: string
+              example: bar-2004
+            name:
+              type: string
+              example: "4"
+            type:
+              type: string
+            rest:
+              type: string
+              example: "0"
+        - $ref: '#/components/schemas/Positions'
+    Measures:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            example: bar-2002454
+          measures:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: bar-2002454
+                voice:
+                  type: string
+                  example: score
+          mdivs:
+            type: array
+            items:
+              type: string
+              example: x84707a44-0e6a-4c77-9eab-d196150079a9
+          name:
+            type: string
+            example: "1"
+    Movement:
+      type: object
+      properties:
+        id:
+          type: string
+          example: movement-1
+        name:
+          type: string
+          example: Allegro
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+          example: facsimile-2001001
+        path:
+          type: string
+          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0001
+        name:
+          type: string
+          example: "1"
+        width:
+          type: string
+          example: "3950"
+        height:
+          type: string
+          example: "3107"
+    Part:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ""
+        name:
+          type: string
+          example: Violine
+    Participant:
+      type: object
+      properties:
+        type:
+          type: string
+          example: measure
+        label:
+          type: string
+          example: Takte 5 bis 7
+        mdiv:
+          type: string
+          example: ""
+        part:
+          type: string
+          example: ""
+        page:
+          type: string
+          example: "2"
+        source:
+          type: string
+          example: Autograph A
+        siglum:
+          type: string
+          example: A
+        digilibBaseParams:
+          type: string
+          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0002
+        digilibSizeParams:
+          type: string
+          example: '&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit'
+        hiddenData:
+          $ref: '#/components/schemas/HiddenData'
+        content:
+          type: string
+          example: ""
+        linkUri:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0
+    plistItem:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Positions'
+        - type: object
+          properties:
+            id:
+              type: string
+              example: annotation__bar-2005
+            type:
+              type: string
+              example: measure
+    Positions:
+      type: object
+      properties:
+        ulx:
+          type: string
+          example: 100
+        uly:
+          type: string
+          example: 200
+        lrx:
+          type: string
+          example: 300
+        lry:
+          type: string
+          example: 400
+    Preferences:
+      type: object
+      properties:
+        application_language:
+          type: string
+          example: de
+        annotation_layout:
+          type: string
+          example: EdiromOnline.view.window.annotationLayouts.AnnotationLayout1
+        image_prefix:
+          type: string
+          example: https://digilib.freischuetz-digital.de/Scaler/
+    Priority:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ediromAnnotPrio1
+        name:
+          type: string
+          example: "1"
+    View:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - headerView
+          - textView
+          - xmlView
+        defaultView:
+          type: boolean
+          example: true
+        label:
+          type: string
+          example: XML Text
+        uri:
+          type: string
+          example: xmldb:exist:///db/apps/contents/edition/freidi-work-overview.xml
   parameters:
     editionParam:
       name: edition
