@@ -941,7 +941,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MeasurePage'
+                $ref: '#/components/schemas/MeasuresOnPage'
 
   # getMovements.xql
   /data/xql/getMovements.xql:
@@ -2222,6 +2222,30 @@ components:
         measureCount:
           type: string
           example: 3
+    MeasuresOnPage:
+      type: array
+      items:
+        $ref: '#/components/schemas/MeasuresOnPageItem'
+    MeasuresOnPageItem:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            type:
+              type: string
+            name:
+              type: string
+              example: 1
+            rest:
+              type: string
+              example: 0
+            id:
+              type: string
+              example: bar-2001
+            zoneId:
+              type: string
+              example: zone_bar-2001
+        - $ref: '#/components/schemas/Positions'
     MeasurePage:
       type: array
       items:
@@ -2231,20 +2255,22 @@ components:
       allOf:
         - type: object
           properties:
+            measureId:
+              type: string
+              example: x00b6e59e-be9e-4f12-99d7-e691aaaef1ac
             zoneId:
               type: string
-              example: zone_bar-2004
-            id:
+            pageId:
               type: string
-              example: bar-2004
-            name:
+            movementId:
               type: string
-              example: "4"
-            type:
+              example: tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf
+            path:
               type: string
-            rest:
+            width:
               type: string
-              example: "0"
+            height:
+              type: string
         - $ref: '#/components/schemas/Positions'
     Measures:
       type: array
