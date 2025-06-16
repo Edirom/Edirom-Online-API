@@ -812,7 +812,7 @@ paths:
         "200":
           description: Successful operation
           content:
-            application/svg+xml:
+            application/json:
               schema:
                 type: string
 
@@ -1859,18 +1859,22 @@ components:
         internalIdType:
           type: string
           example: unknown
-    Works:
-      type: object
-      properties:
-        id:
-          type: string
-          example: ""
-        doc:
-          type: string
-          example: ""
-        title:
-          type: string
-          example: ""
+  Works:
+    type: array
+    items:
+      $ref: '#/components/schemas/Work'
+  Work:
+    type: object
+    properties:
+      id:
+        type: string
+        example: edition-27830471_work-1
+      doc:
+        type: string
+        example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/work.xml
+      title:
+        type: string
+        example: Klarinettenquintett op.34
     plistItem:
       type: object
       properties:
