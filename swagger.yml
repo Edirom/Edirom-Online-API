@@ -1231,7 +1231,6 @@ paths:
                   $ref: '#/components/schemas/Concordance'
 
   # TODO: getHeader.xql
-  # Freischütz: https://edition.freischuetz-digital.de/data/xql/getHeader.xql?_dc=1749114435866&uri=xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fcontents%2Fedition%2Ffreidi-musikgenese.xml&type=text
   /data/xql/getHeader.xql:
     get:
       tags:
@@ -1283,6 +1282,138 @@ paths:
             text/html:
               schema:
                 type: string
+                example: |
+                  <div xmlns="http://www.w3.org/1999/xhtml" class="teiHeader">
+                    <div class="section">
+                      <h1>File Information</h1>
+                      <div class="propertyList">
+                        <div class="property">
+                          <div class="key">Title</div>
+                          <div class="value">Werkentstehung und Überlieferung (a)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Title</div>
+                          <div class="value">Freischütz Digital - Release 1.0.0</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">orgName</div>
+                          <div class="value">TextGrid (dst)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Identifier</div>
+                          <div class="value">
+                            <div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> TextGridUri textgrid:25418.0</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Identifier</div>
+                          <div class="value">
+                            <div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> handle </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="property">
+                          <div class="key">ptr</div>
+                          <div class="value">(<a href="http://textgridrep.org//browse.html?id=textgrid:25418.0" target="_blank">http://textgridrep.org//browse.html?id=textgrid:25418.0</a>)</div>
+                        </div>
+                        <div class="respStmt property">
+                          <div class="resp key">Release</div>
+                          <div class="value"/>
+                        </div>
+                        <div class="property">
+                          <div class="key">Publication</div>
+                          <div class="value">Freischütz Digital (pbl)(<a href="http://freischuetz-digital.de/" target="_blank">http://freischuetz-digital.de/</a>)<div class="address plain">Musikwissenschaftliches Seminar Detmold/Paderborn, Prof. Dr. Joachim Veit, Hornsche Straße 39, 32756, Detmold,
+                              Deutschland</div>
+                            <div class="address plain">International Audio Laboratories Erlangen, Prof. Dr. Meinard Müller, Am Wolfsmantel 33, 91058, Erlangen, Deutschland</div>
+                            <div class="address plain">Goethe-Universität, Institut für Musikwissenschaft, Prof. Dr. Thomas Betzwieser, Senckenberganlage 31, 60325, Frankfurt am Main, Deutschland</div>
+                            <div class="address plain">Universität Paderborn, Institut für Informatik, Fachgebiet Mensch-Computer-Interaktion, Prof. Dr. Gerd Szwillus, Fürstenallee 11, 33102, Paderborn, Deutschland</div>Bundesministerium für Bildung und Forschung (fnd)TextGrid<div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> TextGridUri, FreiDi-Release_0.1.0 </span>
+                            </div>
+                            <div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> handle </span>
+                            </div>
+                            <div class="subProperty">
+                              <span class="subkey">Date</span>
+                              <span class="subvalue"> (2015-10-31) 2015-10-31</span>
+                            </div>
+                            <div class="subProperty">
+                              <span class="subkey">Availability</span>
+                              <span class="subvalue"> restricted <p>Copyright © 2015; Freischütz Digital; Detmold, Erlangen, Frankfurt, Paderborn</p>
+                                  <p>Alle Rechte an den Abbildungen bleiben bei den bewahrenden Bibliotheken und Institutionen.</p> CC BY-NC-SA 4.0 (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">https://creativecommons.org/licenses/by-nc-sa/4.0/</a>) </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="section">
+                          <h1>Source Description</h1>
+                          <div class="propertyList">
+                            <p/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h1>Details about the encoding</h1>
+                      <div class="propertyList">
+                        <div class="property">
+                          <div class="key">Project Description</div>
+                          <div class="value">Das vom Bundesministerium für Bildung und Forschung (BMBF - Förderkennzeichen 01UG1239A bis 01UG1239C) geförderte Projekt “Freischütz Digital – Paradigmatische Umsetzung eines genuin digitalen Editionskonzepts” ist ein gemeinschaftliches Projekt der
+                              Goethe-Universität Frankfurt, der International Audio Laboratories Erlangen und der Universität Paderborn, letztere übernimmt dabei die Gesamtkoordination.</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Sample Scope</div>
+                          <div class="value">Das "Freischütz Digital - Release 1.0.0" umfasst die zum Ende des Förderzeitraums (31. Oktober 2015) bereitgestellten Daten aus den verschiedenen Teilbereichen des Projekts Freischütz Digital (FreiDi).Auf Seiten der Musikedition sind 15 musikalischen Quellen
+                              zunächst durch Metadaten beschrieben, sowie die Positionen aller Takte auf den Faksimiles erfasst. Für alle Quellen liegt zudem eine Quellenbeschreibung als Fließtext vor; während diese für die handschriftlichen Quellen ausführlich auf unterschiedliche Aspekte eingeht, ist sie
+                              für die (überwiegend späteren, für den Überlieferungsprozess relevanten) Drucke knapp gehalten. Der musikalische Inhalt der einzelnen Quellen ist mit unterschiedlicher Erschließungstiefe erfasst. Grundsätzlich sind in allen Quellen außer D1849B, D1867, D1871, DJochum und ED-kl
+                              die Nummern 6, 8 und 9 im Sinne einer Quellenedition – nach dem an anderer Stelle beschriebenen "Core-Modell" – im Format der Music Encoding Initiative (MEI) erschlossen. Die Datei "freidi-work.xml" stellt diesem Modell folgend die "Core-Datei" dar und beschreibt die
+                              Gemeinsamkeiten und Unterschiede der einzelnen Quellen. Für alle Quellen (ausgenommen die bereits genannten) ist dies für die Nummern 6, 8 und 9 bis hin zur Ebene einzelner Noten oder anderer musikalischer Zeichen erfolgt, nur im Falle von Webers Autograph (A) auch für sämtliche
+                              anderen Nummern.Die in diesem Release veröffentlichten Codierungen der Libretti sind nach den Richtlinien der Text Encoding Initiative (TEI) und hier speziell der Teilbereiche "Performance Texts" und "Critical Apparatus" durchgeführt worden und decken auch die editorischen
+                              Erkenntnisse zur jeweiligen quellenimmanenten Genese der Texte ab. Speziell im Falle von KA-tx4 sollten die Codierungskonzepte für Handschriften mit mehrfachen Überarbeitungsspuren (es handelt sich um Webers Handexemplar als Grundlage für die Komposition) verdeutlicht
+                              werden.Ebenfalls den Richtlinien der TEI entsprechend wurden die 10 ausgewählten Referenztexte ausgezeichnet (die drei zusätzlichen Texte mit Schillers "Wallenstein"-Trilogie entstammen dem TextGrid-Repository). Zu sämtlichen Texten wurden Metadaten erstellt, sowie soweit
+                              möglich, ein Digitalisat der Handschrift bzw. eines Druck-Exemplars beigegeben und mit der Übertragung parallelisiert.Aus der akustischen Domäne sind in diesem Bereich strukturierte Metadaten der im Rahmen des Projektes angefertigten Einspielung (Bloemeke 2013) enthalten, sowie
+                              zu den Einspielungen von Ackermann 1951, Erich Kleiber 1955, Jochum 1960, Carlos Kleiber 1973 und Janowski 1994. Letztere wurden uns dankenswerter Weise von den Rechteinhabern auch zur Verwendung in der Online-Publikation zur Verfügung gestellt. Dieser Datensatz teilt sich gemäß
+                              der FRBR-Implementierung in MEI auf zwei Bereiche auf: (1) die "freidi-work.xml" Datei enthält die Angaben zur sog. "expression", also der aufgezeichneten Aufführung; (2) die Dateien im Ordner "audioSources", z.B. "freidi-recording_Bloemeke2013.xml", enthalten dagegen die Daten
+                              zur sog. "manifestation" der Aufnahme, d.h. die zur Publikation überarbeitete Version. Weiterhin enthalten die Codierungen die am Projektstandort Erlangen algorithmisch gewonnenen "Taktannotationen" der Einspielungen, die eine gezielte Ansteuerung der Audio-Daten auf Taktebene
+                              ermöglichen. Zusätzlich ist in der Datei "freidi-recordingDesc-Bloemeke2013.xml" eine textliche Beschreibung der im Rahmen des Projektes angefertigten Einspielung enthalten, die auch Referenzen auf weitere, diese Aufnahme betreffende Texte enthält.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h1>File revisions</h1>
+                      <div class="propertyList">
+                        <div class="property">
+                          <div class="key">status</div>
+                          <div class="value">candidate</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-11-01</span></div>
+                          <div class="value">JV: Fehler im Text (Verbindung Nr. 8 mit Lodoiska) korrigiert (trifft nur auf Nr. 6 zu; 8 bezieht sich auf die Vestalin)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-04-20</span></div>
+                          <div class="value">JV: inline-Zitate als solche gekennzeichnet; Umbrüche aus TB-Zitaten entfernt; vereinzelt abgetrennte Punkte gelöscht bzw. versetzt</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-04-07</span></div>
+                          <div class="value">JV: Mini-Änderungen (Fehlerkorrekturen)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-01-30</span></div>
+                          <div class="value">JV: Link-Bezeichnungen ausgetauscht gegen die verkürzten der Textgenese</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2015-11-08</span></div>
+                          <div class="value">JV: Nach einer Korrektur zu veröffentlichende erste Fassung</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
   # getHelp.xql
   /data/xql/getHelp.xql:
@@ -1317,7 +1448,27 @@ paths:
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                    <head>
+                      <title>Edirom Online Help</title>
+                      <meta name="author" content="Benjamin W. BohlDFG-Projekt &#34;Digitale Musikedition&#34; (Edirom)&#xA;                  &#xA;                     Musikwissenschaftliches Seminar Detmold/Paderborn&#xA;                     Gartenstraße 20&#xA;                     D-32756 Detmold&#xA;                  &#xA;               andDaniel RöwenstrunkFreischütz Digital&#xA;                  &#xA;                            Musikwissenschaftliches Seminar Detmold/Paderborn&#xA;                     Gartenstraße 20&#xA;                     D-32756 Detmold&#xA;                  &#xA;               " />
+                      <meta name="generator" content="Text Encoding Initiative Consortium XSLT stylesheets" />
+                      <meta http-equiv="Content-Type" content="text/html;          charset=utf-8" />
+                      <meta name="DC.Title" content="Edirom Online Help" />
+                      <meta name="DC.Type" content="Text" />
+                      <meta name="DC.Format" content="text/html" />
+                      <link href="http://www.tei-c.org/release/xml/tei/stylesheet/tei.css" rel="stylesheet" type="text/css" />
+                      <link rel="stylesheet" media="print" type="text/css" href="http://www.tei-c.org/release/xml/tei/stylesheet/tei-print.css" />
+                    </head>
+                    <body class="simple" id="helpWindow-1073TOP">
+                      ...
+                    </body>
+                  </html>
 
   # getiFrameURL.xql
   /data/xql/getiFrameURL.xql:
