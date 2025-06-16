@@ -1859,22 +1859,22 @@ components:
         internalIdType:
           type: string
           example: unknown
-  Works:
-    type: array
-    items:
-      $ref: '#/components/schemas/Work'
-  Work:
-    type: object
-    properties:
-      id:
-        type: string
-        example: edition-27830471_work-1
-      doc:
-        type: string
-        example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/work.xml
-      title:
-        type: string
-        example: Klarinettenquintett op.34
+    Works:
+      type: array
+      items:
+        $ref: '#/components/schemas/Work'
+    Work:
+      type: object
+      properties:
+        id:
+          type: string
+          example: edition-27830471_work-1
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/work.xml
+        title:
+          type: string
+          example: Klarinettenquintett op.34
     plistItem:
       type: object
       properties:
