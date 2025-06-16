@@ -1008,6 +1008,7 @@ paths:
             text/plain:
               schema:
                 type: string
+                example: facsimile-20010011
 
   # getOverlays.xql
   # [empty result - there may be better example]
