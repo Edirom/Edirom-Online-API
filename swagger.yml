@@ -1028,14 +1028,14 @@ paths:
         examples: 
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Overlays'
 
   # getOverlayOnPage.xql
   /data/xql/getOverlayOnPage.xql:
@@ -2313,6 +2313,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Part'
+    Overlay:
+      type: object
+      properties:
+        id:
+          type: string
+          example: layer-1
+        name:
+          type: string
+          example: Sichere Eintragungen Webers
     OverlayOnPage:
       type: object
       properties:
@@ -2322,6 +2331,10 @@ components:
         id:
           type: string
           example: layer_1210336306250
+    Overlays:
+      type: array
+      items:
+        $ref: '#/components/schemas/Overlay'
     Page:
       type: object
       properties:
