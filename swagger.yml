@@ -1079,7 +1079,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/OverlayOnPage'
 
   # getWorkID
   /data/xql/getWorkID.xql:
@@ -2313,6 +2313,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Part'
+    OverlayOnPage:
+      type: object
+      properties:
+        svg:
+          type: string
+          example: "<svg xmlns=\"http://www.w3.org/2000/svg\" ... >...</svg>"
+        id:
+          type: string
+          example: layer_1210336306250
     Page:
       type: object
       properties:
