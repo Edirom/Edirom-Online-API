@@ -299,6 +299,18 @@ paths:
             text/html:
               schema:
                 type: string
+                example: | 
+                  <div class="annotView">
+                    <div class="contentBox">
+                        <h1>Satz 1, Takt 16</h1>
+                        <p>
+                          Während in ED₁ keine Bögen notiert sind, wurden sie (vermutlich auf
+                          Webers Korrektur zurückgehend) in ED₂ ergänzt. (Dabei ist der über den
+                          Taktstrich zu T. 23 hinausreichende Bogen nach dem Zeilenwechsel in T. 23
+                          nicht weitergeführt.)
+                        </p>
+                    </div>
+                  </div>
   
   # getAnnotationsInText.xql
   # https://open-faust.zenmem.de
