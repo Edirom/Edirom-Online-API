@@ -68,7 +68,45 @@ paths:
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            text/html:
+              schema:
+                type: string
+                example: | 
+                  <div class="annotTip">
+                    <div class="metaBox">
+                      <div class="property priority">
+                          <div class="key">Priorität</div>
+                          <div class="value"></div>
+                      </div>
+                      <div class="property categories">
+                          <div class="key">Kategorie</div>
+                          <div class="value"></div>
+                      </div>
+                      <!--<div class="property sourceLabel">
+                          <div class="key">{$sourcesLabel}</div>
+                          <div class="value">{string-join($sources, ', ')}</div>
+                      </div>-->
+                      <div class="property sourceSiglums">
+                          <div class="key">Siglen</div>
+                          <div class="value">A, K/sv, ED₁</div>
+                      </div>
+                      <div class="property annotID">
+                          <div class="key">Anm.-ID</div>
+                          <div class="value">annotation-2</div>
+                      </div>
+                    </div>
+                    <div class="contentBox">
+                      <h1></h1>
+                      <p>....</p>
+                    </div>
+                    <!-- <div class="previewArea">
+                      {
+                        local:calculatePreviewsForTip(tokenize($annot/string(@plist),' '))
+                      }
+                    </div> -->
+                  </div>
+
 
   # getAnnotations.xql
   /data/xql/getAnnotations.xql:
