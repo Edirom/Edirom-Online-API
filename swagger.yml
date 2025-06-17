@@ -1857,7 +1857,7 @@ paths:
                 $ref: '#/components/schemas/prefs'
             
 
-  # TODO: getReducedDocument.xql
+  # DEPRECATED: getReducedDocument.xql
   /data/xql/getReducedDocument.xql:
     get:
       tags:
@@ -1919,7 +1919,7 @@ paths:
               schema:
                 type: string
 
-  # TODO: getSummary.xql
+  # DEPRECATED: getSummary.xql
   /data/xql/getSummary.xql:
     get:
       tags:
@@ -1978,30 +1978,33 @@ paths:
       description: Returns HTML for text
       operationId: getText
       parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string      
+        examples: 
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_D-tx1.xml
       - name: edition
         in: query
         description: Identifier of the edition
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+          Freischütz:
+            summary: "Freischütz"
+            value: 
       - name: idPrefix
         in: query
         description: ID prefix
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: textView-1063_
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: textView-1063_
+          Freischütz:
+            summary: "Freischütz"
+            value: textFacsimileSplitView-1660_
       - name: term
         in: query
         description: Term
@@ -2009,11 +2012,8 @@ paths:
         schema:
           type: string      
         examples:
-          EditionExample:
-            summary: "EditionExample"
-            value: 
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
+          Freischütz:
+            summary: "Freischütz"
             value: 
       - name: path
         in: query
@@ -2022,11 +2022,8 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value:
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
+          Freischütz:
+            summary: "Freischütz"
             value: 
       - name: page
         in: query
@@ -2035,12 +2032,9 @@ paths:
         schema:
           type: string      
         examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value:
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
+          Freischütz:
+            summary: "Freischütz"
+            value: surface_0000006
       responses:
         "200":
           description: Successful operation
@@ -2048,6 +2042,17 @@ paths:
             text/html:
               schema:
                 type: string
+                example: |
+                  <div xmlns:exist="http://exist.sourceforge.net/NS/exist" xmlns="http://www.w3.org/1999/xhtml" class="freidi_libretto D-tx1">
+                    <div class="pagebreak" id="textFacsimileSplitView-1660_file-pb-d52e4">  pag.   1</div><br class="pb" />
+                    <div class="titlePage">
+                      <div class="titlePart"><span class="expanded"><b>Der Freischütz</b></span>.</div>
+                      <div class="titlePart"><span class="expanded">Von
+                        <br />Friedrich Kind.</span></div>
+                      <div class="titlePart"><span class="expanded">Leipzig,
+                        <br />bei Georg Joachim Göschen, 1822</span>.</div>
+                    </div>
+                  </div>
   
   # getXml.xql
   /data/xql/getXml.xql:
@@ -2692,7 +2697,6 @@ components:
             properties:
               entry:
                 type: object
-                xml-name: entry
                 properties:
                   key:
                     type: string
