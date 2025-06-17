@@ -1667,7 +1667,10 @@ paths:
       responses:
         "200":
           description: Successful operation
-          content: {}
+          content: 
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/mei'
 
   # getNavigatorConfig.xql
   /data/xql/getNavigatorConfig.xql:
@@ -2482,6 +2485,29 @@ components:
           name:
             type: string
             example: "1"
+    mei:
+      type: object
+      xml:
+        namespace: "http://www.music-encoding.org/ns/mei"
+      properties:
+        "xmlns:xlink":
+          type: string
+          enum:
+            - "http://www.w3.org/1999/xlink"
+          xml:
+            attribute: true
+        meiversion:
+          type: string
+          example: "4.0.0"
+          xml:
+            attribute: true
+        music:
+          type: object
+          properties:
+            facsimile:
+              type: object
+            body:
+              type: object       
     Movement:
       type: object
       properties:
