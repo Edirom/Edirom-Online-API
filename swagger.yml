@@ -1495,6 +1495,7 @@ paths:
             text/plain:
               schema:
                 type: string
+                example: https://klarinettenquintett.weber-gesamtausgabe.de:443/apps/weber-klarinettenquintett-eol-emeritus/texts/text-7.xml
 
   # getInternalIdType.xql
   /data/xql/getInternalIdType.xql:
@@ -1521,6 +1522,7 @@ paths:
             text/plain:
               schema:
                 type: string
+                example: unknown
 
   # getLanguageFile.xql
   /data/xql/getLanguageFile.xql:
@@ -1576,10 +1578,10 @@ paths:
           content:
             application/xml:
               schema:
-                type: string
+                $ref: '#/components/schemas/LangFile'
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/LangFile'
 
   # getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
@@ -2334,6 +2336,35 @@ components:
         origW:
           type: integer
           example: 3950
+    LangFile:      
+      type: object
+      properties:
+        lang:
+          type: string
+          example: de
+        version:
+          type: string
+          example: "1.0"
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              entry:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                      example: global_cancel
+                      xml:
+                        attribute: true
+                    value:
+                      type: string
+                      example: Abbrechen
+                      xml:
+                        attribute: true
     LinkTarget:
       type: object
       properties:
