@@ -1165,7 +1165,6 @@ paths:
               schema:
                 type: string
 
-
   # getLinkTarget.xql
   /data/xql/getLinkTarget.xql:
     post:
@@ -2237,8 +2236,7 @@ components:
       description: Measure Count
       schema:
         type: string
-        default: "1"
-        
+        default: "1"        
     modeParam:
       name: mode
       in: query
