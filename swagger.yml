@@ -1773,6 +1773,9 @@ paths:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/musicSources/freidi-musicSource_ED-kl.xml
       responses:
         "200":
           description: Successful operation
@@ -1851,7 +1854,7 @@ paths:
                 $ref: '#/components/schemas/Preferences'
             application/xml:
               schema:
-                type: string
+                $ref: '#/components/schemas/prefs'
             
 
   # TODO: getReducedDocument.xql
@@ -2674,6 +2677,33 @@ components:
         image_prefix:
           type: string
           example: https://digilib.freischuetz-digital.de/Scaler/
+    prefs:
+      type: object
+      properties:
+        version:
+          type: string
+          example: "1.0"
+          xml:
+            attribute: true
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              entry:
+                type: object
+                xml-name: entry
+                properties:
+                  key:
+                    type: string
+                    example: application_language
+                    xml:
+                      attribute: true
+                  value:
+                    type: string
+                    example: de
+                    xml:
+                      attribute: true                      
     Priority:
       type: object
       properties:
