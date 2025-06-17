@@ -1170,9 +1170,6 @@ paths:
           Freischütz:
             summary: "Freischütz"
             value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_ED-tx.xml
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: xmldb:exist:///db/apps/edirom/edition-example/content/startwindow.xml
       - name: mode
         in: query
         description: Mode
@@ -1182,9 +1179,6 @@ paths:
           Freischütz:
             summary: "Freischütz"
             value: pageMode
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: 
       responses:
         "200":
           description: Successful operation
