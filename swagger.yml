@@ -675,7 +675,7 @@ paths:
         "200":
           description: Successful operation
           content:
-            application/xml:
+            application/json:
               schema:
                 type: string
 
