@@ -1150,7 +1150,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Works'
 
   # getChapters.xql
   /data/xql/getChapters.xql:
@@ -1169,7 +1169,7 @@ paths:
         examples: 
           Freischütz:
             summary: "Freischütz"
-            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_ED-tx.xml
+            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_L-tx2.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/startwindow.xml
@@ -1191,7 +1191,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Chapters'
 
   # getConcordances.xql
   /data/xql/getConcordances.xql:
@@ -2431,6 +2431,22 @@ components:
         internalIdType:
           type: string
           example: unknown
+    Works:
+      type: array
+      items:
+        $ref: '#/components/schemas/Work'
+    Work:
+      type: object
+      properties:
+        id:
+          type: string
+          example: edition-27830471_work-1
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/work.xml
+        title:
+          type: string
+          example: Klarinettenquintett op.34
     Measure:
       type: object
       properties:
@@ -2717,6 +2733,18 @@ components:
         name:
           type: string
           example: "1"
+    Chapters:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "d1e372"
+        name:
+          type: string
+          example: "No. 0"
+        pageId:
+          type: string
+          example: "surface_0000005"
     View:
       type: object
       properties:
