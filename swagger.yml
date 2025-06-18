@@ -7,14 +7,18 @@ info:
     name: MIT
   version: 1.0.0
 servers:
+# locally deployed editions:
+# - EditionExample: https://github.com/Edirom/EditionExample 
+# - Klarinettenquintett: https://git.uni-paderborn.de/wega/klarinettenquintett-edirom
 - url: http://localhost:8080/exist/apps/Edirom-Online-Backend
-  description: Local backend
-- url: https://klarinettenquintett.weber-gesamtausgabe.de/
-  description: Klarinettenquintett
+  description: Local backend with EditionExample and Klarinettenquintett
+# remote edition Freischütz Digital
 - url: https://edition.freischuetz-digital.de
-  description: Freischütz Digital
+  description: Remote backend with Freischütz Digital edition
+# remote edition Open Faust
 - url: https://open-faust.zenmem.de
-  description: Open Faust
+  description: Remote backend with Open Faust edition
+
 paths:
 
   # getAnnotation.xql
@@ -504,40 +508,9 @@ paths:
         "200":
           description: Successful operation
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                example: |
-                  {
-                    "success": true,
-                    "participants": [
-                      {
-                        "type": "measure",
-                        "label": "Takte 5 bis 7",
-                        "mdiv": "",
-                        "part": "",
-                        "page": "2",
-                        "source": "Autograph A",
-                        "siglum": "A",
-                        "digilibBaseParams": "https://content.staatsbibliothek-berlin.de/dc/69007087X-0002",
-                        "digilibSizeParams": "&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit",
-                        "hiddenData": {
-                          "width": 634,
-                          "height": 940,
-                          "x": 1610,
-                          "y": 240,
-                          "origH": 3107,
-                          "origW": 3950
-                        },
-                        "content": "",
-                        "linkUri": "xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0"
-                      }
-                    ]
-                  }
-            # could be application/json, but we use text/plain because of return type from backend
-            # application/json:
-              # schema:
-                # $ref: '#/components/schemas/AnnotationPreviews'
+                $ref: '#/components/schemas/AnnotationPreviews'
 
   # getAudioPlayer.xql
   /data/xql/getAudioPlayer.xql:
