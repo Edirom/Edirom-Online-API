@@ -1,47 +1,2948 @@
-
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  description: "This is the description and documentation of the Edirom-Online backend API."
-  version: "1.0.0"
-  title: "Edirom-Online Backend API"
+  title: Edirom-Online Backend API
+  description: This is the description and documentation of the Edirom-Online backend
+    API.
   license:
-    name: "MIT"
-host: "localhost:8080"
-basePath: "/exist/apps/Edirom-Online-Backend"
-schemes:
-  - "http"
+    name: MIT
+  version: 1.0.0
+servers:
+# locally deployed editions:
+# - EditionExample: https://github.com/Edirom/EditionExample
+# - Klarinettenquintett: https://git.uni-paderborn.de/wega/klarinettenquintett-edirom
+- url: http://localhost:8080/exist/apps/Edirom-Online-Backend
+  description: Local backend with EditionExample and Klarinettenquintett
+# remote edition Freischütz Digital
+- url: https://edition.freischuetz-digital.de
+  description: Remote backend with Freischütz Digital edition
+# remote edition Open Faust
+- url: https://open-faust.zenmem.de
+  description: Remote backend with Open Faust edition
+
 paths:
+
+  # getAnnotation.xql
   /data/xql/getAnnotation.xql:
     get:
-      summary: "Get annotation"
-      description: "Returns HTML for annotation"
-      operationId: "getAnnotation"
-      produces:
-        - "text/html"
+      tags:
+      - Annotations
+      summary: Get annotation
+      description: Returns HTML for annotation
+      operationId: getAnnotation
       parameters:
-        - name: "edition"
-          in: "query"
-          description: "Identifier of the edition"
-          required: true
-          type: "string" # sample: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
-        - name: "uri"
-          in: "query"
-          description: "URI"
-          required: true
-          type: "string" # sample: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
-        - name: "target"
-          in: "query"
-          description: "Target"
-          required: true
-          type: "string" # sample: tip
-        - name: "lang"
-          in: "query"
-          description: "Language"
-          required: true
-          type: "string" # sample: de
-          pattern: "^(de|en)$"
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
+      - name: target
+        in: query
+        description: Target
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: tip
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
       responses:
         "200":
-          description: "Successful operation"
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div class="annotTip">
+                    <div class="metaBox">
+                      <div class="property priority">
+                          <div class="key">Priorität</div>
+                          <div class="value"></div>
+                      </div>
+                      <div class="property categories">
+                          <div class="key">Kategorie</div>
+                          <div class="value"></div>
+                      </div>
+                      <!--<div class="property sourceLabel">
+                          <div class="key">{$sourcesLabel}</div>
+                          <div class="value">{string-join($sources, ', ')}</div>
+                      </div>-->
+                      <div class="property sourceSiglums">
+                          <div class="key">Siglen</div>
+                          <div class="value">A, K/sv, ED₁</div>
+                      </div>
+                      <div class="property annotID">
+                          <div class="key">Anm.-ID</div>
+                          <div class="value">annotation-2</div>
+                      </div>
+                    </div>
+                    <div class="contentBox">
+                      <h1></h1>
+                      <p>....</p>
+                    </div>
+                    <!-- <div class="previewArea">
+                      {
+                        local:calculatePreviewsForTip(tokenize($annot/string(@plist),' '))
+                      }
+                    </div> -->
+                  </div>
+
+
+  # getAnnotations.xql
+  /data/xql/getAnnotations.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotations
+      description: Returns JSON for annotations
+      operationId: getAnnotations
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Annotations'
+
+  # getAnnotationInfos.xql
+  /data/xql/getAnnotationInfos.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotation infos
+      description: Returns JSON for annotation infos
+      operationId: getAnnotationInfos
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationInfos'
+
+  # getAnnotationMeta.xql
+  /data/xql/getAnnotationMeta.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotation metadata
+      description: Returns HTML for annotation metadata
+      operationId: getAnnotationMeta
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div class="annotView">
+                    <div class="metaBox">
+                        <div class="property priority">
+                            <div class="key">Priorität</div>
+                            <div class="value">1</div>
+                        </div>
+                        <div class="property categories">
+                            <div class="key">Kategorie</div>
+                            <div class="value">Bogensetzung</div>
+                        </div>
+                        <!-- <div class="property sourceLabel">
+                                <div class="key">{$sourcesLabel}</div>
+                                <div class="value">{string-join($sources, ', ')}</div>
+                        </div> -->
+                        <div class="property sourceSiglums">
+                            <div class="key">Quellen</div>
+                            <div class="value">A, K/sv, ED₁</div>
+                        </div>
+                        <div class="property annotID">
+                            <div class="key">Annot.-ID</div>
+                            <div class="value">annotation-2</div>
+                        </div>
+                    </div>
+                  </div>
+
+  # getAnnotationText.xql
+  /data/xql/getAnnotationText.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotation text
+      description: Returns HTML for annotation text
+      operationId: getAnnotationText
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-8
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div class="annotView">
+                    <div class="contentBox">
+                        <h1>Satz 1, Takt 16</h1>
+                        <p>
+                          Während in ED₁ keine Bögen notiert sind, wurden sie (vermutlich auf
+                          Webers Korrektur zurückgehend) in ED₂ ergänzt. (Dabei ist der über den
+                          Taktstrich zu T. 23 hinausreichende Bogen nach dem Zeilenwechsel in T. 23
+                          nicht weitergeführt.)
+                        </p>
+                    </div>
+                  </div>
+
+  # getAnnotationsInText.xql
+  # https://open-faust.zenmem.de
+  # /data/xql/getAnnotationsInText.xql?_dc=1749634993542&
+  # xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fopen-faust%2Fcontent%2Fedition%2Fedition_text.xml
+  # xmldb%3Aexist%3A%2F%2F%2Fdb%2Fapps%2Fedirom%2Fopen-faust%2Fcontent%2F
+  # lang=en
+  /data/xql/getAnnotationsInText.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotations in text
+      description: Returns JSON for annotations in text
+      operationId: getAnnotationsInText
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          OpenFaust:
+            summary: "Open Faust"
+            value: xmldb:exist:///db/apps/edirom/open-faust/content/edition-open-faust.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          OpenFaust:
+            summary: "Open Faust"
+            value: xmldb:exist:///db/apps/edirom/open-faust/content/edition/edition_text.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnotationItem'
+
+  # getAnnotationsOnPage.xql
+  /data/xql/getAnnotationsOnPage.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotations on page
+      description: Returns JSON for annotations on page
+      operationId: getAnnotationsOnPage
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
+      - name: pageId
+        in: query
+        description: Page ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: facsimile-2001002
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnotationItem'
+
+  # getAnnotationOpenAllUris.xql
+  /data/xql/getAnnotationOpenAllUris.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get all annotation URIs
+      description: Opens all annotation URIs
+      operationId: getAnnotationOpenAllUris
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      - name: annotId
+        in: query
+        description: Annotation ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: annotation-9
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-20016?tstamp2=2m+0
+                  xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml#bar-2002469?tstamp2=2m+0
+                  xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-2.xml#measure_x2eb1eec1-5284-429c-9a80-c16ebe4e8233_16?tstamp2=2m+0
+                  xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-5.xml#measure_xd31c779c-6c97-4d9d-9383-5fc7eb9f19d4_16?tstamp2=2m+0
+
+  # getAnnotationPreviews.xql
+  /data/xql/getAnnotationPreviews.xql:
+    get:
+      tags:
+      - Annotations
+      summary: Get annotation previews
+      description: Returns JSON for annotation previews
+      operationId: getAnnotationPreviews
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-8
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationPreviews'
+
+  # getAudioPlayer.xql
+  /data/xql/getAudioPlayer.xql:
+    get:
+      tags:
+      - Audio
+      summary: Get audio player
+      description: Returns HTML for audio player
+      operationId: getAudioPlayer
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/audioSources/freidi-recording_Janowski1994.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <html>
+                  <head>
+                      <meta charset="UTF-8" />
+                      <title></title><!-- **Amplitude.js** -->
+                      <script type="text/javascript" src="../../resources/js/amplitude.min.js"></script>
+                      <script type="text/javascript" src="../../resources/js/jquery-2.1.4.min.js"></script>
+                      <link rel="stylesheet" href="../../resources/css/audio-player.css" />
+                  </head>
+                  <body><!-- Start Top Header -->
+                      <div id="top-header" class="hidden-on-collapse">
+                          <div id="top-header-toggle" class="small-player-toggle-contract"></div>
+                          <div class="now-playing-title" amplitude-song-info="name"></div>
+                          <div class="album-information"><span amplitude-song-info="artist"></span> - <span amplitude-song-info="album"></span></div>
+                      </div><!-- End Top Header --><!-- Start Large Album Art -->
+                      <div id="top-large-album" class="hidden-on-collapse"><img id="large-album-art" amplitude-song-info="cover" /></div><!-- End Large Album Art --><!-- Begin Small Player -->
+                      <div id="small-player"><!-- Begin Small Player Left -->
+                          <div id="small-player-left" class="hidden-on-expanded"></div><!-- End Small Player Left --><!-- Begin Small Player Album Art --><img id="small-player-album-art" class="hidden-on-expanded" amplitude-song-info="cover" /><!-- End Small Player Album Art --><!-- Begin Small Player Middle -->
+                          <div id="small-player-middle" class="hidden-on-expanded">
+                              <div id="small-player-middle-top"><!-- Begin Controls Container -->
+                                  <div id="small-player-middle-controls">
+                                      <div class="amplitude-prev" id="middle-top-previous"></div>
+                                      <div class="amplitude-play-pause amplitude-paused" amplitude-main-play-pause="true" id="middle-top-play-pause"></div>
+                                      <div class="amplitude-next" id="middle-top-next"></div>
+                                  </div><!-- End Controls Container --><!-- Begin Meta Container -->
+                                  <div id="small-player-middle-meta">
+                                      <div class="now-playing-title" amplitude-song-info="name"></div>
+                                      <div class="album-information"><span amplitude-song-info="artist"></span> - <span amplitude-song-info="album"></span></div>
+                                  </div><!-- End Meta Container -->
+                              </div>
+                              <div id="small-player-middle-bottom">
+                                  <div class="amplitude-song-time-visualization" amplitude-single-song-time-visualization="true" id="song-time-visualization"></div>
+                              </div>
+                          </div><!-- End Small Player Middle --><!-- Begin Small Player Right -->
+                          <div id="small-player-right" class="hidden-on-expanded">
+                              <div id="toggle-playlist" class="playlist-toggle"></div><span class="current-time"><span class="amplitude-current-minutes" amplitude-single-current-minutes="true">0</span>:<span class="amplitude-current-seconds" amplitude-single-current-seconds="true">00</span></span></div><!-- End Small Player Right --><!-- Begin Small Player Full Bottom -->
+                          <div id="small-player-full-bottom" class="hidden-on-collapse">
+                              <div id="toggle-playlist-full" class="playlist-toggle"></div>
+                              <div id="small-player-full-bottom-controls">
+                                  <div class="amplitude-prev" id="middle-bottom-previous"></div>
+                                  <div class="amplitude-play-pause amplitude-paused" amplitude-main-play-pause="true" id="small-player-bottom-play-pause"></div>
+                                  <div class="amplitude-next" id="middle-top-next"></div>
+                              </div>
+                              <div id="small-player-full-bottom-info"><span class="current-time"><span class="amplitude-current-minutes" amplitude-single-current-minutes="true">0</span>:<span class="amplitude-current-seconds" amplitude-single-current-seconds="true">00</span></span>
+                                  <div class="amplitude-song-time-visualization" amplitude-single-song-time-visualization="true" id="song-time-visualization-large"></div><span class="time-duration"><span class="amplitude-duration-minutes" amplitude-single-duration-minutes="true">0</span>:<span class="amplitude-duration-seconds" amplitude-single-duration-seconds="true">00</span></span></div>
+                          </div><!-- End Small Player Full Bottom -->
+                      </div><!-- End Small Player --><!-- Begin Playlist -->
+                      <div id="small-player-playlist" style="height:auto;max-height:590px;margin-bottom:18px;">
+                          <div class="information">
+                              <persName xmlns="http://www.music-encoding.org/ns/mei">Janowski, Marek</persName> – Der Freischütz<hr />
+                          </div>
+                          <div class="amplitude-song-container amplitude-play-pause playlist-item" amplitude-song-index="0">
+                              <div class="playlist-meta">
+                                  <div class="now-playing-title">Schelm, halt fest! Ich will dich's lehren!</div>
+                                  <div class="album-information">
+                                      <persName xmlns="http://www.music-encoding.org/ns/mei">Janowski, Marek</persName> – Der Freischütz</div>
+                              </div>
+                              <div style="clear: both;"></div>
+                          </div>
+                          <div class="amplitude-song-container amplitude-play-pause playlist-item" amplitude-song-index="1">
+                              <div class="playlist-meta">
+                                  <div class="now-playing-title">Wie nahte mir Schlummer … Leise, leise, fromme Weise</div>
+                                  <div class="album-information">
+                                      <persName xmlns="http://www.music-encoding.org/ns/mei">Janowski, Marek</persName> – Der Freischütz</div>
+                              </div>
+                              <div style="clear: both;"></div>
+                          </div>
+                          <div class="amplitude-song-container amplitude-play-pause playlist-item" amplitude-song-index="2">
+                              <div class="playlist-meta">
+                                  <div class="now-playing-title">Wie? Was? Entsetzen! Dort in der Schreckensschlucht?</div>
+                                  <div class="album-information">
+                                      <persName xmlns="http://www.music-encoding.org/ns/mei">Janowski, Marek</persName> – Der Freischütz</div>
+                              </div>
+                              <div style="clear: both;"></div>
+                          </div>
+                      </div><!-- End Playlist -->
+                    </body>
+                    <script type="text/javascript">
+                    Amplitude.init({
+                      "songs": [{
+                              "name": "Schelm, halt fest! Ich will dich's lehren!"
+                              ,"artist": "Janowski, Marek"
+                              ,"album": "Der Freischütz"
+                              ,"url": "/apps/contents/audioData/Weber_Freischuetz-06_Janowski1994.mp3"
+                              ,"live": false
+                            }, {
+                              "name": "Wie nahte mir Schlummer … Leise, leise, fromme Weise"
+                              ,"artist": "Janowski, Marek"
+                              ,"album": "Der Freischütz"
+                              ,"url": "/apps/contents/audioData/Weber_Freischuetz-08_Janowski1994.mp3"
+                              ,"live": false
+                            }, {
+                              "name": "Wie? Was? Entsetzen! Dort in der Schreckensschlucht?"
+                              ,"artist": "Janowski, Marek"
+                              ,"album": "Der Freischütz"
+                              ,"url": "/apps/contents/audioData/Weber_Freischuetz-09_Janowski1994.mp3"
+                              ,"live": false
+                            }],
+                      "default_album_art": "../../resources/img/no-cover.png"
+                    });
+
+                    var expanded = false;
+                    var playlistEpxanded = true;
+                    /*
+                      jQuery Visual Helpers
+                    */
+                    $('#small-player').hover(function(){
+                      $('#small-player-middle-controls').show();
+                      $('#small-player-middle-meta').hide();
+                    }, function(){
+                      $('#small-player-middle-controls').hide();
+                      $('#small-player-middle-meta').show();
+
+                    });
+
+                    $('#top-large-album').hover(function(){
+                      $('#top-header').show();
+                      $('#small-player').show();
+                    }, function(){
+                      if( !$('#top-header').is(':hover')) {
+                      if(!$('#small-player').is(':hover') ){
+                        $('#top-header').fadeOut(1000);
+                        $('#small-player').fadeOut(1000);
+                          }}});
+
+                    $('#top-header').hover(function(){
+                      $('#top-header').show();
+                      $('#small-player').show();
+                    }, function(){});
+
+                    /*
+                      Toggles Album Art
+                    */
+                    $('#small-player-toggle').click(function(){
+                      $('.hidden-on-collapse').show();
+                      $('.hidden-on-expanded').hide();
+                      /*
+                        Is expanded
+                      */
+                      expanded = true;
+
+                      $('#small-player').css('border-top-left-radius', '0px');
+                      $('#small-player').css('border-top-right-radius', '0px');
+                    });
+
+                    $('#top-header-toggle').click(function(){
+                      $('.hidden-on-collapse').hide();
+                      $('.hidden-on-expanded').show();
+                      /*
+                        Is collapsed
+                      */
+                      expanded = false;
+
+                      $('#small-player').css('border-top-left-radius', '5px');
+                      $('#small-player').css('border-top-right-radius', '5px');
+                    });
+
+                    $('.playlist-toggle').click(function(){
+                      if( playlistEpxanded ){
+                        $('#small-player-playlist').hide();
+
+                        $('#small-player').css('border-bottom-left-radius', '5px');
+                        $('#small-player').css('border-bottom-right-radius', '5px');
+
+                        $('#large-album-art').css('border-bottom-left-radius', '5px');
+                        $('#large-album-art').css('border-bottom-right-radius', '5px');
+
+                        playlistEpxanded = false;
+                      }else{
+                        $('#small-player-playlist').show();
+
+                        $('#small-player').css('border-bottom-left-radius', '0px');
+                        $('#small-player').css('border-bottom-right-radius', '0px');
+
+                        $('#large-album-art').css('border-bottom-left-radius', '0px');
+                        $('#large-album-art').css('border-bottom-right-radius', '0px');
+
+                        playlistEpxanded = true;
+                      }});
+                    </script>
+                  </html>
+
+  # getEdition.xql
+  /data/xql/getEdition.xql:
+    get:
+      tags:
+      - Edition
+      summary: Get edition
+      description: Returns JSON for edition
+      operationId: getEdition
+      parameters:
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Edition'
+
+  # getEditions.xql
+  /data/xql/getEditions.xql:
+    get:
+      tags:
+      - Edition
+      summary: Get editions
+      description: Returns JSON for editions
+      operationId: getEditions
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Edition'
+
+  # getEditionURI
+  /data/xql/getEditionURI.xql:
+    get:
+      tags:
+      - Edition
+      summary: Get edition URI
+      description: Returns JSON for edition URI
+      operationId: getEditionURI
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_edition_examplexmldb:exist:///db/contents/edition-50127042.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                EditionExample:
+                  summary: "EditionExample"
+                  value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+
+  # getMeasure.xql
+  /data/xql/getMeasure.xql:
+    get:
+      tags:
+      - Measure
+      summary: Get measure
+      description: Returns JSON for measure
+      operationId: getMeasure
+      parameters:
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
+      - name: measureId
+        in: query
+        description: Measure ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: bar-20016?tstamp2=2m+0
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measure'
+
+  # getMeasures.xql
+  /data/xql/getMeasures.xql:
+    get:
+      tags:
+      - Measure
+      summary: Get measures
+      description: Returns JSON for measures
+      operationId: getMeasures
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
+      - name: mdiv
+        in: query
+        description: Measure div
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: x84707a44-0e6a-4c77-9eab-d196150079a9
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Measures'
+
+  # getMeasurePage.xql
+  /data/xql/getMeasurePage.xql:
+    get:
+      tags:
+      - Measure
+      summary: Get measure page
+      description: Returns JSON for measure page
+      operationId: getMeasurePage
+      parameters:
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      - name: measure
+        in: query
+        description: Measure
+        schema:
+          type: number
+          format: integer
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: 3
+      - name: movementId
+        in: query
+        description: Movement ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf
+      - name: measureCount
+        in: query
+        required: false
+        description: Measure Count
+        schema:
+          type: number
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: 2
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasurePage'
+
+  # getMeasuresOnPage.xql
+  /data/xql/getMeasuresOnPage.xql:
+    get:
+      tags:
+      - Measure
+      summary: Get measures on page
+      description: Returns JSON for measures on page
+      operationId: getMeasuresOnPage
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
+      - name: pageId
+        in: query
+        description: Page ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: facsimile-2001002
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasuresOnPage'
+
+  # getMovements.xql
+  /data/xql/getMovements.xql:
+    get:
+      tags:
+      - Movements
+      summary: Get movements
+      description: Returns JSON for movements
+      operationId: getMovements
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_47dde5ab-b8ff-4004-bfde-b65ea5a9a15e.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movement'
+
+  # getMovementsFirstPage.xql
+  /data/xql/getMovementsFirstPage.xql:
+    get:
+      tags:
+      - Movements
+      summary: Get movements first page
+      description: Returns JSON for movements first page
+      operationId: getMovementsFirstPage
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
+      - name: movementId
+        in: query
+        description: Movement ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: part-3
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: facsimile-20010011
+
+  # getOverlays.xql
+  # [empty result - there may be better example]
+  /data/xql/getOverlays.xql:
+    get:
+      tags:
+      - Overlay
+      summary: Get overlays
+      description: Returns JSON for overlays
+      operationId: getOverlays
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Overlays'
+
+  # getOverlayOnPage.xql
+  /data/xql/getOverlayOnPage.xql:
+    get:
+      tags:
+      - Overlay
+      summary: Get overlay on page
+      description: Returns JSON for overlay on page
+      operationId: OverlayOnPage
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
+      - name: pageId
+        in: query
+        description: Page ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: facsimile-2002001
+      - name: overlayId
+        in: query
+        description: Overlay ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: layer-1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverlayOnPage'
+
+  # getWorkID
+  /data/xql/getWorkID.xql:
+    get:
+      tags:
+      - Work
+      summary: Get work ID
+      description: Returns work ID
+      operationId: getWork
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: workId
+        in: query
+        description: Work ID
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_work_743373fb-4dcf-4329-90c0-fd1eacc9ea69
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                EditionExample:
+                  summary: "EditionExample"
+                  value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
+
+  # getWorks.xql
+  /data/xql/getWorks.xql:
+    get:
+      tags:
+      - Work
+      summary: Get works
+      description: Returns JSON for works
+      operationId: getWorks
+      parameters:
+      - name: editionId
+        in: query
+        description: Edition ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Works'
+
+  # getChapters.xql
+  /data/xql/getChapters.xql:
+    get:
+      tags:
+      - Other
+      summary: Get chapters
+      description: Returns JSON for chapters
+      operationId: getChapters
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_L-tx2.xml
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: pageMode
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  {
+                    "id": "d1e372",
+                    "name": "No. 0",
+                    "pageId": "surface_0000005"
+                  }
+            # could be application/json, but we use text/plain because backend currently returns text/plain
+            # application/json:
+              # schema:
+                # $ref: '#/components/schemas/Chapters'
+
+  # getConcordances.xql
+  /data/xql/getConcordances.xql:
+    get:
+      tags:
+      - Other
+      summary: Get concordances
+      description: Returns JSON for concordances
+      operationId: getConcordances
+      parameters:
+      - name: id
+        in: query
+        description: ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: workId
+        in: query
+        description: Work ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: edition-27830471_work-1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Concordance'
+
+  # TODO: getHeader.xql
+  /data/xql/getHeader.xql:
+    get:
+      tags:
+      - Other
+      summary: Get header
+      description: Returns JSON for header
+      operationId: getHeader
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/edition/freidi-musikgenese.xml
+      - name: type
+        in: query
+        description: Type
+        schema:
+          type: string
+          enum:
+          - work
+          - source
+          - recording
+          - text
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: text
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          default: en
+          enum:
+          - de
+          - en
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: en
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div xmlns="http://www.w3.org/1999/xhtml" class="teiHeader">
+                    <div class="section">
+                      <h1>File Information</h1>
+                      <div class="propertyList">
+                        <div class="property">
+                          <div class="key">Title</div>
+                          <div class="value">Werkentstehung und Überlieferung (a)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Title</div>
+                          <div class="value">Freischütz Digital - Release 1.0.0</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">orgName</div>
+                          <div class="value">TextGrid (dst)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Identifier</div>
+                          <div class="value">
+                            <div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> TextGridUri textgrid:25418.0</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Identifier</div>
+                          <div class="value">
+                            <div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> handle </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="property">
+                          <div class="key">ptr</div>
+                          <div class="value">(<a href="http://textgridrep.org//browse.html?id=textgrid:25418.0" target="_blank">http://textgridrep.org//browse.html?id=textgrid:25418.0</a>)</div>
+                        </div>
+                        <div class="respStmt property">
+                          <div class="resp key">Release</div>
+                          <div class="value"/>
+                        </div>
+                        <div class="property">
+                          <div class="key">Publication</div>
+                          <div class="value">Freischütz Digital (pbl)(<a href="http://freischuetz-digital.de/" target="_blank">http://freischuetz-digital.de/</a>)<div class="address plain">Musikwissenschaftliches Seminar Detmold/Paderborn, Prof. Dr. Joachim Veit, Hornsche Straße 39, 32756, Detmold,
+                              Deutschland</div>
+                            <div class="address plain">International Audio Laboratories Erlangen, Prof. Dr. Meinard Müller, Am Wolfsmantel 33, 91058, Erlangen, Deutschland</div>
+                            <div class="address plain">Goethe-Universität, Institut für Musikwissenschaft, Prof. Dr. Thomas Betzwieser, Senckenberganlage 31, 60325, Frankfurt am Main, Deutschland</div>
+                            <div class="address plain">Universität Paderborn, Institut für Informatik, Fachgebiet Mensch-Computer-Interaktion, Prof. Dr. Gerd Szwillus, Fürstenallee 11, 33102, Paderborn, Deutschland</div>Bundesministerium für Bildung und Forschung (fnd)TextGrid<div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> TextGridUri, FreiDi-Release_0.1.0 </span>
+                            </div>
+                            <div class="subProperty">
+                              <span class="subkey">Identifier</span>
+                              <span class="subvalue"> handle </span>
+                            </div>
+                            <div class="subProperty">
+                              <span class="subkey">Date</span>
+                              <span class="subvalue"> (2015-10-31) 2015-10-31</span>
+                            </div>
+                            <div class="subProperty">
+                              <span class="subkey">Availability</span>
+                              <span class="subvalue"> restricted <p>Copyright © 2015; Freischütz Digital; Detmold, Erlangen, Frankfurt, Paderborn</p>
+                                  <p>Alle Rechte an den Abbildungen bleiben bei den bewahrenden Bibliotheken und Institutionen.</p> CC BY-NC-SA 4.0 (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">https://creativecommons.org/licenses/by-nc-sa/4.0/</a>) </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="section">
+                          <h1>Source Description</h1>
+                          <div class="propertyList">
+                            <p/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h1>Details about the encoding</h1>
+                      <div class="propertyList">
+                        <div class="property">
+                          <div class="key">Project Description</div>
+                          <div class="value">Das vom Bundesministerium für Bildung und Forschung (BMBF - Förderkennzeichen 01UG1239A bis 01UG1239C) geförderte Projekt “Freischütz Digital – Paradigmatische Umsetzung eines genuin digitalen Editionskonzepts” ist ein gemeinschaftliches Projekt der
+                              Goethe-Universität Frankfurt, der International Audio Laboratories Erlangen und der Universität Paderborn, letztere übernimmt dabei die Gesamtkoordination.</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Sample Scope</div>
+                          <div class="value">Das "Freischütz Digital - Release 1.0.0" umfasst die zum Ende des Förderzeitraums (31. Oktober 2015) bereitgestellten Daten aus den verschiedenen Teilbereichen des Projekts Freischütz Digital (FreiDi).Auf Seiten der Musikedition sind 15 musikalischen Quellen
+                              zunächst durch Metadaten beschrieben, sowie die Positionen aller Takte auf den Faksimiles erfasst. Für alle Quellen liegt zudem eine Quellenbeschreibung als Fließtext vor; während diese für die handschriftlichen Quellen ausführlich auf unterschiedliche Aspekte eingeht, ist sie
+                              für die (überwiegend späteren, für den Überlieferungsprozess relevanten) Drucke knapp gehalten. Der musikalische Inhalt der einzelnen Quellen ist mit unterschiedlicher Erschließungstiefe erfasst. Grundsätzlich sind in allen Quellen außer D1849B, D1867, D1871, DJochum und ED-kl
+                              die Nummern 6, 8 und 9 im Sinne einer Quellenedition – nach dem an anderer Stelle beschriebenen "Core-Modell" – im Format der Music Encoding Initiative (MEI) erschlossen. Die Datei "freidi-work.xml" stellt diesem Modell folgend die "Core-Datei" dar und beschreibt die
+                              Gemeinsamkeiten und Unterschiede der einzelnen Quellen. Für alle Quellen (ausgenommen die bereits genannten) ist dies für die Nummern 6, 8 und 9 bis hin zur Ebene einzelner Noten oder anderer musikalischer Zeichen erfolgt, nur im Falle von Webers Autograph (A) auch für sämtliche
+                              anderen Nummern.Die in diesem Release veröffentlichten Codierungen der Libretti sind nach den Richtlinien der Text Encoding Initiative (TEI) und hier speziell der Teilbereiche "Performance Texts" und "Critical Apparatus" durchgeführt worden und decken auch die editorischen
+                              Erkenntnisse zur jeweiligen quellenimmanenten Genese der Texte ab. Speziell im Falle von KA-tx4 sollten die Codierungskonzepte für Handschriften mit mehrfachen Überarbeitungsspuren (es handelt sich um Webers Handexemplar als Grundlage für die Komposition) verdeutlicht
+                              werden.Ebenfalls den Richtlinien der TEI entsprechend wurden die 10 ausgewählten Referenztexte ausgezeichnet (die drei zusätzlichen Texte mit Schillers "Wallenstein"-Trilogie entstammen dem TextGrid-Repository). Zu sämtlichen Texten wurden Metadaten erstellt, sowie soweit
+                              möglich, ein Digitalisat der Handschrift bzw. eines Druck-Exemplars beigegeben und mit der Übertragung parallelisiert.Aus der akustischen Domäne sind in diesem Bereich strukturierte Metadaten der im Rahmen des Projektes angefertigten Einspielung (Bloemeke 2013) enthalten, sowie
+                              zu den Einspielungen von Ackermann 1951, Erich Kleiber 1955, Jochum 1960, Carlos Kleiber 1973 und Janowski 1994. Letztere wurden uns dankenswerter Weise von den Rechteinhabern auch zur Verwendung in der Online-Publikation zur Verfügung gestellt. Dieser Datensatz teilt sich gemäß
+                              der FRBR-Implementierung in MEI auf zwei Bereiche auf: (1) die "freidi-work.xml" Datei enthält die Angaben zur sog. "expression", also der aufgezeichneten Aufführung; (2) die Dateien im Ordner "audioSources", z.B. "freidi-recording_Bloemeke2013.xml", enthalten dagegen die Daten
+                              zur sog. "manifestation" der Aufnahme, d.h. die zur Publikation überarbeitete Version. Weiterhin enthalten die Codierungen die am Projektstandort Erlangen algorithmisch gewonnenen "Taktannotationen" der Einspielungen, die eine gezielte Ansteuerung der Audio-Daten auf Taktebene
+                              ermöglichen. Zusätzlich ist in der Datei "freidi-recordingDesc-Bloemeke2013.xml" eine textliche Beschreibung der im Rahmen des Projektes angefertigten Einspielung enthalten, die auch Referenzen auf weitere, diese Aufnahme betreffende Texte enthält.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="section">
+                      <h1>File revisions</h1>
+                      <div class="propertyList">
+                        <div class="property">
+                          <div class="key">status</div>
+                          <div class="value">candidate</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-11-01</span></div>
+                          <div class="value">JV: Fehler im Text (Verbindung Nr. 8 mit Lodoiska) korrigiert (trifft nur auf Nr. 6 zu; 8 bezieht sich auf die Vestalin)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-04-20</span></div>
+                          <div class="value">JV: inline-Zitate als solche gekennzeichnet; Umbrüche aus TB-Zitaten entfernt; vereinzelt abgetrennte Punkte gelöscht bzw. versetzt</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-04-07</span></div>
+                          <div class="value">JV: Mini-Änderungen (Fehlerkorrekturen)</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2016-01-30</span></div>
+                          <div class="value">JV: Link-Bezeichnungen ausgetauscht gegen die verkürzten der Textgenese</div>
+                        </div>
+                        <div class="property">
+                          <div class="key">Change<span class="date">2015-11-08</span></div>
+                          <div class="value">JV: Nach einer Korrektur zu veröffentlichende erste Fassung</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+  # getHelp.xql
+  /data/xql/getHelp.xql:
+    get:
+      tags:
+      - Other
+      summary: Get help
+      description: Returns HTML for help
+      operationId: getHelp
+      parameters:
+      - name: idPrefix
+        in: query
+        description: ID prefix
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: helpWindow-1073
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: en
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                    <head>
+                      <title>Edirom Online Help</title>
+                      <meta name="author" content="Benjamin W. BohlDFG-Projekt &#34;Digitale Musikedition&#34; (Edirom)&#xA;                  &#xA;                     Musikwissenschaftliches Seminar Detmold/Paderborn&#xA;                     Gartenstraße 20&#xA;                     D-32756 Detmold&#xA;                  &#xA;               andDaniel RöwenstrunkFreischütz Digital&#xA;                  &#xA;                            Musikwissenschaftliches Seminar Detmold/Paderborn&#xA;                     Gartenstraße 20&#xA;                     D-32756 Detmold&#xA;                  &#xA;               " />
+                      <meta name="generator" content="Text Encoding Initiative Consortium XSLT stylesheets" />
+                      <meta http-equiv="Content-Type" content="text/html;          charset=utf-8" />
+                      <meta name="DC.Title" content="Edirom Online Help" />
+                      <meta name="DC.Type" content="Text" />
+                      <meta name="DC.Format" content="text/html" />
+                      <link href="http://www.tei-c.org/release/xml/tei/stylesheet/tei.css" rel="stylesheet" type="text/css" />
+                      <link rel="stylesheet" media="print" type="text/css" href="http://www.tei-c.org/release/xml/tei/stylesheet/tei-print.css" />
+                    </head>
+                    <body class="simple" id="helpWindow-1073TOP">
+                      ...
+                    </body>
+                  </html>
+
+  # getiFrameURL.xql
+  /data/xql/getiFrameURL.xql:
+    get:
+      tags:
+      - Other
+      summary: Get iframe URL
+      description: Returns iframe URL
+      operationId: getiFrameURL
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-7.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: https://klarinettenquintett.weber-gesamtausgabe.de:443/apps/weber-klarinettenquintett-eol-emeritus/texts/text-7.xml
+
+  # getInternalIdType.xql
+  /data/xql/getInternalIdType.xql:
+    get:
+      tags:
+      - Other
+      summary: Get internalIdType
+      description: Returns internalIdType
+      operationId: getInternalIdType
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: unknown
+
+  # getLanguageFile.xql
+  /data/xql/getLanguageFile.xql:
+    get:
+      tags:
+      - Other
+      summary: Get language file
+      description: Returns XML for language file
+      operationId: getLanguageFile
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
+          enum:
+          - xml
+          - json
+          default: xml
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: de
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: en
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/langFile'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/langFile'
+
+  # getLinkTarget.xql
+  /data/xql/getLinkTarget.xql:
+    post:
+      tags:
+      - Other
+      summary: Get link target
+      description: Returns JSON for link target
+      operationId: getLinkTarget
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTarget'
+
+  # getMusicInMdiv.xql
+  /data/xql/getMusicInMdiv.xql:
+    get:
+      tags:
+      - Other
+      summary: Get music in mdiv
+      description: Returns XML for music in mdiv
+      operationId: getMusicInMdiv
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/editions/edirom_edition_7bade454-c1b2-499f-8100-7b3e369e2d65.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      - name: movementId
+        in: query
+        required: false
+        description: Movement ID
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/mei'
+
+  # getNavigatorConfig.xql
+  /data/xql/getNavigatorConfig.xql:
+    get:
+      tags:
+      - Other
+      summary: Get navigator config
+      description: Returns HTML for navigator config
+      operationId: getNavigatorConfig
+      parameters:
+      - name: editionId
+        in: query
+        description: Edition ID
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: workId
+        in: query
+        description: Work ID
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: edition-27830471_work-1
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: de
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: en
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div class="navigatorCategory" id="x651675ff-fa48-4fab-80bf-45bd70539283">
+                    <div class="navigatorCategoryTitle">Texte</div>
+                    <div id="x651675ff-fa48-4fab-80bf-45bd70539283-items" class="">
+                      <div class="navigatorItem" id="x0eda59b9-aba1-4a15-8188-ee07e08da07d" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-1.xml', {})">Vorbemerkungen</div>
+                      <div class="navigatorItem" id="x1080412b-2c1e-4c15-a43a-b8a474f5141e" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-2.xml', {})">Abkürzungen und Siglen</div>
+                      <div class="navigatorItem" id="x30dd99c0-a7f6-4034-9ee2-b359a3c6a956" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-3.xml', {})">Zur Printversion</div>
+                      <div class="navigatorItem" id="x906c2ee7-ebd4-4f2e-bef5-23b77de967b0" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-4.xml', {})">Zum vorliegenden Band</div>
+                      <div class="navigatorItem" id="xa9585bcf-aa76-4004-88d3-e87369e4268e" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-5.xml', {})">Werkgenese und Werküberlieferung</div>
+                      <div class="navigatorItem" id="xca800938-9306-478e-bfa4-d01c1e9e3014" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-6.xml', {})">Quellenbewertung</div>
+                      <div class="navigatorItem" id="xb2b28693-a2c9-4639-8d43-24fdbd42d6c0" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-7.xml', {})">Editionsbericht</div>
+                    </div>
+                  </div>
+                  <div class="navigatorCategory" id="x4e541c03-4e4a-4254-a47c-f62a7ac41278">
+                    <div class="navigatorCategoryTitle">Notentexte</div>
+                    <div id="x4e541c03-4e4a-4254-a47c-f62a7ac41278-items" class="">
+                      <div class="navigatorItem" id="xe10beeda-8900-408b-be00-ec50007431ff" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml', {})">Edition</div>
+                      <div class="navigatorItem" id="x547db0c6-f14f-4e1b-90a0-70e89123dc16" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml', {})">Autograph A</div>
+                      <div class="navigatorItem" id="x943424ce-593f-488f-a6a3-23c1838a5ef5" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml', {})">Stichvorlage K/sv</div>
+                      <div class="navigatorItem" id="x1880118c-0695-4b2a-87fa-1e7c517fa69e" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-2.xml', {})">Erstdruck I ED₁</div>
+                      <div class="navigatorItem" id="x3b7d1cfc-1177-4305-85b6-a75a8af8ff60" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-5.xml', {})">Erstdruck II ED₂</div>
+                      <div class="navigatorItem" id="x380eb5a2-6e2a-430f-a3d2-b494b75306f5" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-6.xml', {})">Baermann D⁺-st</div>
+                      <div class="navigatorItem" id="x1681cdff-7343-4920-8211-b2cac3945cfc" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-7.xml', {})">Baermann D⁺-kl</div>
+                      <div class="navigatorItem" id="x440a9a74-bf49-4a5e-834f-425e91b9ff1b" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-8.xml', {})">Ebers D-arr</div>
+                      <div class="navigatorItem" id="x64d3f3be-1b22-4e2a-95c8-1280de5c8d3d" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-9.xml', {})">Hermann D⁺-arr</div>
+                    </div>
+                  </div>
+
+  # getPages.xql
+  /data/xql/getPages.xql:
+    get:
+      tags:
+      - Other
+      summary: Get pages
+      description: Returns JSON for pages
+      operationId: getPages
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/musicSources/freidi-musicSource_ED-kl.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Page'
+
+  # getParts.xql
+  /data/xql/getParts.xql:
+    get:
+      tags:
+      - Other
+      summary: Get parts
+      description: Returns JSON for parts
+      operationId: getParts
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-5.xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part2'
+
+  # getPreferences.xql
+  /data/xql/getPreferences.xql:
+    get:
+      tags:
+      - Other
+      summary: Get preferences
+      description: Returns XML for preferences
+      operationId: getPreferences
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+      - name: mode
+        in: query
+        description: Mode
+        schema:
+          type: string
+          enum:
+          - xml
+          - json
+          default: xml
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Preferences'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/prefs'
+
+  # getText.xql
+  # [returns empty <div> - there may be better example]
+  /data/xql/getText.xql:
+    get:
+      tags:
+      - Other
+      summary: Get text
+      description: Returns HTML for text
+      operationId: getText
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_D-tx1.xml
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value:
+      - name: idPrefix
+        in: query
+        description: ID prefix
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: textFacsimileSplitView-1660_
+      - name: term
+        in: query
+        description: Term
+        required: false
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value:
+      - name: path
+        in: query
+        description: Path
+        required: false
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value:
+      - name: page
+        in: query
+        description: Page
+        required: false
+        schema:
+          type: string
+        examples:
+          Freischütz:
+            summary: "Freischütz"
+            value: surface_0000006
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div xmlns:exist="http://exist.sourceforge.net/NS/exist" xmlns="http://www.w3.org/1999/xhtml" class="freidi_libretto D-tx1">
+                    <div class="pagebreak" id="textFacsimileSplitView-1660_file-pb-d52e4">  pag.   1</div><br class="pb" />
+                    <div class="titlePage">
+                      <div class="titlePart"><span class="expanded"><b>Der Freischütz</b></span>.</div>
+                      <div class="titlePart"><span class="expanded">Von
+                        <br />Friedrich Kind.</span></div>
+                      <div class="titlePart"><span class="expanded">Leipzig,
+                        <br />bei Georg Joachim Göschen, 1822</span>.</div>
+                    </div>
+                  </div>
+
+  # getXml.xql
+  /data/xql/getXml.xql:
+    get:
+      tags:
+      - Other
+      summary: Get xml
+      description: Returns XML
+      operationId: getXml
+      parameters:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
+      - name: lang
+        in: query
+        description: Language
+        schema:
+          type: string
+          enum:
+          - de
+          - en
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: de
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/xml:
+              schema:
+                type: string
+
+  #getZone.xql
+  /data/xql/getZone.xql:
+    get:
+      tags:
+      - Other
+      summary: Get a zone by ID
+      description: Returns a single zone element (typically from a facsimile or measure region) as JSON.
+      operationId: getZone
+      parameters:
+      - name: uri
+        in: query
+        description: Full xmldb URI of the source MEI file containing the zone
+        required: true
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-8.xml
+          EditionExample:
+            summary: "EditionExample"
+            value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
+      - name: zoneId
+        in: query
+        description: The xml:id of the zone element to retrieve
+        required: true
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
+          EditionExample:
+            summary: "EditionExample"
+            value: edirom_zone_ea3b955b-86c2-4cac-9dde-4874bc5b7422
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - properties:
+                      zoneIid:
+                        type: string
+                        example: zone_4d395284-88a3-4269-adc8-8ecabc1d434d
+                      pageId:
+                        type: string
+                        example: surface_40a1f7ea-e7fb-4642-9195-0a4fce19210a
+                  - $ref: '#/components/schemas/Positions'
+
+  # search.xql
+  /data/xql/search.xql:
+    get:
+      tags:
+        - Search
+      summary: Search in edition
+      description: Returns HTML with search results for a given term in the specified edition and language.
+      operationId: search
+      parameters:
+        - name: edition
+          in: query
+          description: Identifier of the edition (XMLDB URI)
+          required: true
           schema:
-            type: "string"
+            type: string
+          examples:
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
+              value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
+        - name: term
+          in: query
+          description: Search term
+          required: true
+          schema:
+            type: string
+          examples:
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
+              value: neu
+        - name: lang
+          in: query
+          description: Language for result messages
+          required: false
+          schema:
+            type: string
+            default: en
+            enum:
+              - de
+              - en
+          examples:
+            Klarinettenquintett:
+              summary: "Klarinettenquintett"
+              value: de
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <div class="searchResult">
+                    <div class="searchResultOverview">Hits in <span class="num">1</span> objects:</div>
+                    <div class="searchResultDoc">
+                        <div class="doc"><span class="resultTitle" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-213?term=neu');">[No title found!]</span><span class="resultCount">(1 hit)</span></div>
+                        <div class="hitP" style="">
+                            <p><span class="previous">...T.57 Vc (im vorliegenden
+                                          Exemplar von ED₁ handschriftlich nachgetragen)  </span><span class="hit" onclick="loadLink('xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-213?path=/annot[1]/p[1]&amp;term=neu');">neu</span><span class="following">  hinzugefügt.</span></p>
+                        </div>
+                    </div>
+                  </div>
+
+  # DEPRECATED: getReducedDocument.xql
+  /data/xql/getReducedDocument.xql:
+    get:
+      tags:
+      - Deprecated
+      # DEPRECATED: This endpoint is deprecated and should not be used in new applications.
+      summary: "[DEPRECATED] Get reduced document"
+      description: "[DEPRECATED] Returns HTML for reduced document"
+      operationId: getReducedDocument
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      - name: selectionId
+        in: query
+        description: Selection ID
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      - name: subtreeRoot
+        in: query
+        description: Subtree root
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      - name: idPrefix
+        in: query
+        description: ID prefix
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+
+  # DEPRECATED: getSummary.xql
+  /data/xql/getSummary.xql:
+    get:
+      tags:
+      - Deprecated
+      # DEPRECATED: This endpoint is deprecated and should not be used in new applications.
+      summary: "[DEPRECATED] Get summary"
+      description: "[DEPRECATED] Returns HTML for summary"
+      operationId: getSummary
+      parameters:
+      - name: edition
+        in: query
+        description: Identifier of the edition
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      - name: uri
+        in: query
+        description: URI
+        schema:
+          type: string
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      - name: type
+        in: query
+        description: Type
+        schema:
+          type: string
+          enum:
+          - work
+          - source
+          - recording
+          - text
+        examples:
+          Klarinettenquintett:
+            summary: "Klarinettenquintett"
+            value:
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/html:
+              schema:
+                type: string
+
+components:
+  schemas:
+    Annotation:
+      type: object
+      properties:
+        id:
+          type: string
+          example: annotation-2
+        title:
+          type: string
+          example: Annotation Title
+        categories:
+          type: string
+          example: Bogensetzung
+        priority:
+          type: string
+          format: integer
+          example: "1"
+        pos:
+          type: string
+          format: integer
+          example: "2"
+        sigla:
+          type: string
+          example: "A, K/sv, ED₁"
+    AnnotationInfos:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        priorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Priority'
+        count:
+          type: integer
+          example: 226
+    AnnotationItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: annotation-2
+        plist:
+          type: array
+          items:
+            $ref: '#/components/schemas/plistItem'
+        svgList:
+          type: array
+          items:
+            type: string
+            example: svg-1.svg
+        fn:
+          type: string
+          example: loadLink("xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2")
+        uri:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
+        priority:
+          type: string
+          example: ediromAnnotPrio1
+        categories:
+          type: string
+          example: wega.annotation.category.bogensetzung
+    AnnotationPreviews:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+    Annotations:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        total:
+          type: integer
+          example: 301
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          example: wega.annotation.category.bogensetzung
+        name:
+          type: string
+          example: Bogensetzung
+    Chapters:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "d1e372"
+        name:
+          type: string
+          example: "No. 0"
+        pageId:
+          type: string
+          example: "surface_0000005"
+    Concordance:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Taktkonkordanz nach neuer Struktur
+        groups:
+          type: object
+          properties:
+            label:
+              type: string
+              example: Satz
+            groups:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Overtura.
+                  connections:
+                    type: object
+                    properties:
+                      label:
+                        type: string
+                        example: Takt
+                      connections:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: "1"
+                            plist:
+                              type: string
+                              example: xmldb:exist:///db/apps/contents/musicSources/freidi-musicSource_A.xml#A_mov0_measure1
+            connections:
+              type: array
+              items:
+                type: object
+                properties: {}
+    Edition:
+      type: object
+      properties:
+        id:
+          type: string
+          example: edirom_edition_example
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
+        name:
+          type: string
+          example: Edirom Edition Example
+        additional_css_path:
+          type: string
+          example: ""
+        languages:
+          type: string
+          example: de
+    HiddenData:
+      type: object
+      properties:
+        width:
+          type: integer
+          example: 634
+        height:
+          type: integer
+          example: 940
+        x:
+          type: integer
+          example: 1610
+        "y":
+          type: integer
+          example: 240
+        origH:
+          type: integer
+          example: 3107
+        origW:
+          type: integer
+          example: 3950
+    langFile:
+      type: object
+      properties:
+        lang:
+          type: string
+          example: de
+        version:
+          type: string
+          example: "1.0"
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              entry:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                      example: global_cancel
+                      xml:
+                        attribute: true
+                    value:
+                      type: string
+                      example: Abbrechen
+                      xml:
+                        attribute: true
+    LinkTarget:
+      type: object
+      properties:
+        type:
+          type: string
+          example: work
+        title:
+          type: string
+          example: "Der Freischütz, romantische Oper in drei Aufzügen"
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/contents/edition/freidi-work.xml
+        views:
+          type: array
+          items:
+            $ref: '#/components/schemas/View'
+        internalId:
+          type: string
+          example: ""
+        term:
+          type: string
+          example: ""
+        path:
+          type: string
+          example: ""
+        internalIdType:
+          type: string
+          example: unknown
+    Measure:
+      type: object
+      properties:
+        measureId:
+          type: string
+          example: bar-20016
+        movementId:
+          type: string
+          example: part-1
+        measureCount:
+          type: integer
+          example: 3
+    MeasuresOnPage:
+      type: array
+      items:
+        $ref: '#/components/schemas/MeasuresOnPageItem'
+    MeasuresOnPageItem:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            type:
+              type: string
+            name:
+              type: string
+              example: 1
+            rest:
+              type: string
+              example: 0
+            id:
+              type: string
+              example: bar-2001
+            zoneId:
+              type: string
+              example: zone_bar-2001
+        - $ref: '#/components/schemas/Positions'
+    MeasurePage:
+      type: array
+      items:
+        $ref: '#/components/schemas/MeasurePageItem'
+    MeasurePageItem:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            measureId:
+              type: string
+              example: x00b6e59e-be9e-4f12-99d7-e691aaaef1ac
+            zoneId:
+              type: string
+            pageId:
+              type: string
+            movementId:
+              type: string
+              example: tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf
+            path:
+              type: string
+            width:
+              type: string
+            height:
+              type: string
+        - $ref: '#/components/schemas/Positions'
+    Measures:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            example: bar-2002454
+          measures:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: bar-2002454
+                voice:
+                  type: string
+                  example: score
+          mdivs:
+            type: array
+            items:
+              type: string
+              example: x84707a44-0e6a-4c77-9eab-d196150079a9
+          name:
+            type: string
+            example: "1"
+    mei:
+      type: object
+      xml:
+        namespace: "http://www.music-encoding.org/ns/mei"
+      properties:
+        "xmlns:xlink":
+          type: string
+          enum:
+            - "http://www.w3.org/1999/xlink"
+          xml:
+            attribute: true
+        meiversion:
+          type: string
+          example: "4.0.0"
+          xml:
+            attribute: true
+        meiHead:
+          type: object
+        music:
+          type: object
+          properties:
+            facsimile:
+              type: object
+            body:
+              type: object
+    Movement:
+      type: object
+      properties:
+        id:
+          type: string
+          example: movement-1
+        name:
+          type: string
+          example: Allegro
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+    Overlay:
+      type: object
+      properties:
+        id:
+          type: string
+          example: layer-1
+        name:
+          type: string
+          example: Sichere Eintragungen Webers
+    OverlayOnPage:
+      type: object
+      properties:
+        svg:
+          type: string
+          example: "<svg xmlns=\"http://www.w3.org/2000/svg\" ... >...</svg>"
+        id:
+          type: string
+          example: layer_1210336306250
+    Overlays:
+      type: array
+      items:
+        $ref: '#/components/schemas/Overlay'
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+          example: facsimile-2001001
+        path:
+          type: string
+          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0001
+        name:
+          type: string
+          example: "1"
+        width:
+          type: string
+          example: "3950"
+        height:
+          type: string
+          example: "3107"
+    Part:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ""
+        name:
+          type: string
+          example: Violine
+    Part2:
+      type: object
+      properties:
+        selectedByDefault:
+          type: boolean
+          example: true
+        label:
+          type: string
+          example: Klarinette
+        id:
+          type: string
+          example: perfRes-voice-1
+        selected:
+          type: boolean
+          example: true
+    Participant:
+      type: object
+      properties:
+        type:
+          type: string
+          example: measure
+        label:
+          type: string
+          example: Takte 5 bis 7
+        mdiv:
+          type: string
+          example: ""
+        part:
+          type: string
+          example: ""
+        page:
+          type: string
+          example: "2"
+        source:
+          type: string
+          example: Autograph A
+        siglum:
+          type: string
+          example: A
+        digilibBaseParams:
+          type: string
+          example: https://content.staatsbibliothek-berlin.de/dc/69007087X-0002
+        digilibSizeParams:
+          type: string
+          example: '&amp;wx=0.40759493670886077&amp;wy=0.07724493080141616&amp;ww=0.16050632911392404&amp;wh=0.30254264563887995&amp;mo=fit'
+        hiddenData:
+          $ref: '#/components/schemas/HiddenData'
+        content:
+          type: string
+          example: ""
+        linkUri:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml#bar-2005?tstamp2=2m+0
+    plistItem:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Positions'
+        - type: object
+          properties:
+            id:
+              type: string
+              example: annotation__bar-2005
+            type:
+              type: string
+              example: measure
+    Positions:
+      type: object
+      properties:
+        ulx:
+          type: string
+          example: 100
+        uly:
+          type: string
+          example: 200
+        lrx:
+          type: string
+          example: 300
+        lry:
+          type: string
+          example: 400
+    Preferences:
+      type: object
+      properties:
+        application_language:
+          type: string
+          example: de
+        annotation_layout:
+          type: string
+          example: EdiromOnline.view.window.annotationLayouts.AnnotationLayout1
+        image_prefix:
+          type: string
+          example: https://digilib.freischuetz-digital.de/Scaler/
+    prefs:
+      type: object
+      properties:
+        version:
+          type: string
+          example: "1.0"
+          xml:
+            attribute: true
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              entry:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: application_language
+                    xml:
+                      attribute: true
+                  value:
+                    type: string
+                    example: de
+                    xml:
+                      attribute: true
+    Priority:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ediromAnnotPrio1
+        name:
+          type: string
+          example: "1"
+    View:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - headerView
+          - textView
+          - xmlView
+        defaultView:
+          type: boolean
+          example: true
+        label:
+          type: string
+          example: XML Text
+        uri:
+          type: string
+          example: xmldb:exist:///db/apps/contents/edition/freidi-work-overview.xml
+    Works:
+      type: array
+      items:
+        $ref: '#/components/schemas/Work'
+    Work:
+      type: object
+      properties:
+        id:
+          type: string
+          example: edition-27830471_work-1
+        doc:
+          type: string
+          example: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/work.xml
+        title:
+          type: string
+          example: Klarinettenquintett op.34
+  parameters:
+    editionParam:
+      name: edition
+      in: query
+      description: Identifier of the edition
+      schema:
+        type: string
+    uriParam:
+      name: uri
+      in: query
+      description: URI
+      schema:
+        type: string
+    langParam:
+      name: lang
+      in: query
+      description: Language
+      schema:
+        type: string
+        default: en
+        enum:
+        - de
+        - en
+    idParam:
+      name: id
+      in: query
+      description: ID
+      schema:
+        type: string
+    editionIdParam:
+      name: editionId
+      in: query
+      description: Edition ID
+      schema:
+        type: string
+    pageIdParam:
+      name: pageId
+      in: query
+      description: Page ID
+      schema:
+        type: string
+    annotIdParam:
+      name: annotId
+      in: query
+      description: Annotation ID
+      schema:
+        type: string
+    measureIdParam:
+      name: measureId
+      in: query
+      description: Measure ID
+      schema:
+        type: string
+    movementIdParam:
+      name: movementId
+      in: query
+      description: Movement ID
+      schema:
+        type: string
+    overlayIdParam:
+      name: overlayId
+      in: query
+      description: Overlay ID
+      schema:
+        type: string
+    workIdParam:
+      name: workId
+      in: query
+      description: Work ID
+      schema:
+        type: string
+    selectionIdParam:
+      name: selectionId
+      in: query
+      description: Selection ID
+      schema:
+        type: string
+    zoneIdParam:
+      name: zoneId
+      in: query
+      description: Zone ID
+      schema:
+        type: string
+    internalIdParam:
+      name: internalId
+      in: query
+      description: Internal ID
+      schema:
+        type: string
+    idPrefixParam:
+      name: idPrefix
+      in: query
+      description: ID prefix
+      schema:
+        type: string
+    targetParam:
+      name: target
+      in: query
+      description: Target
+      schema:
+        type: string
+    mdivParam:
+      name: mdiv
+      in: query
+      description: Measure div
+      schema:
+        type: string
+    measureParam:
+      name: measure
+      in: query
+      description: Measure
+      schema:
+        type: string
+    measureCountParam:
+      name: measureCount
+      in: query
+      description: Measure Count
+      schema:
+        type: string
+        default: "1"
+    modeParam:
+      name: mode
+      in: query
+      description: Mode
+      schema:
+        type: string
+    typeParam:
+      name: type
+      in: query
+      description: Type
+      schema:
+        type: string
+        enum:
+        - work
+        - source
+        - recording
+        - text
+    termParam:
+      name: term
+      in: query
+      description: Term
+      schema:
+        type: string
+    pathParam:
+      name: path
+      in: query
+      description: Path
+      schema:
+        type: string
+    pageParam:
+      name: page
+      in: query
+      description: Page
+      schema:
+        type: string
+    subtreeRootParam:
+      name: subtreeRoot
+      in: query
+      description: Subtree root
+      schema:
+        type: string
