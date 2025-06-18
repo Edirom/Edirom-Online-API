@@ -1,8 +1,10 @@
 openapi: 3.0.1
 info:
-  title: Edirom-Online Backend API
+  title: Edirom Online API
   description: This is the description and documentation of the Edirom-Online backend
-    API.
+    API. Some of the documented endpoints can be tested against locally deployed editions (EditionExample 
+    and Klarinettenquintett in an eXist-db at http://localhost:8080, see https://github.com/Edirom/Edirom-Online 
+    for information about building and deployment), others against remote editions (Freischütz Digital and Open Faust).
   license:
     name: MIT
   version: 1.0.0
