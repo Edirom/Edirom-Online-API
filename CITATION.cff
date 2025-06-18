@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: Edirom Online API
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Daniel
+    family-names: Jettka
+    orcid: https://orcid.org/0000-0002-2375-2227
+  - given-names: Hizkiel
+    family-names: Alemayehu
+    orcid: https://orcid.org/0009-0006-3345-086X
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15690219
+    description: Edirom Online API
+repository-code: https://github.com/Edirom/Edirom-Online-API
+abstract: >-
+  The Edirom Online API is the description of the Edirom Online Backend 
+  which in conjunction with the Edirom Online Frontend is used for the 
+  presentation and analysis of critical musical editions. The present 
+  API version describes the backend version Edirom Online Backend v1.0.1.
+license: MIT
+version: v1.0.0
+date-released: 2025-06-18
