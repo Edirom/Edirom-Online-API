@@ -747,15 +747,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Edition'
-              examples:
-                EditionExample:
-                  summary: "EditionExample"
-                  value: 
-                    - additional_css_path: ""
-                      id: "edirom_edition_example"
-                      languages: "de"
-                      name: "Edirom Edition Example"
-                      doc: "xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml"
 
   # getEditionURI
   /data/xql/getEditionURI.xql:
@@ -1557,14 +1548,11 @@ paths:
         in: query
         description: Mode
         schema:
-          type: string      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: xml
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: json
+          type: string
+          enum:
+          - xml
+          - json
+          default: xml
       - name: lang
         in: query
         description: Language
@@ -1845,14 +1833,11 @@ paths:
         in: query
         description: Mode
         schema:
-          type: string      
-        examples: 
-          EditionExample:
-            summary: "EditionExample"
-            value: xml
-          Klarinettenquintett:
-            summary: "Klarinettenquintett"
-            value: json
+          type: string
+          enum:
+          - xml
+          - json
+          default: xml
       responses:
         "200":
           description: Successful operation
