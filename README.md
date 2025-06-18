@@ -1,5 +1,11 @@
-# Edirom-Online Backend API
+# Edirom Online API
 
-This is the Open API definition for the [Edirom-Online backend](https://github.com/Edirom/Edirom-Online-Backend).
+The Edirom Online API is the description of the [Edirom Online Backend](https://github.com/Edirom/Edirom-Online-Backend) which in conjunction with the [Edirom Online Frontend](https://github.com/Edirom/Edirom-Online-Frontend) is used for the presentation and analysis of critical musical editions. The present API version describes the backend version [Edirom Online Backend v1.0.1](https://doi.org/10.5281/zenodo.15294819) in OpenAPI v3.0.1 format.
 
-Swagger UI: https://edirom.github.io/Edirom-Online-API/ 
+Any frontend implementation for the Edirom Online should adhere to this API specification until there is a newer version available.
+
+This work is based on the efforts of the Edirom Online community.
+
+## Swagger UI
+
+An online presentation of the API is available at: https://edirom.github.io/Edirom-Online-API/ (the configuration files for the GitHub Pages site are part of this repository)
