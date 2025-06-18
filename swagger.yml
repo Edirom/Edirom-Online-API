@@ -143,32 +143,11 @@ paths:
         "200":
           description: Successful operation
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                example: |
-                  [
-                    {
-                      "success": true,
-                      "total": 301,
-                      "annotations": [
-                        {
-                          "id": "annotation-2",
-                          "title": "Annotation Title",
-                          "categories": "Bogensetzung",
-                          "priority": "1",
-                          "pos": "2",
-                          "sigla": "A, K/sv, ED₁"
-                        }
-                      ]
-                    }
-                  ]
-            # could be application/json, but we use text/plain because of return type from backend
-            # application/json:
-              # schema:
-                # type: array
-                # items:
-                  # $ref: '#/components/schemas/Annotations'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Annotations'
 
   # getAnnotationInfos.xql
   /data/xql/getAnnotationInfos.xql:
@@ -1208,9 +1187,19 @@ paths:
         "200":
           description: Successful operation
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/Chapters'
+                type: string
+                example: |
+                  {
+                    "id": "d1e372",
+                    "name": "No. 0",
+                    "pageId": "surface_0000005"
+                  }
+            # could be application/json, but we use text/plain because backend currently returns text/plain
+            # application/json:
+              # schema:
+                # $ref: '#/components/schemas/Chapters'
 
   # getConcordances.xql
   /data/xql/getConcordances.xql:
