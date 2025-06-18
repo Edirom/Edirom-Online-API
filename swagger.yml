@@ -8,7 +8,7 @@ info:
   version: 1.0.0
 servers:
 # locally deployed editions:
-# - EditionExample: https://github.com/Edirom/EditionExample 
+# - EditionExample: https://github.com/Edirom/EditionExample
 # - Klarinettenquintett: https://git.uni-paderborn.de/wega/klarinettenquintett-edirom
 - url: http://localhost:8080/exist/apps/Edirom-Online-Backend
   description: Local backend with EditionExample and Klarinettenquintett
@@ -34,8 +34,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -43,8 +43,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-2
@@ -52,8 +52,8 @@ paths:
         in: query
         description: Target
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: tip
@@ -64,19 +64,19 @@ paths:
           type: string
           enum:
           - de
-          - en        
-        examples: 
+          - en
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: de
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
-                example: | 
+                example: |
                   <div class="annotTip">
                     <div class="metaBox">
                       <div class="property priority">
@@ -125,8 +125,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -134,8 +134,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
@@ -162,7 +162,7 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -171,7 +171,7 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -197,7 +197,7 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -206,7 +206,7 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -218,7 +218,7 @@ paths:
           type: string
           enum:
           - de
-          - en        
+          - en
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -230,7 +230,7 @@ paths:
             text/html:
               schema:
                 type: string
-                example: | 
+                example: |
                   <div class="annotView">
                     <div class="metaBox">
                         <div class="property priority">
@@ -269,8 +269,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -278,8 +278,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-8
@@ -291,7 +291,7 @@ paths:
           default: en
           enum:
           - de
-          - en        
+          - en
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -299,11 +299,11 @@ paths:
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
-                example: | 
+                example: |
                   <div class="annotView">
                     <div class="contentBox">
                         <h1>Satz 1, Takt 16</h1>
@@ -315,7 +315,7 @@ paths:
                         </p>
                     </div>
                   </div>
-  
+
   # getAnnotationsInText.xql
   # https://open-faust.zenmem.de
   # /data/xql/getAnnotationsInText.xql?_dc=1749634993542&
@@ -334,8 +334,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           OpenFaust:
             summary: "Open Faust"
             value: xmldb:exist:///db/apps/edirom/open-faust/content/edition-open-faust.xml
@@ -343,8 +343,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           OpenFaust:
             summary: "Open Faust"
             value: xmldb:exist:///db/apps/edirom/open-faust/content/edition/edition_text.xml
@@ -371,7 +371,7 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -380,8 +380,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
@@ -389,8 +389,8 @@ paths:
         in: query
         description: Page ID
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: facsimile-2001002
@@ -417,8 +417,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
@@ -426,8 +426,8 @@ paths:
         in: query
         description: Annotation ID
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: annotation-9
@@ -443,7 +443,7 @@ paths:
                   xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml#bar-2002469?tstamp2=2m+0
                   xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-2.xml#measure_x2eb1eec1-5284-429c-9a80-c16ebe4e8233_16?tstamp2=2m+0
                   xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-5.xml#measure_xd31c779c-6c97-4d9d-9383-5fc7eb9f19d4_16?tstamp2=2m+0
-  
+
   # getAnnotationPreviews.xql
   /data/xql/getAnnotationPreviews.xql:
     get:
@@ -457,8 +457,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -466,8 +466,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml#annotation-8
@@ -478,8 +478,8 @@ paths:
           type: string
           enum:
           - de
-          - en        
-        examples: 
+          - en
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: de
@@ -504,18 +504,18 @@ paths:
         in: query
         description: URI
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: xmldb:exist:///db/apps/contents/audioSources/freidi-recording_Janowski1994.xml
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
@@ -619,7 +619,7 @@ paths:
                             }],
                       "default_album_art": "../../resources/img/no-cover.png"
                     });
-                    
+
                     var expanded = false;
                     var playlistEpxanded = true;
                     /*
@@ -714,8 +714,8 @@ paths:
         in: query
         description: ID
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
@@ -762,7 +762,7 @@ paths:
         description: URI
         schema:
           type: string
-        examples: 
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: edirom_edition_examplexmldb:exist:///db/contents/edition-50127042.xml
@@ -777,7 +777,7 @@ paths:
                 EditionExample:
                   summary: "EditionExample"
                   value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
-  
+
   # getMeasure.xql
   /data/xql/getMeasure.xql:
     get:
@@ -791,8 +791,8 @@ paths:
         in: query
         description: ID
         schema:
-          type: string        
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
@@ -800,7 +800,7 @@ paths:
         in: query
         description: Measure ID
         schema:
-          type: string        
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -826,8 +826,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
@@ -835,8 +835,8 @@ paths:
         in: query
         description: Measure div
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: x84707a44-0e6a-4c77-9eab-d196150079a9
@@ -861,7 +861,7 @@ paths:
         in: query
         description: ID
         schema:
-          type: string      
+          type: string
         examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
@@ -871,8 +871,8 @@ paths:
         description: Measure
         schema:
           type: number
-          format: integer  
-        examples: 
+          format: integer
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: 3
@@ -880,8 +880,8 @@ paths:
         in: query
         description: Movement ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: tf280fcd0-c18e-42b4-8ec3-8166ac51f7cf
@@ -890,8 +890,8 @@ paths:
         required: false
         description: Measure Count
         schema:
-          type: number      
-        examples: 
+          type: number
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: 2
@@ -916,8 +916,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
@@ -925,8 +925,8 @@ paths:
         in: query
         description: Page ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: facsimile-2001002
@@ -951,8 +951,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
@@ -982,8 +982,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-1.xml
@@ -991,8 +991,8 @@ paths:
         in: query
         description: Movement ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: part-3
@@ -1019,8 +1019,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
@@ -1045,8 +1045,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-3.xml
@@ -1054,8 +1054,8 @@ paths:
         in: query
         description: Page ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: facsimile-2002001
@@ -1063,8 +1063,8 @@ paths:
         in: query
         description: Overlay ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: layer-1
@@ -1089,8 +1089,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
@@ -1101,8 +1101,8 @@ paths:
         in: query
         description: Work ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: edirom_work_743373fb-4dcf-4329-90c0-fd1eacc9ea69
@@ -1134,8 +1134,8 @@ paths:
         in: query
         description: Edition ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -1160,8 +1160,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_L-tx2.xml
@@ -1169,8 +1169,8 @@ paths:
         in: query
         description: Mode
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: pageMode
@@ -1205,8 +1205,8 @@ paths:
         in: query
         description: ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -1214,8 +1214,8 @@ paths:
         in: query
         description: Work ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: edition-27830471_work-1
@@ -1242,8 +1242,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: xmldb:exist:///db/apps/contents/edition/freidi-musikgenese.xml
@@ -1256,8 +1256,8 @@ paths:
           - work
           - source
           - recording
-          - text      
-        examples: 
+          - text
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: text
@@ -1269,7 +1269,7 @@ paths:
           default: en
           enum:
           - de
-          - en      
+          - en
         examples:
           Freischütz:
             summary: "Freischütz"
@@ -1277,7 +1277,7 @@ paths:
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
@@ -1427,8 +1427,8 @@ paths:
         in: query
         description: ID prefix
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: helpWindow-1073
@@ -1439,15 +1439,15 @@ paths:
           type: string
           enum:
           - de
-          - en      
-        examples: 
+          - en
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: en
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
@@ -1482,8 +1482,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/texts/text-7.xml
@@ -1509,8 +1509,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
@@ -1536,8 +1536,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
@@ -1560,8 +1560,8 @@ paths:
           type: string
           enum:
           - de
-          - en      
-        examples: 
+          - en
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: de
@@ -1592,8 +1592,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/edition.xml
@@ -1601,8 +1601,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
@@ -1613,8 +1613,8 @@ paths:
           type: string
           enum:
           - de
-          - en      
-        examples: 
+          - en
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: de
@@ -1639,8 +1639,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/editions/edirom_edition_7bade454-c1b2-499f-8100-7b3e369e2d65.xml
@@ -1652,18 +1652,18 @@ paths:
         required: false
         description: Movement ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             application/xml:
               schema:
                 $ref: '#/components/schemas/mei'
@@ -1681,8 +1681,8 @@ paths:
         in: query
         description: Edition ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
@@ -1693,8 +1693,8 @@ paths:
         in: query
         description: Work ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: edirom_work_291f7ad8-9bb8-45eb-9186-801dec2f80d9
@@ -1708,8 +1708,8 @@ paths:
           type: string
           enum:
           - de
-          - en      
-        examples: 
+          - en
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: de
@@ -1719,7 +1719,7 @@ paths:
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
@@ -1764,8 +1764,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
@@ -1795,8 +1795,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-5.xml
@@ -1821,8 +1821,8 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/ediromEditions/edirom_edition_example.xml
@@ -1848,9 +1848,9 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/prefs'
-            
+
   # getText.xql
-  # [returns empty <div> - there may be better example] 
+  # [returns empty <div> - there may be better example]
   /data/xql/getText.xql:
     get:
       tags:
@@ -1863,8 +1863,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: xmldb:exist:///db/apps/contents/librettoSources/freidi-librettoSource_D-tx1.xml
@@ -1872,17 +1872,17 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
-            value: 
+            value:
       - name: idPrefix
         in: query
         description: ID prefix
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: textFacsimileSplitView-1660_
@@ -1891,35 +1891,35 @@ paths:
         description: Term
         required: false
         schema:
-          type: string      
+          type: string
         examples:
           Freischütz:
             summary: "Freischütz"
-            value: 
+            value:
       - name: path
         in: query
         description: Path
         required: false
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
-            value: 
+            value:
       - name: page
         in: query
         description: Page
         required: false
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Freischütz:
             summary: "Freischütz"
             value: surface_0000006
       responses:
         "200":
           description: Successful operation
-          content: 
+          content:
             text/html:
               schema:
                 type: string
@@ -1934,7 +1934,7 @@ paths:
                         <br />bei Georg Joachim Göschen, 1822</span>.</div>
                     </div>
                   </div>
-  
+
   # getXml.xql
   /data/xql/getXml.xql:
     get:
@@ -1948,8 +1948,8 @@ paths:
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: xmldb:exist:///db/apps/weber-klarinettenquintett-eol-emeritus/sources/source-4-MEI.xml
@@ -1960,8 +1960,8 @@ paths:
           type: string
           enum:
           - de
-          - en      
-        examples: 
+          - en
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
             value: de
@@ -1980,7 +1980,7 @@ paths:
       - Other
       summary: Get a zone by ID
       description: Returns a single zone element (typically from a facsimile or measure region) as JSON.
-      operationId: getZone 
+      operationId: getZone
       parameters:
       - name: uri
         in: query
@@ -1995,7 +1995,7 @@ paths:
           EditionExample:
             summary: "EditionExample"
             value: xmldb:exist:///db/apps/edirom/edition-example/content/sources/edirom_source_2b2b26e5-c85d-4edd-8806-fe126ce390a2.xml
-      - name: zoneId  
+      - name: zoneId
         in: query
         description: The xml:id of the zone element to retrieve
         required: true
@@ -2024,7 +2024,7 @@ paths:
                         type: string
                         example: surface_40a1f7ea-e7fb-4642-9195-0a4fce19210a
                   - $ref: '#/components/schemas/Positions'
-  
+
   # search.xql
   /data/xql/search.xql:
     get:
@@ -2086,12 +2086,12 @@ paths:
                         </div>
                     </div>
                   </div>
-  
+
   # DEPRECATED: getReducedDocument.xql
   /data/xql/getReducedDocument.xql:
     get:
       tags:
-      - Deprecated 
+      - Deprecated
       # DEPRECATED: This endpoint is deprecated and should not be used in new applications.
       summary: "[DEPRECATED] Get reduced document"
       description: "[DEPRECATED] Returns HTML for reduced document"
@@ -2101,47 +2101,47 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       - name: uri
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       - name: selectionId
         in: query
         description: Selection ID
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       - name: subtreeRoot
         in: query
         description: Subtree root
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       - name: idPrefix
         in: query
         description: ID prefix
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       responses:
         "200":
           description: Successful operation
@@ -2154,7 +2154,7 @@ paths:
   /data/xql/getSummary.xql:
     get:
       tags:
-      - Deprecated 
+      - Deprecated
       # DEPRECATED: This endpoint is deprecated and should not be used in new applications.
       summary: "[DEPRECATED] Get summary"
       description: "[DEPRECATED] Returns HTML for summary"
@@ -2164,20 +2164,20 @@ paths:
         in: query
         description: Identifier of the edition
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       - name: uri
         in: query
         description: URI
         schema:
-          type: string      
-        examples: 
+          type: string
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       - name: type
         in: query
         description: Type
@@ -2187,11 +2187,11 @@ paths:
           - work
           - source
           - recording
-          - text      
-        examples: 
+          - text
+        examples:
           Klarinettenquintett:
             summary: "Klarinettenquintett"
-            value: 
+            value:
       responses:
         "200":
           description: Successful operation
@@ -2199,7 +2199,7 @@ paths:
             text/html:
               schema:
                 type: string
-              
+
 components:
   schemas:
     Annotation:
@@ -2391,7 +2391,7 @@ components:
         origW:
           type: integer
           example: 3950
-    langFile:      
+    langFile:
       type: object
       properties:
         lang:
@@ -2561,7 +2561,7 @@ components:
             facsimile:
               type: object
             body:
-              type: object       
+              type: object
     Movement:
       type: object
       properties:
@@ -2741,7 +2741,7 @@ components:
                     type: string
                     example: de
                     xml:
-                      attribute: true                      
+                      attribute: true
     Priority:
       type: object
       properties:
