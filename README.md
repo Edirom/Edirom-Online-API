@@ -4,7 +4,7 @@ The Edirom Online API is the description of the [Edirom Online Backend](https://
 
 Any frontend implementation for the Edirom Online should adhere to this API specification until there is a newer version available.
 
-This work is based on the efforts of the Edirom Online community.
+This work is based on the efforts of the Edirom Online community. Further information about the community and the software is also available at https://github.com/Edirom/Edirom-Online
 
 ## Swagger UI
 
